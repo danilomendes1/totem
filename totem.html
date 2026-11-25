@@ -366,6 +366,32 @@ svg.av{stroke:none!important}
 .doc .where{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2px 4px;font-size:15px;color:var(--muted);font-weight:600;margin-top:8px;line-height:1.3}
 .doc .where b{font-size:15px;color:var(--txt-g)}
 .doc .where svg{width:16px;height:16px;stroke:var(--g600);fill:none;stroke-width:2.2;flex:none}
+
+/* ===== Carteirinha interativa do popup ===== */
+#ovCard .dlg{perspective:1400px}
+.tilt{position:relative;transform-style:preserve-3d;will-change:transform;touch-action:none}
+.tilt .card{will-change:transform}
+.tilt.press .card{scale:.97;transition:scale .15s}
+.tilt .card .glare{position:absolute;inset:0;pointer-events:none;z-index:1;background:radial-gradient(circle at var(--gx,50%) var(--gy,20%),rgba(255,255,255,.8),rgba(255,255,255,0) 50%);mix-blend-mode:overlay;opacity:.25}
+.tilt .card .sheen{position:absolute;top:-10%;bottom:-10%;left:-60%;width:45%;pointer-events:none;z-index:1;background:linear-gradient(105deg,rgba(255,255,255,0),rgba(255,255,255,.75),rgba(255,255,255,0));transform:skewX(-18deg)}
+.ov.on .tilt .card .sheen{animation:sheen 3.6s ease-in-out .9s infinite}
+@keyframes sheen{0%{left:-60%}35%,100%{left:140%}}
+.tilt .card.enter{animation:cardIn 1.05s cubic-bezier(.2,1.1,.3,1) both}
+@keyframes cardIn{0%{transform:rotateY(-130deg) rotateX(28deg) translateY(90px) scale(.55);opacity:0}55%{opacity:1}100%{transform:none;opacity:1}}
+.tilt .card.enter .seal{animation:sealIn .7s cubic-bezier(.3,1.6,.5,1) .85s both}
+@keyframes sealIn{from{transform:scale(0) rotate(-70deg)}to{transform:scale(1) rotate(0)}}
+.tilt .card.spin{animation:cardSpin .9s cubic-bezier(.3,1.2,.4,1)}
+@keyframes cardSpin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.spark{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px;pointer-events:none;z-index:-1;color:var(--c,#16a34a);background:linear-gradient(currentColor,currentColor) center/34% 100% no-repeat,linear-gradient(currentColor,currentColor) center/100% 34% no-repeat;animation:spark var(--t,.9s) cubic-bezier(.15,.8,.3,1) forwards}
+@keyframes spark{0%{transform:translate(0,0) scale(.2) rotate(0);opacity:1}80%{opacity:1}100%{transform:translate(var(--x),var(--y)) scale(var(--s,1)) rotate(200deg);opacity:0}}
+.cardhint{display:flex;align-items:center;justify-content:center;gap:10px;font-size:19px!important;color:var(--txt-g)!important;font-weight:700;margin:-14px 0 26px!important}
+.cardhint svg{width:26px;height:26px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;animation:wiggle 1.8s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:translateX(-6px) rotate(-12deg)}50%{transform:translateX(6px) rotate(12deg)}}
+.ov.on#ovCard h2{animation:upIn .5s .1s both}
+.ov.on#ovCard .dlg>p{animation:upIn .5s .2s both}
+.ov.on#ovCard .go,.ov.on#ovCard .back{animation:upIn .5s .95s both}
+.ov.on#ovCard .cardhint{animation:upIn .5s 1.2s both}
+@keyframes upIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -586,7 +612,8 @@ svg.av{stroke:none!important}
     <div class="dlg">
       <h2 id="ovCardT">Cadastro confirmado!</h2>
       <p id="ovCardP">Confira seus dados na carteirinha antes de continuar.</p>
-      <div class="card ok" data-card></div>
+      <div class="tilt" id="tilt"><div class="card ok" data-card></div></div>
+      <p class="cardhint"><svg viewBox="0 0 24 24"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg>Deslize o dedo pela tela ou toque na carteirinha</p>
       <button class="go" id="ovCardGo" type="button">Continuar →</button>
       <button class="back" id="ovCardFix" type="button">Corrigir meus dados</button>
     </div>
@@ -1144,8 +1171,61 @@ svg.av{stroke:none!important}
   }
 
   /* ---------- Sobreposições ---------- */
-  function openOv(id){$(id).classList.add('on')}
-  function closeOv(id){$(id).classList.remove('on')}
+
+  /* Carteirinha do popup: entra girando, acompanha o dedo/mouse pela tela, brilha e flutua sozinha */
+  var cardFx=(function(){
+    var ov=$('ovCard'),tilt=$('tilt'),card=tilt.querySelector('.card'),raf=0,on=false,tx=0,ty=0,cx=0,cy=0,last=0,t0=0;
+    var calm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var gl=document.createElement('i');gl.className='glare';card.appendChild(gl);
+    var sh=document.createElement('i');sh.className='sheen';card.appendChild(sh);
+    function clamp(v){return Math.max(-1,Math.min(1,v))}
+    function move(e){
+      var r=tilt.getBoundingClientRect();
+      tx=clamp((e.clientX-(r.left+r.width/2))/(r.width*.8));
+      ty=clamp((e.clientY-(r.top+r.height/2))/(r.height*1.3));
+      last=Date.now();
+    }
+    function frame(now){
+      if(!on)return;
+      var gx=tx,gy=ty;
+      if(Date.now()-last>1800){var s=(now-t0)/1000;gx=Math.sin(s*.9)*.5;gy=Math.cos(s*.7)*.3}
+      cx+=(gx-cx)*.1;cy+=(gy-cy)*.1;
+      tilt.style.transform='rotateY('+(cx*22).toFixed(2)+'deg) rotateX('+(-cy*18).toFixed(2)+'deg)';
+      card.style.boxShadow=(-cx*30).toFixed(1)+'px '+(34+cy*20).toFixed(1)+'px 70px -24px rgba(0,30,15,.55),0 0 0 1px rgba(255,255,255,.4) inset';
+      card.style.setProperty('--gx',(50+cx*55).toFixed(1)+'%');
+      card.style.setProperty('--gy',(35+cy*55).toFixed(1)+'%');
+      gl.style.opacity=(.2+Math.min(1,Math.abs(cx)+Math.abs(cy))*.3).toFixed(2);
+      raf=requestAnimationFrame(frame);
+    }
+    function burst(n){
+      var cols=['#16a34a','#4ade80','#bbf0cf','#0f7a45','#f3d98b'];
+      for(var i=0;i<n;i++){
+        var a=Math.random()*Math.PI*2,d=170+Math.random()*190,sp=document.createElement('span');
+        sp.className='spark';
+        sp.style.cssText='--x:'+(Math.cos(a)*d*1.4).toFixed(0)+'px;--y:'+(Math.sin(a)*d).toFixed(0)+'px;--c:'+cols[i%cols.length]+';--s:'+(.5+Math.random()*.9).toFixed(2)+';--t:'+(.7+Math.random()*.6).toFixed(2)+'s';
+        tilt.insertBefore(sp,card);
+        setTimeout(function(el){el.remove()},1500,sp);
+      }
+    }
+    function replay(cls){card.classList.remove('enter','spin');void card.offsetWidth;card.classList.add(cls)}
+    ov.addEventListener('pointermove',move);
+    ov.addEventListener('pointerdown',function(e){move(e);if(e.target.closest('#tilt'))tilt.classList.add('press')});
+    window.addEventListener('pointerup',function(){tilt.classList.remove('press')});
+    window.addEventListener('deviceorientation',function(e){if(!on||e.gamma==null)return;tx=clamp(e.gamma/30);ty=clamp((e.beta-45)/30);last=Date.now()});
+    card.addEventListener('click',function(e){if(e.target.closest('[data-eye]'))return;replay('spin');burst(14)});
+    return{
+      start:function(){
+        on=true;last=0;cx=cy=tx=ty=0;t0=performance.now();
+        replay('enter');
+        if(calm)return;
+        setTimeout(function(){if(on)burst(22)},650);
+        cancelAnimationFrame(raf);raf=requestAnimationFrame(frame);
+      },
+      stop:function(){on=false;cancelAnimationFrame(raf)}
+    };
+  })();
+  function openOv(id){$(id).classList.add('on');if(id==='ovCard')cardFx.start()}
+  function closeOv(id){$(id).classList.remove('on');if(id==='ovCard')cardFx.stop()}
   $('btnHome').addEventListener('click',function(){openOv('ovCancel')});
   $('cancelNo').addEventListener('click',function(){closeOv('ovCancel')});
   $('cancelYes').addEventListener('click',resetAll);
