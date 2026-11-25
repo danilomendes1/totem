@@ -104,9 +104,10 @@ main{flex:1;position:relative;overflow:hidden}
 .mstage{transition:height .35s cubic-bezier(.3,1.1,.5,1)}
 .mstage .card{transition:transform .35s}
 .mstage h2{transition:opacity .25s}
-.kb-open .mstage{height:290px}
+.kb-open .mstage{height:250px}
 .kb-open .mstage h2{opacity:0;position:absolute}
-.kb-open .mstage .card{transform:scale(.78)}
+.kb-open .mstage .card{transform:scale(.7)}
+.kb-open #sId .pnl .sub{display:none}
 .pnl{flex:1;display:flex;flex-direction:column;padding:34px 64px 30px;min-height:0}
 .pnl h1{font-size:46px;font-weight:800;letter-spacing:-.025em;line-height:1.1}
 .pnl .sub{color:var(--muted);font-size:23px;margin-top:8px}
@@ -235,11 +236,24 @@ main{flex:1;position:relative;overflow:hidden}
 .day span{font-size:17px;color:var(--muted);font-weight:600}
 .day[aria-pressed=true]{background:linear-gradient(135deg,var(--g600),var(--g700));border-color:var(--g700);color:#fff;box-shadow:0 14px 26px -12px rgba(15,122,69,.8)}
 .day[aria-pressed=true] small,.day[aria-pressed=true] span{color:#d6f5e2}
-.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.doc{display:flex;align-items:center;gap:14px;padding:16px;border-radius:22px;border:2.5px solid var(--line);background:var(--card);cursor:pointer;text-align:left;font-size:20px;font-weight:700;line-height:1.2}
-.doc i{width:56px;height:56px;border-radius:50%;background:var(--g100);color:var(--g700);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:21px;flex:none}
-.doc[aria-pressed=true]{border-color:var(--g600);background:var(--g100);box-shadow:0 0 0 5px rgba(22,163,74,.22)}
-.doc[aria-pressed=true] i{background:var(--g600);color:#fff}
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.doc{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:22px 14px 20px;border-radius:26px;border:2.5px solid var(--line);background:var(--card);cursor:pointer;position:relative;transition:transform .15s}
+.doc:active{transform:scale(.98)}
+.doc .ph{width:124px;height:124px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 5px var(--g100);margin-bottom:12px;flex:none;background:var(--g100)}
+.doc .ph svg,.doc .ph img{width:100%;height:100%;display:block;object-fit:cover}
+.doc b{font-size:25px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.doc small{font-size:18px;color:var(--muted);font-weight:600}
+.doc .crm{font-size:15px;color:var(--g700);font-weight:700;background:var(--g100);border-radius:99px;padding:4px 12px;margin-top:6px}
+.doc[aria-pressed=true]{border-color:var(--g600);background:var(--g50);box-shadow:0 0 0 5px rgba(22,163,74,.22)}
+.doc[aria-pressed=true] .ph{box-shadow:0 0 0 5px var(--g600)}
+.doc[aria-pressed=true]::after{content:"";position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:var(--g600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/20px no-repeat}
+svg.av{stroke:none!important}
+.mini{display:inline-block;width:40px;height:40px;border-radius:50%;overflow:hidden;vertical-align:middle;margin-right:10px;box-shadow:0 0 0 2px var(--g100)}
+.mini svg,.mini img{width:100%;height:100%;display:block;object-fit:cover}
+.cl .dr{display:flex;align-items:center}
+.rrow .ri.rph{overflow:hidden;border-radius:50%}
+.rrow .ri.rph{display:block;padding:0}
+.rrow .ri.rph svg,.rrow .ri.rph img{width:62px;height:62px;display:block;object-fit:cover}
 .slots{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .slot{height:84px;border-radius:20px;border:2.5px solid var(--line);background:var(--card);font-size:28px;font-weight:800;cursor:pointer;font-variant-numeric:tabular-nums}
 .slot:disabled{background:transparent;border-style:dashed;color:#b5c9bd;text-decoration:line-through;cursor:not-allowed}
@@ -368,7 +382,7 @@ main{flex:1;position:relative;overflow:hidden}
 .kb-open .mstage h2{opacity:1;position:relative}
 .kb-open .mstage .card{transform:none}
 #sId .pnl{padding:34px 100px 30px}
-.fld{margin-top:16px;padding:14px 26px 10px}
+.fld{margin-top:12px;padding:12px 26px 8px}
 .fld .v{font-size:36px;min-height:46px}
 #sId .prog{margin-top:22px}
 #sId .actions.btn2{width:100%}
@@ -388,13 +402,10 @@ main{flex:1;position:relative;overflow:hidden}
 .nfr .nfhelp{margin-top:40px}
 
 /* Preferências */
-#sPref .g3 .opt{padding:30px 10px}
 
 /* Horários */
 .slots{grid-template-columns:repeat(6,1fr)}
 .slot{height:76px;font-size:26px}
-.docs{grid-template-columns:1fr}
-.doc{padding:12px 16px}
 
 /* Atendimento mais rápido: 3 clínicas lado a lado */
 .frow{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
@@ -430,9 +441,14 @@ main{flex:1;position:relative;overflow:hidden}
 
 /* Sobreposições */
 .dlg .card{width:560px}
-#ovOutras .dlg{width:1240px}
 .olist{grid-template-columns:repeat(4,1fr)}
 .olist .opt{flex-direction:column;padding:24px 12px;font-size:22px}
+
+/* Especialidades: todas visíveis */
+#gEsp{grid-template-columns:repeat(4,1fr);gap:12px}
+#sPref #gEsp .opt{padding:16px 8px;gap:8px;font-size:20px;min-height:112px;line-height:1.15;hyphens:manual}
+#gEsp .opt svg{width:36px;height:36px}
+#gEsp .opt[aria-pressed=true]::after{width:24px;height:24px;top:8px;right:8px;background-size:14px}
 </style>
 </head>
 <body>
@@ -502,6 +518,11 @@ main{flex:1;position:relative;overflow:hidden}
           <span class="v" id="vCpf"></span>
           <span class="hint" id="hCpf"></span>
         </button>
+        <button class="fld" id="fTel" data-f="tel" type="button">
+          <span class="t"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Celular / WhatsApp<span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
+          <span class="v" id="vTel"></span>
+          <span class="hint" id="hTel"></span>
+        </button>
 
         <div class="prog" aria-live="polite"><div class="bar"><i id="barFill"></i></div><span id="barTxt">Faltam 3 passos</span></div>
 
@@ -549,7 +570,6 @@ main{flex:1;position:relative;overflow:hidden}
           <div class="sec">
             <h3>1. Escolha a especialidade</h3>
             <div class="g3" id="gEsp"></div>
-            <button class="pill" id="btnOutras" type="button" aria-pressed="false">Outras especialidades</button>
           </div>
           <div>
             <div class="sec"><h3>2. Qual é sua prioridade?</h3><div class="g2" id="gPri"></div></div>
@@ -680,16 +700,6 @@ main{flex:1;position:relative;overflow:hidden}
     </div>
   </div>
 
-  <!-- Outras especialidades -->
-  <div class="ov" id="ovOutras" role="dialog" aria-modal="true" aria-labelledby="ovOutrasT">
-    <div class="dlg">
-      <h2 id="ovOutrasT">Outras especialidades</h2>
-      <p>Toque na especialidade desejada.</p>
-      <div class="olist" id="gOutras"></div>
-      <button class="back" id="ovOutrasX" type="button">Cancelar</button>
-    </div>
-  </div>
-
   <!-- Inatividade -->
   <div class="ov" id="ovIdle" role="dialog" aria-modal="true" aria-labelledby="ovIdleT">
     <div class="dlg">
@@ -751,7 +761,7 @@ main{flex:1;position:relative;overflow:hidden}
   });
 
   /* ---------- Ícones ---------- */
-  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M12 14v4M10 16h4"/>',bk:'<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',bld:'<path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M12 6v4M10 8h4"/>'};
+  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M12 14v4M10 16h4"/>',bk:'<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',tel:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',baby:'<circle cx="12" cy="8" r="5"/><path d="M10 8h.01M14 8h.01M10.5 10.5c.8.6 2.2.6 3 0M7 21v-2a5 5 0 0 1 10 0v2"/>',eye:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',brain:'<path d="M12 5a3 3 0 0 0-5.8-1A3 3 0 0 0 4 8.5a3 3 0 0 0 .5 5.3A3.5 3.5 0 0 0 9 19a3 3 0 0 0 3-1M12 5a3 3 0 0 1 5.8-1A3 3 0 0 1 20 8.5a3 3 0 0 1-.5 5.3A3.5 3.5 0 0 1 15 19a3 3 0 0 1-3-1M12 5v13"/>',drop:'<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',flask:'<path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7 15h10"/>',chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>',ear:'<path d="M6 9a6 6 0 0 1 12 0c0 3-2 4-3 5.5S14 18 12 20a3 3 0 0 1-5-2"/><path d="M9 9a3 3 0 0 1 6 0c0 1.5-1.5 2-2 3"/>',apple:'<path d="M12 7c-2-2-7-1.5-7 4 0 4 3 9 5 9 1 0 1.5-.5 2-.5s1 .5 2 .5c2 0 5-5 5-9 0-5.5-5-6-7-4zM12 7c0-2 1-4 3-4"/>',bld:'<path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M12 6v4M10 8h4"/>'};
   var ic=function(k){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+I[k]+'</svg>'};
   var LOGO='<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#16a34a"/><path d="M20 33C9 25 7 18 10 14c3-4 8-3 10 1 2-4 7-5 10-1 3 4 1 11-10 19z" fill="#fff"/><path d="M20 15v9M15.5 19.5h9" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/></svg>';
 
@@ -767,8 +777,8 @@ main{flex:1;position:relative;overflow:hidden}
   /* ---------- Estado ---------- */
   var S,touched,act=null,kbMode='alpha';
   function fresh(){
-    S={nome:'',nasc:'',cpf:'',esp:'',pri:'',per:'',day:-1,doc:'',hora:'',clin:'',date:null,fsel:null,showCpf:false};
-    touched={nome:false,nasc:false,cpf:false};
+    S={nome:'',nasc:'',cpf:'',tel:'',esp:'',pri:'',per:'',day:-1,doc:'',hora:'',clin:'',date:null,fsel:null,showCpf:false};
+    touched={nome:false,nasc:false,cpf:false,tel:false};
   }
   fresh();
 
@@ -786,7 +796,10 @@ main{flex:1;position:relative;overflow:hidden}
   function fmtCpf(d){return d.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
   function maskCpf(d){var f=fmtCpf(d);return f.replace(/\d/g,function(c,i){return(i<3||i>=f.length-2)?c:'•'})}
   function fmtNasc(d){return d?(d.slice(0,2)+(d.length>2?'/'+d.slice(2,4):'')+(d.length>4?'/'+d.slice(4):'')):''}
-  function isOk(){return{nome:okNome(),nasc:nascInfo().ok,cpf:cpfOk(S.cpf)}}
+  function telInfo(){var t=S.tel;if(t.length<11)return{ok:false,msg:'Digite DDD + número (11 números).'};if(t[2]!=='9')return{ok:false,msg:'O celular deve começar com 9 depois do DDD.'};return{ok:true,msg:'Celular confirmado.'}}
+  function fmtTel(t){return t.replace(/^(\d{2})(\d)/,'($1) $2').replace(/(\d{5})(\d{1,4})$/,'$1-$2')}
+  function isOk(){return{nome:okNome(),nasc:nascInfo().ok,cpf:cpfOk(S.cpf),tel:telInfo().ok}}
+  function allOk(){var o=isOk();return o.nome&&o.nasc&&o.cpf&&o.tel}
   function esc(t){return t.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function firstName(){var f=S.nome.trim().split(/\s+/)[0]||'';return f.charAt(0)+f.slice(1).toLowerCase()}
 
@@ -803,7 +816,7 @@ main{flex:1;position:relative;overflow:hidden}
   }
 
   function paint(){
-    var ok=isOk(),n=(ok.nome?1:0)+(ok.nasc?1:0)+(ok.cpf?1:0);
+    var ok=isOk(),n=(ok.nome?1:0)+(ok.nasc?1:0)+(ok.cpf?1:0)+(ok.tel?1:0);
     // Nome
     $('vNome').innerHTML=S.nome||act==='nome'?esc(S.nome)+(act==='nome'?'<span class="caret"></span>':''):'<span class="phd">Toque para digitar seu nome</span>';
     setF('fNome','hNome',ok.nome,touched.nome,ok.nome?'Prazer em te conhecer!':(touched.nome?'Digite nome e sobrenome.':'Como está no seu documento.'));
@@ -815,12 +828,16 @@ main{flex:1;position:relative;overflow:hidden}
     $('vCpf').innerHTML=S.cpf||act==='cpf'?masked(S.cpf,'000.000.000-00',act==='cpf'):'<span class="phd">Toque para digitar · 000.000.000-00</span>';
     var cmsg=S.cpf.length<11?'Informe os 11 números do seu CPF.':'CPF completo.';
     setF('fCpf','hCpf',ok.cpf,touched.cpf&&S.cpf.length===11||touched.cpf&&act!=='cpf',cmsg);
-    ['fNome','fNasc','fCpf'].forEach(function(id){$(id).classList.toggle('act',$(id).dataset.f===act)});
+    // Celular
+    var ti=telInfo();
+    $('vTel').innerHTML=S.tel||act==='tel'?masked(S.tel,'(00) 00000-0000',act==='tel'):'<span class="phd">Toque para digitar · (00) 00000-0000</span>';
+    setF('fTel','hTel',ti.ok,touched.tel,ti.ok?ti.msg:(touched.tel?ti.msg:'Usaremos para avisos sobre seu atendimento.'));
+    ['fNome','fNasc','fCpf','fTel'].forEach(function(id){$(id).classList.toggle('act',$(id).dataset.f===act)});
     // Progresso
-    $('barFill').style.width=(n/3*100)+'%';
-    $('barTxt').textContent=n===3?'Tudo pronto!':(n===2?'Falta 1 passo':'Faltam '+(3-n)+' passos');
-    $('goId').disabled=n<3;
-    paintCards(n===3);
+    $('barFill').style.width=(n/4*100)+'%';
+    $('barTxt').textContent=n===4?'Tudo pronto!':(n===3?'Falta 1 passo':'Faltam '+(4-n)+' passos');
+    $('goId').disabled=n<4;
+    paintCards(n===4);
   }
   function setF(id,hid,valid,isTouched,msg){
     var f=$(id),wasBad=f.classList.contains('bad'),bad=!valid&&isTouched;
@@ -840,15 +857,15 @@ main{flex:1;position:relative;overflow:hidden}
   }
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-eye]');if(!b)return;
-    e.stopPropagation();S.showCpf=!S.showCpf;paintCards(isOk().nome&&isOk().nasc&&isOk().cpf);
+    e.stopPropagation();S.showCpf=!S.showCpf;paintCards(allOk());
   });
 
   /* ---------- Teclado ---------- */
   var ALPHA=[['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L','Ç'],['Z','X','C','V','B','N','M','bk'],['acc','sp','ok']];
   var ACC=[['Á','À','Â','Ã','É','Ê','Í','Ó','Ô','Õ'],['Ú','Ü',"'",'-','.','','','','',''],['','','','','','','','bk'],['abc','sp','ok']];
   var NUM=[['1','2','3'],['4','5','6'],['7','8','9'],['bk','0','ok']];
-  var LBL={nome:'Nome completo',nasc:'Data de nascimento',cpf:'CPF'};
-  var ORDER=['nome','nasc','cpf'];
+  var LBL={nome:'Nome completo',nasc:'Data de nascimento',cpf:'CPF',tel:'Celular'};
+  var ORDER=['nome','nasc','cpf','tel'];
   function nextField(){var i=ORDER.indexOf(act);for(var j=i+1;j<ORDER.length;j++){if(!isOk()[ORDER[j]])return ORDER[j]}return null}
   function renderKb(){
     var rows=act==='nome'?(kbMode==='acc'?ACC:ALPHA):NUM,nx=nextField(),h='';
@@ -908,7 +925,7 @@ main{flex:1;position:relative;overflow:hidden}
   });
   $('kbClose').addEventListener('click',closeKb);
   $('kbClr').addEventListener('click',function(){if(act){S[act]='';paint()}});
-  ['fNome','fNasc','fCpf'].forEach(function(id){$(id).addEventListener('click',function(){openKb(this.dataset.f)})});
+  ['fNome','fNasc','fCpf','fTel'].forEach(function(id){$(id).addEventListener('click',function(){openKb(this.dataset.f)})});
 
   /* ---------- Navegação ---------- */
   var STEP={sId:[1,'Identificação'],sNf:[1,'Identificação'],sFast:[3,'Agendamento'],sPref:[2,'Preferências'],sHor:[3,'Dia e horário'],sConf:[4,'Confirmação']};
@@ -933,7 +950,7 @@ main{flex:1;position:relative;overflow:hidden}
   $('sHome').addEventListener('click',function(){show('sId');setTimeout(function(){openKb('nome')},450)});
 
   /* Identificação */
-  $('clearId').addEventListener('click',function(){S.nome=S.nasc=S.cpf='';touched={nome:false,nasc:false,cpf:false};openKb('nome')});
+  $('clearId').addEventListener('click',function(){S.nome=S.nasc=S.cpf=S.tel='';touched={nome:false,nasc:false,cpf:false,tel:false};openKb('nome')});
   $('goId').addEventListener('click',function(){
     var go=this;if(go.disabled)return;
     go.classList.add('load');go.disabled=true;$('goIdTxt').textContent='Localizando cadastro…';
@@ -972,8 +989,7 @@ main{flex:1;position:relative;overflow:hidden}
   });
 
   /* Preferências */
-  var esp=[['Clínico Geral','steth'],['Cardiologia','heart'],['Dermatologia','hand'],['Ginecologia','fem'],['Odontologia','smile'],['Ortopedia','bone']];
-  var outras=['Pediatria','Oftalmologia','Neurologia','Urologia','Endocrinologia','Psiquiatria','Otorrinolaringologia','Nutrição'];
+  var esp=[['Clínico Geral','steth'],['Cardiologia','heart'],['Dermatologia','hand'],['Ginecologia','fem'],['Odontologia','smile'],['Ortopedia','bone'],['Pediatria','baby'],['Oftalmologia','eye'],['Neurologia','brain'],['Urologia','drop'],['Endocrinologia','flask'],['Psiquiatria','chat'],['Otorrinolaringologia','ear','Otorrinolaringo&shy;logia'],['Nutrição','apple']];
   var pri=[['Atendimento mais rápido','bolt','Primeiro horário livre com qualquer profissional.'],['Médico específico','steth','Escolher o profissional de sua preferência.']];
   var per=[['Manhã','rise'],['Tarde','sun'],['Noite','moon'],['Qualquer horário','clock']];
   function tiles(id,list,key,cls,inner,onPick){
@@ -987,21 +1003,10 @@ main{flex:1;position:relative;overflow:hidden}
       g.appendChild(b);
     });
   }
-  function resetOutras(){$('btnOutras').setAttribute('aria-pressed','false');$('btnOutras').textContent='Outras especialidades'}
-  tiles('gEsp',esp,'esp','',function(i){return ic(i[1])+i[0]},resetOutras);
+  tiles('gEsp',esp,'esp','',function(i){return ic(i[1])+'<span>'+(i[2]||i[0])+'</span>'});
   tiles('gPri',pri,'pri','pri',function(i){return ic(i[1])+'<span>'+i[0]+'</span><small>'+i[2]+'</small>'});
   tiles('gPer',per,'per','per',function(i){return ic(i[1])+i[0]});
   function checkPref(){$('goPref').disabled=!(S.esp&&S.pri&&S.per)}
-  $('gOutras').innerHTML=outras.map(function(o){return '<button type="button" class="opt" data-o="'+o+'">'+ic('steth')+o+'</button>'}).join('');
-  $('btnOutras').addEventListener('click',function(){openOv('ovOutras')});
-  $('ovOutrasX').addEventListener('click',function(){closeOv('ovOutras')});
-  $('gOutras').addEventListener('click',function(e){
-    var b=e.target.closest('[data-o]');if(!b)return;
-    S.esp=b.dataset.o;
-    [].forEach.call($('gEsp').children,function(x){x.setAttribute('aria-pressed','false')});
-    $('btnOutras').setAttribute('aria-pressed','true');$('btnOutras').textContent='Outras: '+S.esp+' ✓';
-    closeOv('ovOutras');checkPref();
-  });
   $('goPref').addEventListener('click',function(){
     if(this.disabled)return;
     S.day=0;S.doc='';S.hora='';S.fsel=null;
@@ -1053,7 +1058,7 @@ main{flex:1;position:relative;overflow:hidden}
         var rest=x.first.s.slice(3);
         if(rest.length)extra+='<div class="xd">'+CAL+dmy(x.first.d)+'</div><div class="xs">'+rest.map(function(t){return slotBtn(x.ci,x.first.d,t)}).join('')+'</div>';
         x.days.slice(1,4).forEach(function(dd){extra+='<div class="xd">'+CAL+WDS[dd.d.getDay()]+' · '+dmy(dd.d)+'</div><div class="xs">'+dd.s.map(function(t){return slotBtn(x.ci,dd.d,t)}).join('')+'</div>'});
-        body='<div class="when">'+CAL+dmy(x.first.d)+'</div><div class="dr">'+x.doc+'</div>'+
+        body='<div class="when">'+CAL+dmy(x.first.d)+'</div><div class="dr"><span class="mini">'+foto(x.doc)+'</span>'+x.doc+'</div>'+
           '<div class="ts">'+x.first.s.slice(0,3).map(function(t){return slotBtn(x.ci,x.first.d,t)}).join('')+'</div>'+
           '<div class="extra">'+extra+'</div>'+
           '<button type="button" class="more" data-more="'+x.ci+'">'+(fastOpen[x.ci]?'Ver menos':'Ver mais datas e horários')+'<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>';
@@ -1087,6 +1092,24 @@ main{flex:1;position:relative;overflow:hidden}
     return out;
   }
   function docsFor(){var h=hsh(S.esp),r=[];for(var i=0;i<3;i++)r.push(DOCS[(h+i*3)%DOCS.length]);return r}
+  /* Fotos dos médicos: coloque aqui o caminho da foto real, ex.: 'Dra. Ana Ribeiro':'fotos/ana-ribeiro.jpg'.
+     Quem não tiver foto aparece com um retrato ilustrado. */
+  var FOTOS={};
+  function avatar(n){
+    var h=hsh(n),f=/^Dra/.test(n);
+    var bg=['#cfe9da','#d6e4f5','#f4e3cf','#e5dcf3','#f3d9df'][h%5],sk=['#f1c7a5','#d9a37f','#a8734f','#e8b892','#7a4e33'][(h>>3)%5],hr=['#2b1d14','#1a1a1a','#3b2a20','#241812','#4a2f1d'][(h>>6)%5];
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="'+bg+'"/>'+
+      (f?'<path d="M29 50c0-20 9-30 21-30s21 10 21 30v26H29z" fill="'+hr+'"/>':'')+
+      '<path d="M14 100c2-19 16-27 36-27s34 8 36 27z" fill="#fff"/>'+
+      '<path d="M41 73l9 13 9-13z" fill="#16a34a"/>'+
+      '<rect x="44" y="56" width="12" height="18" rx="5" fill="'+sk+'"/>'+
+      '<circle cx="50" cy="43" r="16" fill="'+sk+'"/><circle cx="44" cy="45" r="1.8" fill="#1f1a17"/><circle cx="56" cy="45" r="1.8" fill="#1f1a17"/><path d="M45 51c3 2.4 7 2.4 10 0" fill="none" stroke="#7a3e2e" stroke-width="1.8" stroke-linecap="round"/>'+
+      (f?'<path d="M34 43c0-12 7-19 16-19s16 7 16 19c-5-7-10-10-16-10s-11 3-16 10z" fill="'+hr+'"/>':'<path d="M34 41c0-11 7-17 16-17s16 6 16 17c-3-5-8-7-16-7s-13 2-16 7z" fill="'+hr+'"/>')+
+      '<path d="M37 78c-2 8 0 14 6 15" fill="none" stroke="#4b5a52" stroke-width="2.4" stroke-linecap="round"/><circle cx="44" cy="93" r="3" fill="#4b5a52"/></svg>';
+    return '<img alt="" src="data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)+'">';
+  }
+  function foto(n){return FOTOS[n]?'<img src="'+FOTOS[n]+'" alt="">':avatar(n)}
+  function crm(n){return 'CRM-RJ '+(520000+hsh(n)%90000)}
   function initials(n){var p=n.replace(/^Dra?\.\s*/,'').split(' ');return p[0][0]+p[p.length-1][0]}
   function buildHor(){
     var DS=days(),needDoc=S.pri==='Médico específico',docs=docsFor(),today=new Date();today.setHours(0,0,0,0);
@@ -1097,7 +1120,7 @@ main{flex:1;position:relative;overflow:hidden}
       return '<button type="button" class="day" data-d="'+i+'" aria-pressed="'+(S.day===i)+'"><small>'+lbl+'</small><b>'+d.getDate()+'</b><span>'+MSS[d.getMonth()]+'</span></button>';
     }).join('');
     $('secDoc').hidden=!needDoc;
-    $('gDocs').innerHTML=docs.map(function(n){return '<button type="button" class="doc" data-doc="'+n+'" aria-pressed="'+(S.doc===n)+'"><i>'+initials(n)+'</i>'+n+'</button>'}).join('');
+    $('gDocs').innerHTML=docs.map(function(n){return '<button type="button" class="doc" data-doc="'+n+'" aria-pressed="'+(S.doc===n)+'"><span class="ph">'+foto(n)+'</span><b>'+n+'</b><small>'+esc(S.esp)+'</small><span class="crm">'+crm(n)+'</span></button>'}).join('');
     // horários
     var r=PER[S.per],day=DS[S.day],now=new Date(),h='',any=false;
     var who=needDoc?S.doc:'';
@@ -1130,8 +1153,8 @@ main{flex:1;position:relative;overflow:hidden}
   function dayTxt(){var d=S.date;return WD[d.getDay()].replace(/^./,function(c){return c.toUpperCase()})+', '+d.getDate()+' de '+MS[d.getMonth()]}
   function buildConf(){
     var hs=horScr();
-    var rows=[['user','Paciente',esc(S.nome.trim()),'sId'],['steth','Especialidade',esc(S.esp),'sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
-    $('review').innerHTML=rows.map(function(r){return '<div class="rrow"><span class="ri">'+ic(r[0])+'</span><span><small>'+r[1]+'</small><b>'+r[2]+'</b></span><button type="button" class="edit" data-go="'+r[3]+'">Alterar</button></div>'}).join('');
+    var rows=[['user','Paciente',esc(S.nome.trim()),'sId'],['tel','Celular',fmtTel(S.tel),'sId'],['steth','Especialidade',esc(S.esp),'sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
+    $('review').innerHTML=rows.map(function(r){return '<div class="rrow"><span class="ri'+(r[0]==='doc'?' rph':'')+'">'+(r[0]==='doc'?foto(S.doc):ic(r[0]))+'</span><span><small>'+r[1]+'</small><b>'+r[2]+'</b></span><button type="button" class="edit" data-go="'+r[3]+'">Alterar</button></div>'}).join('');
   }
   $('review').addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b)show(b.dataset.go)});
   $('confBack').addEventListener('click',function(){show(horScr())});
@@ -1178,11 +1201,11 @@ main{flex:1;position:relative;overflow:hidden}
   /* ---------- Reiniciar ---------- */
   function resetAll(){
     clearInterval(doneT);clearInterval(idleT);idleOpen=false;
-    ['ovCard','ovOutras','ovIdle','ovCancel'].forEach(closeOv);
+    ['ovCard','ovIdle','ovCancel'].forEach(closeOv);
     fresh();act=null;$('kb').classList.remove('on');K.classList.remove('kb-open');
     [].forEach.call(document.querySelectorAll('.opt[aria-pressed]'),function(x){x.setAttribute('aria-pressed','false')});
-    resetOutras();checkPref();
-    ['fNome','fNasc','fCpf'].forEach(function(id){$(id).classList.remove('ok','bad','act')});
+    checkPref();
+    ['fNome','fNasc','fCpf','fTel'].forEach(function(id){$(id).classList.remove('ok','bad','act')});
     paint();show('sHome');
   }
 
