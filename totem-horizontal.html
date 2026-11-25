@@ -487,6 +487,11 @@ svg.av{stroke:none!important}
 .ov.on#ovCard .go,.ov.on#ovCard .back{animation:upIn .5s .95s both}
 .ov.on#ovCard .cardhint{animation:upIn .5s 1.2s both}
 @keyframes upIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* Carteirinha interativa também na revisão */
+.revcard{perspective:1400px}
+.screen.on .tilt .card .sheen{animation:sheen 3.6s ease-in-out .9s infinite}
+#sConf .cardhint{margin:16px 0 0!important}
 </style>
 </head>
 <body>
@@ -673,7 +678,7 @@ svg.av{stroke:none!important}
         <p class="sub">Confira se está tudo certo antes de confirmar.</p>
         <div class="cols">
           <div>
-            <div class="revcard"><div class="card ok" data-card></div></div>
+            <div class="revcard"><div class="tilt" id="tilt2"><div class="card ok" data-card></div></div></div><p class="cardhint"><svg viewBox="0 0 24 24"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg>Deslize o dedo pela tela ou toque na carteirinha</p>
             <div class="note"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5L15.5 10"/></svg>Chegue com 15 minutos de antecedência e leve um documento com foto.</div>
           </div>
           <div class="review" id="review"></div>
@@ -974,6 +979,7 @@ svg.av{stroke:none!important}
     var prev=$(cur);prev.classList.remove('on');
     $(id).classList.remove('out');$(id).classList.add('on');
     cur=id;
+    if(confFx){if(id==='sConf')confFx.start();else confFx.stop()}
     K.classList.toggle('is-home',id==='sHome');
     K.classList.toggle('is-done',id==='sDone');
     if(STEP[id]){
@@ -1293,8 +1299,8 @@ svg.av{stroke:none!important}
   /* ---------- Sobreposições ---------- */
 
   /* Carteirinha do popup: entra girando, acompanha o dedo/mouse pela tela, brilha e flutua sozinha */
-  var cardFx=(function(){
-    var ov=$('ovCard'),tilt=$('tilt'),card=tilt.querySelector('.card'),raf=0,on=false,tx=0,ty=0,cx=0,cy=0,last=0,t0=0;
+  function makeTilt(ov,tilt){
+    var card=tilt.querySelector('.card'),raf=0,on=false,tx=0,ty=0,cx=0,cy=0,last=0,t0=0;
     var calm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var gl=document.createElement('i');gl.className='glare';card.appendChild(gl);
     var sh=document.createElement('i');sh.className='sheen';card.appendChild(sh);
@@ -1343,7 +1349,8 @@ svg.av{stroke:none!important}
       },
       stop:function(){on=false;cancelAnimationFrame(raf)}
     };
-  })();
+  }
+  var cardFx=makeTilt($('ovCard'),$('tilt')),confFx=makeTilt($('sConf'),$('tilt2'));
   function openOv(id){$(id).classList.add('on');if(id==='ovCard')cardFx.start()}
   function closeOv(id){$(id).classList.remove('on');if(id==='ovCard')cardFx.stop()}
   $('btnHome').addEventListener('click',function(){openOv('ovCancel')});
