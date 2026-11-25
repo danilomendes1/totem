@@ -1,8 +1,9 @@
 # Totem de Autoatendimento
 
-Totem vertical (1080x1920) da Policlínica São Francisco de Paula.
+Totem de autoatendimento da Policlínica São Francisco de Paula.
 
-- `totem.html` — totem de autoatendimento (identificação, preferências, horário, confirmação e senha)
+- `totem.html` — totem **vertical** (1080x1920)
+- `totem-horizontal.html` — totem **horizontal** (1920x1080)
 - `Confirme sua identidade · Policlínica São Francisco de Paula (1).html` — página original
 
 Abra `totem.html` no navegador. No totem, use o Chrome em modo quiosque:

@@ -53,6 +53,8 @@ main{flex:1;position:relative;overflow:hidden}
 /* ===== Fundo verde com cruzes ===== */
 .green{background:radial-gradient(120% 90% at 20% 0%,#16a34a,#0b5a35 55%,#073b24);color:#fff;position:relative;overflow:hidden}
 .crosses{position:absolute;inset:0;pointer-events:none}
+.screen.green{position:absolute}
+#sHome>.crosses,#sDone>.crosses{position:absolute}
 .crosses i{position:absolute;width:var(--s);height:var(--s);opacity:.12;background:linear-gradient(#fff,#fff) center/34% 100% no-repeat,linear-gradient(#fff,#fff) center/100% 34% no-repeat;left:var(--x);top:110%;animation:rise var(--d) linear var(--dl) infinite}
 @keyframes rise{to{transform:translateY(-2100px) rotate(90deg)}}
 
