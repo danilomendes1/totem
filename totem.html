@@ -144,6 +144,71 @@ main{flex:1;position:relative;overflow:hidden}
 .btn2{display:grid;grid-template-columns:1fr 2fr;gap:16px;align-items:center}
 .btn2 .back{margin:0;height:108px}
 
+/* ===== Cadastro não localizado ===== */
+#sNf .pnl{padding-top:64px;text-align:center}
+.nfic{width:210px;height:210px;border-radius:50%;background:var(--g100);display:grid;place-items:center;margin:0 auto 36px;position:relative}
+.on .nfic{animation:pop .6s cubic-bezier(.3,1.7,.5,1)}
+.nfic::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:3px solid var(--g200);animation:ring 2.4s ease-out infinite}
+.nfic svg{width:90px;height:90px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#sNf h1{font-size:56px}
+#sNf .sub{font-size:27px;max-width:30ch;margin:14px auto 0;line-height:1.4}
+.nfbox{background:var(--card);border:2px solid var(--line);border-radius:30px;padding:32px 36px;text-align:left;margin-top:50px;box-shadow:0 18px 44px -28px rgba(11,90,53,.5)}
+.nfbox>b{font-size:28px;font-weight:800;display:block}
+.nfbox>p{font-size:22px;color:var(--muted);margin-top:8px;line-height:1.4}
+.nfdata{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:16px;margin-top:22px;padding-top:22px;border-top:2px solid var(--line)}
+.nfdata small{display:block;font-size:17px;color:var(--muted);font-weight:600}
+.nfdata span{display:block;font-size:22px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums}
+.choice{display:flex;align-items:center;gap:26px;width:100%;text-align:left;border-radius:30px;padding:36px;margin-top:24px;cursor:pointer;border:2.5px solid var(--line);background:var(--card);transition:transform .15s}
+.choice:active{transform:scale(.985)}
+.choice.pri{margin-top:40px;background:linear-gradient(135deg,var(--g600),var(--g700));border-color:var(--g700);color:#fff;box-shadow:0 18px 34px -14px rgba(15,122,69,.8)}
+.choice .ci{width:84px;height:84px;border-radius:24px;background:var(--g100);display:grid;place-items:center;flex:none}
+.choice.pri .ci{background:rgba(255,255,255,.16)}
+.choice svg{width:46px;height:46px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.choice.pri svg{stroke:#fff}
+.choice b{display:block;font-size:32px;font-weight:800;letter-spacing:-.01em}
+.choice small{display:block;font-size:22px;color:var(--muted);font-weight:500;margin-top:4px}
+.choice.pri small{color:#d6f5e2}
+.choice .chev{margin-left:auto;width:40px;height:40px}
+.nfhelp{margin-top:auto;border-top:2px solid var(--line);padding-top:28px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:22px;color:var(--muted)}
+.nfhelp svg{width:28px;height:28px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round}
+
+/* ===== Atendimento mais rápido ===== */
+.ttl{display:flex;align-items:center;gap:14px}
+.ttl svg{width:50px;height:50px;stroke:var(--g600);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.fbox{background:var(--g100);border-radius:26px;padding:22px 24px;margin-top:24px;flex:none}
+.fbox>b{font-size:24px;font-weight:800;color:var(--txt-g)}
+.seg{display:flex;gap:8px;margin-top:14px}
+.seg button{flex:1;height:64px;border-radius:99px;border:2px solid transparent;background:transparent;font-size:22px;font-weight:700;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--txt-g);border-color:var(--g200);box-shadow:0 6px 14px -8px rgba(11,90,53,.5)}
+.clinics{flex:1;min-height:0;overflow-y:auto;margin:18px -8px 0;padding:6px 8px;scrollbar-width:none}
+.clinics::-webkit-scrollbar{display:none}
+.cl{background:var(--card);border:2.5px solid var(--line);border-radius:28px;padding:24px 26px 10px;margin-bottom:18px}
+.cl.best{border-color:var(--g600);box-shadow:0 0 0 4px rgba(22,163,74,.15)}
+.cl .tag{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:800;color:var(--g700);letter-spacing:.06em;margin-bottom:12px}
+.cl .tag svg{width:20px;height:20px;stroke:var(--g600);fill:none;stroke-width:2.4;stroke-linejoin:round}
+.cl .ch{display:flex;gap:18px;align-items:center}
+.cl .bi{width:72px;height:72px;border-radius:20px;background:var(--g100);display:grid;place-items:center;flex:none}
+.cl .bi svg{width:40px;height:40px;stroke:var(--g700);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cl .ch b{display:block;font-size:28px;font-weight:800;letter-spacing:-.01em}
+.cl .ch small{display:block;font-size:19px;color:var(--muted);margin-top:2px}
+.cl .when{display:flex;align-items:center;gap:8px;font-size:21px;font-weight:800;margin-top:18px}
+.cl .when svg,.xd svg{width:24px;height:24px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cl .dr{font-size:20px;color:var(--muted);margin-top:4px;font-weight:600}
+.cl .ts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.cl .slot{background:var(--g50)}
+.cl .slot[aria-pressed=true]{background:linear-gradient(135deg,var(--g600),var(--g700))}
+.more{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:6px;background:none;border:0;color:var(--g700);font-weight:800;font-size:20px;height:58px;cursor:pointer}
+.more svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;transition:transform .25s}
+.cl.open .more svg{transform:rotate(180deg)}
+.extra{display:none;border-top:2px dashed var(--line);margin-top:16px;padding-bottom:6px}
+.cl.open .extra{display:block}
+.xd{display:flex;align-items:center;gap:8px;font-size:19px;font-weight:800;margin:16px 0 10px}
+.xs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.xs .slot{height:70px;font-size:22px}
+.nofast{font-size:21px;color:var(--muted);text-align:center;padding:24px 0 14px}
+#sFast .actions .back{margin-top:12px;height:80px}
+#sFast .nfhelp{margin-top:18px;padding-top:18px}
+
 /* ===== Opções ===== */
 .sec{margin-top:30px}
 .sec h3{font-size:25px;font-weight:800;margin-bottom:14px}
@@ -343,6 +408,33 @@ main{flex:1;position:relative;overflow:hidden}
       </div>
     </section>
 
+    <!-- 1b. Cadastro não localizado -->
+    <section class="screen" id="sNf" aria-label="Cadastro não localizado">
+      <div class="pnl">
+        <div class="nfic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div>
+        <h1>Cadastro não localizado</h1>
+        <p class="sub">Não encontramos um cadastro com os dados informados.</p>
+
+        <div class="nfbox">
+          <b>Já realizou atendimento conosco?</b>
+          <p>Confira se seu nome, data de nascimento e CPF estão corretos.</p>
+        </div>
+
+        <button class="choice pri" id="nfFix" type="button">
+          <span class="ci"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+          <span><b>Conferir meus dados</b><small>Corrigir as informações digitadas</small></span>
+          <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <button class="choice" id="nfNew" type="button">
+          <span class="ci"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c1-5 13-5 14 0M19 8v6M16 11h6"/></svg></span>
+          <span><b>Realizar novo cadastro</b><small>É minha primeira vez na clínica</small></span>
+          <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+
+        <p class="nfhelp"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>Precisa de ajuda? Procure nossa recepção.</p>
+      </div>
+    </section>
+
     <!-- 2. Preferências -->
     <section class="screen" id="sPref" aria-label="Preferências">
       <div class="pnl">
@@ -379,6 +471,24 @@ main{flex:1;position:relative;overflow:hidden}
       </div>
     </section>
 
+    <!-- 3b. Atendimento mais rápido -->
+    <section class="screen" id="sFast" aria-label="Atendimento mais rápido">
+      <div class="pnl">
+        <h1 class="ttl"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Atendimento mais rápido</h1>
+        <p class="sub">Compare os horários disponíveis nas três clínicas.</p>
+        <div class="fbox">
+          <b id="fEsp">Clínico Geral</b>
+          <div class="seg" id="fSeg"></div>
+        </div>
+        <div class="clinics" id="fList"></div>
+        <div class="actions" style="padding-top:14px">
+          <button class="go" id="goFast" type="button" disabled>Continuar →</button>
+          <button class="back" data-back="sPref" type="button">← Voltar</button>
+        </div>
+        <p class="nfhelp"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>Precisa de ajuda? Procure nossa recepção.</p>
+      </div>
+    </section>
+
     <!-- 4. Confirmação -->
     <section class="screen" id="sConf" aria-label="Confirmação">
       <div class="pnl">
@@ -388,7 +498,7 @@ main{flex:1;position:relative;overflow:hidden}
         <div class="review" id="review"></div>
         <div class="note"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5L15.5 10"/></svg>Chegue com 15 minutos de antecedência e leve um documento com foto.</div>
         <div class="actions btn2">
-          <button class="back" data-back="sHor" type="button">← Voltar</button>
+          <button class="back" id="confBack" type="button">← Voltar</button>
           <button class="go" id="goConf" type="button"><span class="spin" aria-hidden="true"></span><span id="goConfTxt">Confirmar atendimento</span></button>
         </div>
       </div>
@@ -436,7 +546,7 @@ main{flex:1;position:relative;overflow:hidden}
   <div class="ov" id="ovCard" role="dialog" aria-modal="true" aria-labelledby="ovCardT">
     <div class="dlg">
       <h2 id="ovCardT">Cadastro confirmado!</h2>
-      <p>Confira seus dados na carteirinha antes de continuar.</p>
+      <p id="ovCardP">Confira seus dados na carteirinha antes de continuar.</p>
       <div class="card ok" data-card></div>
       <button class="go" id="ovCardGo" type="button">Continuar →</button>
       <button class="back" id="ovCardFix" type="button">Corrigir meus dados</button>
@@ -514,7 +624,7 @@ main{flex:1;position:relative;overflow:hidden}
   });
 
   /* ---------- Ícones ---------- */
-  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M12 14v4M10 16h4"/>',bk:'<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>'};
+  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M12 14v4M10 16h4"/>',bk:'<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',bld:'<path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M12 6v4M10 8h4"/>'};
   var ic=function(k){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+I[k]+'</svg>'};
   var LOGO='<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#16a34a"/><path d="M20 33C9 25 7 18 10 14c3-4 8-3 10 1 2-4 7-5 10-1 3 4 1 11-10 19z" fill="#fff"/><path d="M20 15v9M15.5 19.5h9" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/></svg>';
 
@@ -530,7 +640,7 @@ main{flex:1;position:relative;overflow:hidden}
   /* ---------- Estado ---------- */
   var S,touched,act=null,kbMode='alpha';
   function fresh(){
-    S={nome:'',nasc:'',cpf:'',esp:'',pri:'',per:'',day:-1,doc:'',hora:'',showCpf:false};
+    S={nome:'',nasc:'',cpf:'',esp:'',pri:'',per:'',day:-1,doc:'',hora:'',clin:'',date:null,fsel:null,showCpf:false};
     touched={nome:false,nasc:false,cpf:false};
   }
   fresh();
@@ -544,11 +654,8 @@ main{flex:1;position:relative;overflow:hidden}
     if(dt>new Date())return{ok:false,msg:'Essa data ainda não chegou.'};
     return{ok:true,msg:''};
   }
-  function cpfOk(s){
-    if(s.length!==11||/^(\d)\1+$/.test(s))return false;
-    for(var t=9;t<11;t++){var sum=0;for(var i=0;i<t;i++)sum+=s[i]*(t+1-i);if(((sum*10)%11)%10!==+s[t])return false}
-    return true;
-  }
+  /* Aceita qualquer CPF com 11 números (sem checar dígito verificador) */
+  function cpfOk(s){return s.length===11}
   function fmtCpf(d){return d.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
   function maskCpf(d){var f=fmtCpf(d);return f.replace(/\d/g,function(c,i){return(i<3||i>=f.length-2)?c:'•'})}
   function fmtNasc(d){return d?(d.slice(0,2)+(d.length>2?'/'+d.slice(2,4):'')+(d.length>4?'/'+d.slice(4):'')):''}
@@ -579,7 +686,7 @@ main{flex:1;position:relative;overflow:hidden}
     setF('fNasc','hNasc',ni.ok,touched.nasc,ni.ok?'Data confirmada.':(touched.nasc?ni.msg:'Exemplo: 05/08/1980'));
     // CPF
     $('vCpf').innerHTML=S.cpf||act==='cpf'?masked(S.cpf,'000.000.000-00',act==='cpf'):'<span class="phd">Toque para digitar · 000.000.000-00</span>';
-    var cmsg=S.cpf.length<11?'Informe os 11 números do seu CPF.':(ok.cpf?'CPF válido.':'Esse CPF não parece correto. Confira os números.');
+    var cmsg=S.cpf.length<11?'Informe os 11 números do seu CPF.':'CPF completo.';
     setF('fCpf','hCpf',ok.cpf,touched.cpf&&S.cpf.length===11||touched.cpf&&act!=='cpf',cmsg);
     ['fNome','fNasc','fCpf'].forEach(function(id){$(id).classList.toggle('act',$(id).dataset.f===act)});
     // Progresso
@@ -652,12 +759,32 @@ main{flex:1;position:relative;overflow:hidden}
     var o=$('kbKeys').querySelector('[data-k=ok]');if(o){var nx2=nextField();o.textContent=nx2?'Próximo →':'Concluir ✓'}
   }
   $('kbKeys').addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b)press(b.dataset.k)});
+
+  /* Teclado físico (para testes): funciona junto com o teclado da tela */
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    if(cur!=='sId'||document.querySelector('.ov.on'))return;
+    var k=e.key;
+    if(!act){
+      if(k.length===1||k==='Backspace'){var f=ORDER.filter(function(x){return!isOk()[x]})[0]||'nome';openKb(f)}
+      else return;
+    }
+    bump();
+    if(k==='Enter'||k==='Tab'){e.preventDefault();press('ok');return}
+    if(k==='Escape'){e.preventDefault();closeKb();return}
+    if(k==='Backspace'){e.preventDefault();press('bk');return}
+    if(k===' '){e.preventDefault();press('sp');return}
+    if(k.length!==1)return;
+    if(act==='nome'){
+      if(/^[a-zA-ZÀ-ÿ'.\-]$/.test(k)){e.preventDefault();press(k.toUpperCase())}
+    }else if(/^\d$/.test(k)){e.preventDefault();press(k)}
+  });
   $('kbClose').addEventListener('click',closeKb);
   $('kbClr').addEventListener('click',function(){if(act){S[act]='';paint()}});
   ['fNome','fNasc','fCpf'].forEach(function(id){$(id).addEventListener('click',function(){openKb(this.dataset.f)})});
 
   /* ---------- Navegação ---------- */
-  var STEP={sId:[1,'Identificação'],sPref:[2,'Preferências'],sHor:[3,'Dia e horário'],sConf:[4,'Confirmação']};
+  var STEP={sId:[1,'Identificação'],sNf:[1,'Identificação'],sFast:[3,'Agendamento'],sPref:[2,'Preferências'],sHor:[3,'Dia e horário'],sConf:[4,'Confirmação']};
   var cur='sHome';
   function show(id){
     if(act)closeKb();
@@ -683,14 +810,39 @@ main{flex:1;position:relative;overflow:hidden}
   $('goId').addEventListener('click',function(){
     var go=this;if(go.disabled)return;
     go.classList.add('load');go.disabled=true;$('goIdTxt').textContent='Localizando cadastro…';
-    setTimeout(function(){
+    buscarCadastro(S.nome.trim(),S.nasc,S.cpf).then(function(achou){
       go.classList.remove('load');$('goIdTxt').textContent='Confirmar e continuar';paint();
-      $('ovCardT').textContent='Tudo certo, '+firstName()+'!';
-      openOv('ovCard');
-    },1300);
+      if(achou){
+        S.novo=false;
+        $('ovCardT').textContent='Tudo certo, '+firstName()+'!';
+        $('ovCardP').textContent='Confira seus dados na carteirinha antes de continuar.';
+        $('ovCardGo').textContent='Continuar →';
+        openOv('ovCard');
+      }else{
+        show('sNf');
+      }
+    });
   });
+
+  /* Busca do cadastro.
+     TROCAR AQUI pela consulta ao sistema da clínica (deve devolver true/false).
+     Demonstração: CPF terminado em número PAR = cadastro encontrado; ÍMPAR = não localizado. */
+  function buscarCadastro(nome,nasc,cpf){
+    return new Promise(function(ok){setTimeout(function(){ok(+cpf.slice(-1)%2===0)},1300)});
+  }
+
   $('ovCardGo').addEventListener('click',function(){closeOv('ovCard');show('sPref')});
-  $('ovCardFix').addEventListener('click',function(){closeOv('ovCard');openKb('nome')});
+  $('ovCardFix').addEventListener('click',function(){closeOv('ovCard');show('sId');setTimeout(function(){openKb('nome')},300)});
+
+  /* Cadastro não localizado */
+  $('nfFix').addEventListener('click',function(){show('sId');setTimeout(function(){openKb('nome')},450)});
+  $('nfNew').addEventListener('click',function(){
+    S.novo=true;
+    $('ovCardT').textContent='Vamos criar seu cadastro';
+    $('ovCardP').textContent='Confira se seus dados estão corretos na carteirinha.';
+    $('ovCardGo').textContent='Criar cadastro e continuar →';
+    openOv('ovCard');
+  });
 
   /* Preferências */
   var esp=[['Clínico Geral','steth'],['Cardiologia','heart'],['Dermatologia','hand'],['Ginecologia','fem'],['Odontologia','smile'],['Ortopedia','bone']];
@@ -723,7 +875,80 @@ main{flex:1;position:relative;overflow:hidden}
     $('btnOutras').setAttribute('aria-pressed','true');$('btnOutras').textContent='Outras: '+S.esp+' ✓';
     closeOv('ovOutras');checkPref();
   });
-  $('goPref').addEventListener('click',function(){if(this.disabled)return;S.day=0;S.doc='';S.hora='';buildHor();show('sHor')});
+  $('goPref').addEventListener('click',function(){
+    if(this.disabled)return;
+    S.day=0;S.doc='';S.hora='';S.fsel=null;
+    if(S.pri==='Atendimento mais rápido'){
+      fastPer=S.per==='Qualquer horário'?'Todos':S.per;fastOpen={};
+      buildFast();show('sFast');$('fList').scrollTop=0;
+    }else{buildHor();show('sHor')}
+  });
+  function horScr(){return S.pri==='Atendimento mais rápido'?'sFast':'sHor'}
+
+  /* Atendimento mais rápido: compara as 3 clínicas */
+  var CLIN=[['Policlínica São Francisco de Paula','Vilar dos Teles – São João de Meriti'],['Policlínica Menino Jesus','Centro – São João de Meriti'],['Clínica Consulta Hoje','Centro – Queimados']];
+  var FPER={'Manhã':[8,12],'Tarde':[12,18],'Noite':[18,21],'Todos':[8,21]};
+  var fastPer='Manhã',fastOpen={};
+  var BLD='<svg viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M9 7h.01M15 7h.01M9 11h.01M15 11h.01M12 6v4M10 8h4"/></svg>';
+  var CAL='<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
+  function nextDays(n){var out=[],d=new Date();d.setHours(0,0,0,0);while(out.length<n){if(d.getDay()!==0)out.push(new Date(d));d.setDate(d.getDate()+1)}return out}
+  function hm(t,sep){return p2(Math.floor(t/60))+sep+p2(t%60)}
+  function dmy(d){return p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()}
+  function fastSlots(ci,day){
+    var r=FPER[fastPer],out=[],lim=new Date(Date.now()+20*60000);
+    for(var t=r[0]*60+ci*25;t<r[1]*60;t+=35){
+      var dt=new Date(day);dt.setHours(Math.floor(t/60),t%60);
+      if(dt<=lim)continue;
+      if(day.getDay()===6&&t>=13*60)continue;
+      if(hsh(S.esp+ci+day.getDate()+t)%4===0)continue;
+      out.push(t);
+    }
+    return out;
+  }
+  function slotBtn(ci,day,t){
+    var ts=day.getTime(),on=S.fsel&&S.fsel.ci===ci&&S.fsel.ts===ts&&S.fsel.t===t;
+    return '<button type="button" class="slot" data-ci="'+ci+'" data-ts="'+ts+'" data-t="'+t+'" aria-pressed="'+!!on+'">'+hm(t,'h')+'</button>';
+  }
+  function buildFast(){
+    $('fEsp').textContent=S.esp;
+    $('fSeg').innerHTML=['Manhã','Tarde','Noite','Todos'].map(function(p){return '<button type="button" data-p="'+p+'" aria-pressed="'+(p===fastPer)+'">'+p+'</button>'}).join('');
+    var DS=nextDays(6),h=DOCS.length,base=hsh(S.esp);
+    var list=CLIN.map(function(c,ci){
+      var days=DS.map(function(d){return{d:d,s:fastSlots(ci,d)}}).filter(function(x){return x.s.length});
+      var first=days[0];
+      return{ci:ci,c:c,doc:DOCS[(base+ci*4)%h],days:days,first:first,when:first?first.d.getTime()+first.s[0]*60000:Infinity};
+    }).sort(function(a,b){return a.when-b.when});
+    $('fList').innerHTML=list.map(function(x,i){
+      var best=i===0&&x.first,body;
+      if(!x.first)body='<p class="nofast">Sem horários neste período nos próximos dias.</p>';
+      else{
+        var extra='';
+        var rest=x.first.s.slice(3);
+        if(rest.length)extra+='<div class="xd">'+CAL+dmy(x.first.d)+'</div><div class="xs">'+rest.map(function(t){return slotBtn(x.ci,x.first.d,t)}).join('')+'</div>';
+        x.days.slice(1,4).forEach(function(dd){extra+='<div class="xd">'+CAL+WDS[dd.d.getDay()]+' · '+dmy(dd.d)+'</div><div class="xs">'+dd.s.map(function(t){return slotBtn(x.ci,dd.d,t)}).join('')+'</div>'});
+        body='<div class="when">'+CAL+dmy(x.first.d)+'</div><div class="dr">'+x.doc+'</div>'+
+          '<div class="ts">'+x.first.s.slice(0,3).map(function(t){return slotBtn(x.ci,x.first.d,t)}).join('')+'</div>'+
+          '<div class="extra">'+extra+'</div>'+
+          '<button type="button" class="more" data-more="'+x.ci+'">'+(fastOpen[x.ci]?'Ver menos':'Ver mais datas e horários')+'<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>';
+      }
+      return '<div class="cl'+(best?' best':'')+(fastOpen[x.ci]?' open':'')+'" data-doc="'+x.doc+'">'+
+        (best?'<div class="tag"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>HORÁRIO MAIS PRÓXIMO</div>':'')+
+        '<div class="ch"><span class="bi">'+BLD+'</span><span><b>'+x.c[0]+'</b><small>'+x.c[1]+'</small></span></div>'+body+'</div>';
+    }).join('');
+    $('goFast').disabled=!S.fsel;
+  }
+  $('fSeg').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b)return;fastPer=b.dataset.p;S.fsel=null;fastOpen={};buildFast();$('fList').scrollTop=0});
+  $('fList').addEventListener('click',function(e){
+    var m=e.target.closest('[data-more]');
+    if(m){var ci=+m.dataset.more;fastOpen[ci]=!fastOpen[ci];var y=$('fList').scrollTop;buildFast();$('fList').scrollTop=y;return}
+    var b=e.target.closest('[data-ci]');if(!b)return;
+    var ci2=+b.dataset.ci,ts=+b.dataset.ts,t=+b.dataset.t,y2=$('fList').scrollTop;
+    S.fsel={ci:ci2,ts:ts,t:t};
+    S.clin=CLIN[ci2][0];S.date=new Date(ts);S.hora=hm(t,':');S.doc=b.closest('.cl').dataset.doc;
+    S.per=t<12*60?'Manhã':(t<18*60?'Tarde':'Noite');
+    buildFast();$('fList').scrollTop=y2;
+  });
+  $('goFast').addEventListener('click',function(){if(this.disabled)return;buildConf();show('sConf')});
 
   /* Horários */
   var DOCS=['Dra. Ana Ribeiro','Dr. Carlos Mendes','Dra. Juliana Prado','Dr. Rafael Costa','Dra. Beatriz Lima','Dr. Marcos Teixeira','Dra. Camila Rocha','Dr. Eduardo Alves','Dra. Fernanda Souza','Dr. Paulo Nogueira'];
@@ -770,16 +995,19 @@ main{flex:1;position:relative;overflow:hidden}
   $('goHor').addEventListener('click',function(){
     if(this.disabled)return;
     if(S.pri!=='Médico específico'){var d=docsFor();S.doc=d[hsh(S.hora+S.day)%3]}
+    S.date=days()[S.day];S.clin=CLIN[0][0];
     buildConf();show('sConf');
   });
 
   /* Confirmação */
-  function dayTxt(){var d=days()[S.day];return WD[d.getDay()].replace(/^./,function(c){return c.toUpperCase()})+', '+d.getDate()+' de '+MS[d.getMonth()]}
+  function dayTxt(){var d=S.date;return WD[d.getDay()].replace(/^./,function(c){return c.toUpperCase()})+', '+d.getDate()+' de '+MS[d.getMonth()]}
   function buildConf(){
-    var rows=[['user','Paciente',esc(S.nome.trim()),'sId'],['steth','Especialidade',esc(S.esp),'sPref'],['doc','Profissional',esc(S.doc),'sHor'],['cal','Data',dayTxt(),'sHor'],['clock','Horário',S.hora+' · '+S.per,'sHor']];
+    var hs=horScr();
+    var rows=[['user','Paciente',esc(S.nome.trim()),'sId'],['steth','Especialidade',esc(S.esp),'sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
     $('review').innerHTML=rows.map(function(r){return '<div class="rrow"><span class="ri">'+ic(r[0])+'</span><span><small>'+r[1]+'</small><b>'+r[2]+'</b></span><button type="button" class="edit" data-go="'+r[3]+'">Alterar</button></div>'}).join('');
   }
   $('review').addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b)show(b.dataset.go)});
+  $('confBack').addEventListener('click',function(){show(horScr())});
   $('goConf').addEventListener('click',function(){
     var go=this;if(go.classList.contains('load'))return;
     go.classList.add('load');$('goConfTxt').textContent='Confirmando…';
@@ -795,8 +1023,8 @@ main{flex:1;position:relative;overflow:hidden}
     var senha=(S.pri==='Atendimento mais rápido'?'R':'M')+p2(Math.floor(Math.random()*90)+10)+Math.floor(Math.random()*10);
     $('tSenha').textContent=senha;
     $('doneH').textContent='Tudo certo, '+firstName()+'!';
-    var d=days()[S.day];
-    $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>Profissional</dt><dd>'+esc(S.doc)+'</dd><dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
+    var d=S.date;
+    $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Local</dt><dd>'+esc(S.clin)+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>Profissional</dt><dd>'+esc(S.doc)+'</dd><dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
     var t=$('ticket');t.style.animation='none';void t.offsetWidth;t.style.animation='';
     show('sDone');confetti();
     var n=30;$('count').textContent='Voltando ao início em '+n+'s';
