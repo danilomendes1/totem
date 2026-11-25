@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Confirme sua identidade · Policlínica São Francisco de Paula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g900:#073b24;--g800:#0b5a35;--g700:#0f7a45;--g600:#16a34a;--g400:#4ade80;--g200:#bbf0cf;--g100:#e3f7ea;--g50:#f3fbf6;
+  --ink:#0c2a1b;--muted:#53705f;--err:#c2410c;--line:#d3e8da;--card:#fff;--dis:#b9dcc6;--ph:#8fa99a;--txt-g:#0b5a35;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --g800:#0b5a35;--g100:#12301f;--g200:#1f5236;--g50:#08170f;--ink:#e6f4ec;--muted:#93b4a1;--err:#fb923c;
+    --line:#22402f;--card:#0d2016;--dis:#1f4630;--ph:#5f8070;--txt-g:#7be0a6;color-scheme:dark
+  }
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--ink);background:var(--g50);min-height:100%}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--g400);outline-offset:2px}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,40px);background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:38px;height:38px;flex:none}
+.brand b{display:block;font-size:15px;font-weight:800;letter-spacing:-.01em}
+.brand small{color:var(--txt-g);font-size:12px;font-weight:600}
+
+.wrap{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 67px)}
+.stage{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 20% 0%,#16a34a,#0b5a35 55%,#073b24);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:40px 24px;perspective:900px}
+.crosses{position:absolute;inset:0;pointer-events:none}
+.crosses i{position:absolute;width:var(--s);height:var(--s);opacity:.12;background:linear-gradient(#fff,#fff) center/34% 100% no-repeat,linear-gradient(#fff,#fff) center/100% 34% no-repeat;left:var(--x);top:110%;animation:rise var(--d) linear var(--dl) infinite}
+@keyframes rise{to{transform:translateY(-130vh) rotate(90deg)}}
+.stage h2{font-size:clamp(22px,2.6vw,32px);font-weight:800;letter-spacing:-.02em;text-align:center;line-height:1.15;position:relative}
+.stage p.lead{color:#d6f5e2;font-size:14px;text-align:center;max-width:34ch;position:relative;margin-top:-14px}
+
+.card{position:relative;width:min(380px,100%);aspect-ratio:1.586;border-radius:22px;background:linear-gradient(135deg,#fff 0%,#e3f7ea 60%,#bbf0cf 100%);color:#0c2a1b;padding:20px 22px;box-shadow:0 30px 60px -20px rgba(0,30,15,.6),0 0 0 1px rgba(255,255,255,.4) inset;transform:rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .15s ease-out;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,30%) var(--my,0%),rgba(255,255,255,.7),transparent 45%);pointer-events:none}
+.card .row{display:flex;justify-content:space-between;align-items:center}
+.card .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:12px;color:#0b5a35;line-height:1.1}
+.card .logo svg{width:28px;height:28px}
+.chip{width:38px;height:28px;border-radius:7px;background:linear-gradient(135deg,#f3d98b,#c9a53f);position:relative}
+.chip::before{content:"";position:absolute;inset:6px 9px;border:1.5px solid rgba(90,60,0,.35);border-radius:3px}
+.ecg{width:100%;height:30px;display:block}
+.ecg path{fill:none;stroke:#16a34a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:260;stroke-dashoffset:260;animation:beat 2.6s ease-in-out infinite}
+@keyframes beat{0%{stroke-dashoffset:260}60%,100%{stroke-dashoffset:0}}
+.card .lbl{font-size:10px;color:#53705f;font-weight:600}
+.card .nm{font-size:clamp(15px,2.4vw,19px);font-weight:800;text-transform:uppercase;letter-spacing:.01em;min-height:1.3em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card .nm.empty,.card .val.empty{color:#9bb8a7}
+.card .meta{display:flex;gap:22px;align-items:flex-end}
+.card .val{font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.eye{margin-left:auto;border:0;background:#e3f7ea;border-radius:99px;width:30px;height:30px;display:grid;place-items:center;cursor:pointer;transition:.2s}
+.eye:hover{background:#bbf0cf}
+.eye svg{width:16px;height:16px;stroke:#0b5a35;fill:none;stroke-width:2}
+.seal{position:absolute;right:16px;top:52px;width:54px;height:54px;border-radius:50%;background:#16a34a;display:grid;place-items:center;transform:scale(0) rotate(-40deg);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.seal svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.card.ok .seal{transform:scale(1) rotate(0)}
+
+.card-dialog{width:min(440px,calc(100% - 32px));max-width:none;max-height:calc(100% - 32px);margin:auto;padding:24px;border:0;border-radius:26px;background:var(--g100);color:var(--ink);box-shadow:0 24px 70px rgba(0,30,15,.35);overflow:auto}
+.card-dialog::backdrop{background:rgba(3,30,18,.72)}
+.card-dialog h2{text-align:center;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.card-dialog p{text-align:center;color:var(--muted);font-size:14px;margin:6px 0 18px}
+.card-dialog .card{width:100%;margin:0 auto}
+.card-dialog .go{margin-top:20px}
+
+.panel{display:flex;align-items:center;justify-content:center;padding:clamp(20px,4vw,48px)}
+.box{width:min(460px,100%)}
+.box>.stepwrap>header{text-align:center;margin-bottom:22px}
+.badge{width:68px;height:68px;border-radius:20px;background:var(--g100);display:grid;place-items:center;margin:0 auto 14px}
+.badge svg{width:38px;height:38px}
+.box h1{font-size:clamp(24px,3.4vw,30px);font-weight:800;letter-spacing:-.02em}
+.box header p{color:var(--muted);font-size:14px;margin-top:6px}
+
+.prog{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.bar{flex:1;height:10px;border-radius:99px;background:var(--g100);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--g600),var(--g400));transition:width .5s cubic-bezier(.3,1.2,.5,1)}
+.prog span{font-size:13px;font-weight:700;color:var(--txt-g);min-width:92px;text-align:right}
+
+form{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:6px 20px;box-shadow:0 14px 40px -24px rgba(11,90,53,.5)}
+.field{padding:16px 0;border-bottom:1px solid var(--line)}
+.field:last-of-type{border-bottom:0}
+.field label,.field .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;margin-bottom:10px}
+.field label svg,.field .t svg{width:18px;height:18px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.status{margin-left:auto;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;transition:.25s;transform:scale(.4);opacity:0}
+.status svg{width:13px!important;height:13px!important;stroke:#fff!important;stroke-width:3.5!important}
+.field.ok .status{background:var(--g600);transform:scale(1);opacity:1}
+input[type=text],select{width:100%;height:48px;border:1.5px solid var(--line);border-radius:14px;padding:0 14px;background:var(--g50);transition:border-color .2s,box-shadow .2s,background .2s;appearance:none;-webkit-appearance:none}
+input::placeholder{color:var(--ph)}
+input:focus,select:focus{outline:0;border-color:var(--g600);background:var(--card);box-shadow:0 0 0 4px rgba(22,163,74,.18)}
+.field.ok input,.field.ok select{border-color:var(--g400)}
+.field.bad input,.field.bad select{border-color:var(--err);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.dates{display:grid;grid-template-columns:.8fr 1.2fr 1fr;gap:10px}
+.dates label{font-size:12px;color:var(--muted);font-weight:600;margin:0 0 4px;display:block}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%2316a34a' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px}
+.hint{font-size:12.5px;color:var(--muted);margin-top:8px;min-height:1.2em}
+.field.bad .hint{color:var(--err);font-weight:600}
+
+.go{width:100%;height:54px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--g600),var(--g700));color:#fff;font-weight:800;font-size:16px;cursor:pointer;margin:18px 0 0;box-shadow:0 12px 24px -10px rgba(15,122,69,.8);transition:transform .15s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:10px}
+.go:hover:not(:disabled){transform:translateY(-2px)}
+.go:active:not(:disabled){transform:scale(.98)}
+.go:disabled{background:var(--dis);color:var(--muted);box-shadow:none;cursor:not-allowed}
+.spin{width:18px;height:18px;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:none}
+.go.load .spin{display:block}
+@keyframes sp{to{transform:rotate(360deg)}}
+.back{display:block;width:100%;margin-top:12px;height:46px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);font-weight:700;color:var(--txt-g);cursor:pointer;transition:.2s}
+.back:hover{background:var(--g100)}
+.safe{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12.5px;color:var(--muted);margin-top:16px}
+.safe svg{width:16px;height:16px;stroke:var(--g600);fill:none;stroke-width:2;flex:none}
+.help{text-align:center;font-size:13px;color:var(--muted);margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+
+.done{display:none;text-align:center;padding:28px 8px}
+.done .big{width:96px;height:96px;border-radius:50%;background:var(--g600);display:grid;place-items:center;margin:0 auto 18px;animation:pop .6s cubic-bezier(.3,1.7,.5,1)}
+.done .big svg{width:50px;height:50px;stroke:#fff;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+@keyframes pop{from{transform:scale(0)}}
+.done h2{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.done p{color:var(--muted);margin:8px 0 20px}
+.show-done .stepwrap{display:none}.show-done .done{display:block}
+.confetti{position:fixed;top:-20px;width:14px;height:14px;z-index:20;pointer-events:none;animation:fall var(--t) ease-in forwards;background:linear-gradient(currentColor,currentColor) center/34% 100% no-repeat,linear-gradient(currentColor,currentColor) center/100% 34% no-repeat}
+@keyframes fall{to{transform:translate(var(--dx),105vh) rotate(var(--r))}}
+
+@media (max-width:860px), (orientation:portrait){
+  .wrap{grid-template-columns:1fr}
+  .stage{padding:24px 16px 28px;gap:14px}
+  .stage .lead{display:block;margin-top:-8px}
+  .card{width:min(320px,100%)}
+  .panel{padding:24px 16px 36px}
+  .box{width:min(480px,100%)}
+}
+.steps{display:flex;gap:6px;margin:8px 0 6px}.steps i{flex:1;height:5px;border-radius:9px;background:var(--g200);transition:background .3s}.steps i.on{background:var(--g600)}
+.slab{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:14px}.slab b{color:var(--g600)}
+.pref{display:none;min-height:100vh;padding:14px}
+body.on-pref{background:#073b24}body.on-pref .top,body.on-pref .wrap{display:none}body.on-pref .pref{display:block}
+.pcard{max-width:480px;margin:0 auto;background:var(--g100);border-radius:26px;padding:18px;border:1px solid var(--g200)}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ph .brand b{font-size:14px}
+.home2{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:99px;border:1.5px solid var(--g200);background:var(--card);color:var(--txt-g);font-weight:700;font-size:13px;cursor:pointer}
+.home2 svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pcard h2{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.pcard .sub{font-size:13px;color:var(--muted);margin:6px 0 4px}
+.sec{border-top:1px solid var(--line);margin-top:18px;padding-top:16px}.sec h3{font-size:15px;font-weight:800;margin-bottom:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{background:var(--card);border:1.5px solid var(--line);border-radius:14px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px 6px;font-weight:600;font-size:13px;text-align:center;transition:.2s}
+.opt:hover{border-color:var(--g400)}
+.opt svg{width:22px;height:22px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.opt[aria-pressed=true]{border-color:var(--g600);background:var(--g50);box-shadow:0 0 0 3px rgba(22,163,74,.22)}
+.opt.row{flex-direction:row;justify-content:flex-start;padding:14px;gap:10px}
+.opt.pri{padding:18px 12px;gap:6px;font-weight:800;font-size:14px}.opt.pri small{font-weight:500;font-size:11.5px;color:var(--muted)}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--g200);margin-top:4px}.opt[aria-pressed=true] .dot{background:var(--g600);border-color:var(--g600)}
+.pill{width:100%;margin-top:8px;height:40px;border-radius:99px;border:1.5px solid var(--line);background:var(--card);font-weight:700;font-size:13px;color:var(--txt-g);cursor:pointer}
+.pill[aria-pressed=true]{border-color:var(--g600);box-shadow:0 0 0 3px rgba(22,163,74,.22)}
+#outras{display:none;margin-top:8px}#outras.show{display:block}
+.pfoot{text-align:center;color:#bbf0cf;font-size:11.5px;font-weight:600;margin-top:14px}
+#pdone{display:none;text-align:center;padding:10px 0}#pdone .big{width:80px;height:80px;border-radius:50%;background:var(--g600);display:grid;place-items:center;margin:8px auto 14px}#pdone .big svg{width:42px;height:42px;stroke:#fff;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+#pdone p{color:var(--muted);font-size:14px;margin:8px 0 16px}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .ecg path{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#16a34a"/><path d="M20 33C9 25 7 18 10 14c3-4 8-3 10 1 2-4 7-5 10-1 3 4 1 11-10 19z" fill="#fff"/><path d="M20 15v9M15.5 19.5h9" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/></svg>
+    <span><b>Policlínica São Francisco de Paula</b><small>Cuidando de você desde 1974</small></span>
+  </div>
+</header>
+
+<div class="wrap" id="wrap">
+  <aside class="stage" id="stage">
+    <div class="crosses" id="crosses" aria-hidden="true"></div>
+    <h2>Sua carteirinha<br>estará pronta após a confirmação</h2>
+    <p class="lead">Confira seus dados para localizar seu cadastro.</p>
+  </aside>
+
+  <main class="panel">
+    <div class="box" id="box">
+      <div class="stepwrap">
+        <header>
+          <div class="steps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div><div class="slab"><span>Etapa 1 de 4</span><b>Identificação</b></div>
+          <div class="badge">
+            <svg viewBox="0 0 40 40" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="32" height="24" rx="5"/><circle cx="14" cy="18" r="3.5"/><path d="M8.5 27c1-4 9-4 11 0M23 16h8M23 22h6"/></svg>
+          </div>
+          <h1>Confirme sua identidade</h1>
+          <p>Confira e complete seus dados para localizarmos seu cadastro.</p>
+        </header>
+
+        <div class="prog" aria-live="polite">
+          <div class="bar"><i id="barFill"></i></div>
+          <span id="barTxt">Faltam 3 passos</span>
+        </div>
+
+        <form id="form" novalidate autocomplete="off">
+          <div class="field" id="fNome">
+            <label for="nome">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg>
+              Nome completo do paciente
+              <span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            </label>
+            <input type="text" id="nome" placeholder="Digite seu nome completo" autocomplete="name" maxlength="80">
+            <div class="hint" id="hNome"></div>
+          </div>
+
+          <div class="field" id="fNasc">
+            <div class="t">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+              Data de nascimento
+              <span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            </div>
+            <div class="dates">
+              <div><label for="dia">Dia</label><select id="dia"><option value="">DD</option></select></div>
+              <div><label for="mes">Mês</label><select id="mes"><option value="">Mês</option></select></div>
+              <div><label for="ano">Ano</label><select id="ano"><option value="">AAAA</option></select></div>
+            </div>
+            <div class="hint" id="hNasc"></div>
+          </div>
+
+          <div class="field" id="fCpf">
+            <label for="cpf">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 11h18"/></svg>
+              CPF
+              <span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            </label>
+            <input type="text" id="cpf" inputmode="numeric" placeholder="000.000.000-00" maxlength="14">
+            <div class="hint" id="hCpf">Informe os 11 números do seu CPF.</div>
+          </div>
+        </form>
+
+        <button class="go" id="go" type="button" disabled>
+          <span class="spin" aria-hidden="true"></span><span id="goTxt">Confirmar e continuar</span>
+        </button>
+        <button class="back" id="back" type="button">Limpar campos</button>
+        <p class="safe">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5L15.5 10"/></svg>
+          Seus dados não são salvos nem enviados nesta página.
+        </p>
+        <p class="help">Precisa de ajuda? Procure nossa recepção.</p>
+      </div>
+
+      <section class="done" id="done" aria-live="polite">
+        <div class="big"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h2 id="doneH">Dados confirmados!</h2>
+        <p>Seus dados estão corretos. Apresente-os na recepção para localizarmos seu cadastro.</p>
+        <button class="back" id="again" type="button">Corrigir meus dados</button>
+      </section>
+    </div>
+  </main>
+</div>
+
+<dialog class="card-dialog" id="cardDialog" aria-labelledby="cardDialogTitle">
+  <h2 id="cardDialogTitle">Cadastro confirmado!</h2>
+  <p>Confira seus dados na carteirinha antes de continuar.</p>
+  <div class="card" id="card" aria-live="polite">
+    <div class="row">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#16a34a"/><path d="M20 33C9 25 7 18 10 14c3-4 8-3 10 1 2-4 7-5 10-1 3 4 1 11-10 19z" fill="#fff"/><path d="M20 15v9M15.5 19.5h9" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/></svg>
+        <span>Policlínica<br>São Francisco de Paula</span>
+      </div>
+      <div class="chip" aria-hidden="true"></div>
+    </div>
+    <svg class="ecg" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16h80l10-12 12 24 10-18 8 6h180"/></svg>
+    <div>
+      <div class="lbl">Paciente</div>
+      <div class="nm empty" id="cNome">Seu nome aparece aqui</div>
+    </div>
+    <div class="meta">
+      <div><div class="lbl">Nascimento</div><div class="val empty" id="cNasc">--/--/----</div></div>
+      <div><div class="lbl">CPF</div><div class="val empty" id="cCpf">---.---.---</div></div>
+      <button class="eye" id="eye" type="button" aria-label="Mostrar ou ocultar CPF na carteirinha" aria-pressed="false">
+        <svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <div class="seal" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+  </div>
+  <button class="go" id="cardContinue" type="button" autofocus>Continuar</button>
+</dialog>
+
+<section class="pref" id="pref" aria-label="Preferências de atendimento">
+  <div class="pcard">
+    <div class="ph">
+      <div class="brand">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#16a34a"/><path d="M20 33C9 25 7 18 10 14c3-4 8-3 10 1 2-4 7-5 10-1 3 4 1 11-10 19z" fill="#fff"/><path d="M20 15v9M15.5 19.5h9" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/></svg>
+        <span><b>Policlínica São Francisco de Paula</b><small>Desde 1974</small></span>
+      </div>
+      <button class="home2" id="pHome" type="button"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Início</button>
+    </div>
+    <div class="steps" id="pSteps" style="margin-top:16px"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+    <div class="slab"><span id="pEtapa">Etapa 2 de 4</span><b id="pNome">Preferências</b></div>
+
+    <div id="pmain">
+      <h2>Como podemos atender você?</h2>
+      <p class="sub">Selecione suas preferências de atendimento.</p>
+      <div class="sec" style="border:0;margin-top:10px;padding-top:6px">
+        <h3>1. Escolha a especialidade</h3>
+        <div class="g3" id="gEsp"></div>
+        <button class="pill" id="btnOutras" type="button" aria-pressed="false">Outras especialidades</button>
+        <select id="outras" aria-label="Outras especialidades"><option value="">Selecione…</option><option>Pediatria</option><option>Oftalmologia</option><option>Neurologia</option><option>Urologia</option><option>Endocrinologia</option><option>Psiquiatria</option><option>Otorrinolaringologia</option></select>
+      </div>
+      <div class="sec"><h3>2. Qual é sua prioridade?</h3><div class="g2" id="gPri"></div></div>
+      <div class="sec"><h3>3. Qual período você prefere?</h3><div class="g2" id="gPer"></div></div>
+      <button class="go" id="pGo" type="button" disabled style="margin-top:22px">Continuar →</button>
+      <button class="back" id="pBack" type="button">← Voltar</button>
+      <p class="help">Precisa de ajuda? Procure nossa recepção.</p>
+    </div>
+
+    <div id="pdone" aria-live="polite">
+      <div class="big"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Preferências registradas</h2>
+      <p id="pResumo"></p>
+      <button class="back" id="pEdit" type="button">← Alterar preferências</button>
+    </div>
+  </div>
+  <div class="pfoot">ClínicaOS • Autoatendimento</div>
+</section>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'};
+  var ic=function(k){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+I[k]+'</svg>'};
+  var sel={e:'',p:'',t:''};
+  var esp=[['Clínico Geral','steth'],['Cardiologia','heart'],['Dermatologia','hand'],['Ginecologia','fem'],['Odontologia','smile'],['Ortopedia','bone']];
+  var pri=[['Atendimento mais rápido','bolt','Encontrar os horários mais próximos.'],['Médico específico','steth','Escolher o profissional de sua preferência.']];
+  var per=[['Manhã','rise'],['Tarde','sun'],['Noite','moon'],['Qualquer horário','clock']];
+
+  function check(){$('pGo').disabled=!(sel.e&&sel.p&&sel.t)}
+  function build(id,list,key,cls,inner){
+    var g=$(id);
+    list.forEach(function(it){
+      var b=document.createElement('button');b.type='button';b.className='opt '+cls;b.setAttribute('aria-pressed','false');b.innerHTML=inner(it);
+      b.addEventListener('click',function(){
+        sel[key]=it[0];
+        [].forEach.call(g.children,function(x){x.setAttribute('aria-pressed',x===b)});
+        if(key==='e'){$('btnOutras').setAttribute('aria-pressed','false');$('btnOutras').textContent='Outras especialidades';$('outras').value=''}
+        check();
+      });
+      g.appendChild(b);
+    });
+  }
+  build('gEsp',esp,'e','',function(i){return ic(i[1])+i[0]});
+  build('gPri',pri,'p','pri',function(i){return ic(i[1])+'<span>'+i[0]+'</span><small>'+i[2]+'</small><span class="dot"></span>'});
+  build('gPer',per,'t','row',function(i){return ic(i[1])+i[0]});
+
+  $('btnOutras').addEventListener('click',function(){$('outras').classList.toggle('show');$('outras').focus()});
+  $('outras').addEventListener('change',function(){
+    var v=this.value;
+    [].forEach.call($('gEsp').children,function(x){x.setAttribute('aria-pressed','false')});
+    sel.e=v;$('btnOutras').setAttribute('aria-pressed',!!v);
+    $('btnOutras').textContent=v?('Outras: '+v):'Outras especialidades';
+    check();
+  });
+
+  function setStep(n,nome){
+    [].forEach.call($('pSteps').children,function(el,i){el.classList.toggle('on',i<n)});
+    $('pEtapa').textContent='Etapa '+n+' de 4';$('pNome').textContent=nome;
+  }
+  function toStep1(){document.body.classList.remove('on-pref');window.scrollTo(0,0)}
+  window.goPref=function(){
+    document.body.classList.add('on-pref');
+    $('pmain').style.display='';$('pdone').style.display='none';setStep(2,'Preferências');
+    window.scrollTo(0,0);
+  };
+  $('pBack').addEventListener('click',toStep1);
+  $('pHome').addEventListener('click',toStep1);
+  $('pGo').addEventListener('click',function(){
+    if(!(sel.e&&sel.p&&sel.t))return;
+    $('pmain').style.display='none';$('pdone').style.display='block';setStep(3,'Horários');
+    $('pResumo').textContent=sel.e+' · '+sel.p+' · '+sel.t;
+    window.scrollTo(0,0);
+  });
+  $('pEdit').addEventListener('click',window.goPref);
+})();
+</script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var nome=$('nome'),dia=$('dia'),mes=$('mes'),ano=$('ano'),cpf=$('cpf');
+  var go=$('go'),card=$('card'),eye=$('eye');
+  var meses=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  var show=false,touched={nome:false,nasc:false,cpf:false},ok={nome:false,nasc:false,cpf:false};
+
+  meses.forEach(function(m,i){mes.add(new Option(m,i+1))});
+  for(var a=new Date().getFullYear();a>=1900;a--)ano.add(new Option(a,a));
+  function fillDays(){
+    var cur=dia.value,m=+mes.value||1,yy=+ano.value||2000,n=new Date(yy,m,0).getDate();
+    dia.length=1;
+    for(var d=1;d<=n;d++)dia.add(new Option(String(d).padStart(2,'0'),d));
+    if(cur&&+cur<=n)dia.value=cur;
+  }
+  fillDays();
+
+  function setField(id,hid,valid,msg,isTouched){
+    var f=$(id);f.classList.toggle('ok',valid);
+    f.classList.toggle('bad',!valid&&isTouched&&!!msg);
+    if(msg!==undefined&&(isTouched||valid))$(hid).textContent=msg;
+  }
+  function vNome(){
+    var p=nome.value.trim().split(/\s+/).filter(Boolean),re=/^[A-Za-zÀ-ÿ'’.\-]{2,}$/;
+    ok.nome=p.length>=2&&p.every(function(w){return re.test(w)});
+    setField('fNome','hNome',ok.nome,ok.nome?'Prazer em te conhecer!':'Digite nome e sobrenome.',touched.nome);
+    var t=nome.value.trim();
+    $('cNome').textContent=t||'Seu nome aparece aqui';
+    $('cNome').classList.toggle('empty',!t);
+  }
+  function vNasc(){
+    var d=+dia.value,m=+mes.value,a=+ano.value,valid=false,msg='';
+    if(d&&m&&a){
+      var dt=new Date(a,m-1,d);
+      valid=dt<=new Date()&&dt.getDate()===d;
+      msg=valid?'':'Essa data ainda não chegou.';
+    }else if(touched.nasc){msg='Escolha dia, mês e ano.'}
+    ok.nasc=valid;
+    setField('fNasc','hNasc',valid,msg,touched.nasc);
+    $('cNasc').textContent=(d?String(d).padStart(2,'0'):'--')+'/'+(m?String(m).padStart(2,'0'):'--')+'/'+(a||'----');
+    $('cNasc').classList.toggle('empty',!(d||m||a));
+  }
+  function cpfOk(s){
+    if(s.length!==11||/^(\d)\1+$/.test(s))return false;
+    for(var t=9;t<11;t++){
+      var sum=0;for(var i=0;i<t;i++)sum+=s[i]*(t+1-i);
+      if(((sum*10)%11)%10!==+s[t])return false;
+    }
+    return true;
+  }
+  function fmt(d){return d.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2')}
+  function vCpf(){
+    var d=cpf.value.replace(/\D/g,'').slice(0,11);
+    cpf.value=fmt(d);
+    ok.cpf=cpfOk(d);
+    var msg=d.length<11?'Informe os 11 números do seu CPF.':(ok.cpf?'CPF válido.':'Esse CPF não parece correto. Confira os números.');
+    setField('fCpf','hCpf',ok.cpf,msg,touched.cpf&&d.length===11);
+    if(d.length<11)$('fCpf').classList.remove('bad');
+    $('hCpf').textContent=msg;
+    paintCpf(d);
+  }
+  function paintCpf(d){
+    var el=$('cCpf');
+    if(!d){el.textContent='---.---.---';el.classList.add('empty');return}
+    el.classList.remove('empty');
+    var f=fmt(d);
+    el.textContent=show?f:f.replace(/\d/g,function(c,i){return(i<3||i>=f.length-2)?c:'•'});
+  }
+  function progress(){
+    var n=(ok.nome?1:0)+(ok.nasc?1:0)+(ok.cpf?1:0);
+    $('barFill').style.width=(n/3*100)+'%';
+    $('barTxt').textContent=n===3?'Tudo pronto!':(n===2?'Falta 1 passo':'Faltam '+(3-n)+' passos');
+    go.disabled=n<3;
+    card.classList.toggle('ok',n===3);
+  }
+  function all(){vNome();vNasc();vCpf();progress()}
+
+  nome.addEventListener('input',function(){touched.nome=true;all()});
+  nome.addEventListener('blur',function(){touched.nome=true;all()});
+  [dia,mes,ano].forEach(function(s){s.addEventListener('change',function(){
+    if(s!==dia)fillDays();touched.nasc=true;all();
+  })});
+  cpf.addEventListener('input',function(){touched.cpf=true;all()});
+  eye.addEventListener('click',function(){
+    show=!show;eye.setAttribute('aria-pressed',show);
+    paintCpf(cpf.value.replace(/\D/g,''));
+  });
+
+  var cr=$('crosses');
+  for(var i=0;i<14;i++){
+    var c=document.createElement('i');
+    c.style.cssText='--s:'+(14+Math.random()*34)+'px;--x:'+(Math.random()*96)+'%;--d:'+(14+Math.random()*16)+'s;--dl:-'+(Math.random()*20)+'s';
+    cr.appendChild(c);
+  }
+
+  function confetti(){
+    var cols=['#16a34a','#4ade80','#bbf0cf','#0f7a45','#ffffff'];
+    for(var i=0;i<46;i++){
+      var c=document.createElement('span');c.className='confetti';
+      c.style.cssText='left:'+(Math.random()*100)+'vw;color:'+cols[i%cols.length]+';--dx:'+((Math.random()-.5)*200)+'px;--r:'+(Math.random()*720)+'deg;--t:'+(1.6+Math.random()*1.6)+'s;transform:scale('+(.6+Math.random()*.9)+')';
+      document.body.appendChild(c);setTimeout(function(el){el.remove()},3600,c);
+    }
+  }
+  go.addEventListener('click',function(){
+    if(go.disabled)return;
+    go.classList.add('load');go.disabled=true;$('goTxt').textContent='Confirmando…';
+    var nomeVal=nome.value.trim();
+    setTimeout(function(){
+      go.classList.remove('load');$('goTxt').textContent='Confirmar e continuar';
+      $('cardDialogTitle').textContent='Tudo certo, '+nomeVal.split(' ')[0]+'!';
+      progress();
+      $('cardDialog').showModal();
+    },1200);
+  });
+  $('cardContinue').addEventListener('click',function(){$('cardDialog').close()});
+  $('cardDialog').addEventListener('close',window.goPref);
+  $('again').addEventListener('click',function(){$('box').classList.remove('show-done');progress()});
+  $('back').addEventListener('click',function(){
+    nome.value='';dia.value='';mes.value='';ano.value='';cpf.value='';
+    touched={nome:false,nasc:false,cpf:false};
+    fillDays();all();
+    ['fNome','fNasc','fCpf'].forEach(function(id){$(id).classList.remove('ok','bad')});
+    ['hNome','hNasc'].forEach(function(id){$(id).textContent=''});
+    nome.focus();
+  });
+
+  all();
+})();
+</script>
+</body>
+</html>
