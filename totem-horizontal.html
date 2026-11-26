@@ -601,6 +601,22 @@ svg.av{stroke:none!important}
 .convrow .seg{margin-top:12px;background:var(--g100);border-radius:99px;padding:6px}
 .convrow .seg button{height:60px;font-size:21px}
 #ovCard.hasconv .cardhint{display:none}
+
+/* Cartão do carrossel ampliado */
+.slide.pos-c::after{content:"";position:absolute;top:22px;right:22px;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='M20 20l-4.2-4.2M11 8.5v5M8.5 11h5'/%3E%3C/svg%3E") center/28px no-repeat;border:2px solid rgba(255,255,255,.45);pointer-events:none;z-index:4;animation:lbPulse 2.4s ease-in-out infinite}
+@keyframes lbPulse{50%{transform:scale(1.1)}}
+#ovSlide{display:flex;align-items:center;justify-content:center;background:rgba(3,30,18,.82)}
+#ovSlide .lbwrap{transform:scale(.86);opacity:0;transition:transform .4s cubic-bezier(.3,1.3,.5,1),opacity .3s}
+#ovSlide.on .lbwrap{transform:none;opacity:1}
+#ovSlide .lbwrap.swap{opacity:0;transition:opacity .15s}
+.lbwrap .slide{position:relative;left:auto;top:auto;margin:0;transform:none!important;filter:none!important;cursor:default;box-shadow:0 40px 90px -20px rgba(0,0,0,.6)}
+.lbwrap .slide::after{display:none}
+#ovSlide .arr{position:absolute;top:50%;margin-top:-48px;width:96px;height:96px}
+#ovSlide .arr svg{width:44px;height:44px}
+.lbp{left:40px}.lbn{right:40px}
+.lbx{position:absolute;top:30px;right:40px;width:84px;height:84px;border-radius:50%;border:0;background:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 26px -10px rgba(0,0,0,.5)}
+.lbx svg{width:38px;height:38px;stroke:var(--g800);fill:none;stroke-width:2.6;stroke-linecap:round}
+.lbhint{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#bbf0cf;font-size:20px;font-weight:700}
 </style>
 </head>
 <body>
@@ -892,6 +908,15 @@ svg.av{stroke:none!important}
       <button class="go" id="ovCardGo" type="button">Continuar →</button>
       <button class="back" id="ovCardFix" type="button">Corrigir meus dados</button>
     </div>
+  </div>
+
+  <!-- Cartão do carrossel ampliado -->
+  <div class="ov" id="ovSlide" role="dialog" aria-modal="true" aria-label="Cartão ampliado">
+    <button class="lbx" id="lbClose" type="button" aria-label="Fechar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="arr lbp" id="lbPrev" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="lbwrap" id="lbWrap"></div>
+    <button class="arr lbn" id="lbNext" type="button" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    <p class="lbhint">Toque fora do cartão para fechar</p>
   </div>
 
   <!-- Inatividade -->
@@ -1504,10 +1529,29 @@ svg.av{stroke:none!important}
   $('slides').addEventListener('pointerup',function(e){
     if(carX===null)return;var dx=e.clientX-carX;carX=null;
     if(Math.abs(dx)>50){carUser(carI+(dx<0?1:-1));return}
-    var s=e.target.closest('.slide');if(s&&!s.classList.contains('pos-c'))carUser(slides.indexOf(s));
+    var s=e.target.closest('.slide');if(!s)return;if(s.classList.contains('pos-c'))lbOpen();else carUser(slides.indexOf(s));
   });
-  setInterval(function(){if(cur!=='sId'||act||Date.now()-carPause<12000)return;carGo(carI+1)},7000);
+  setInterval(function(){if(cur!=='sId'||act||$('ovSlide').classList.contains('on')||Date.now()-carPause<12000)return;carGo(carI+1)},7000);
   carGo(1);
+
+  /* Toque no cartão do centro: abre ampliado para leitura */
+  function lbRender(){
+    var w=$('lbWrap'),c=slides[carI].cloneNode(true);
+    c.classList.remove('pos-c','pos-l','pos-r');
+    [].forEach.call(c.querySelectorAll('[id]'),function(el){el.removeAttribute('id')});
+    var W=K.offsetWidth,H=K.offsetHeight,z=Math.min((H-150)/760,(W-300)/560);
+    c.style.zoom=z.toFixed(3);
+    w.innerHTML='';w.appendChild(c);
+  }
+  function lbOpen(){lbRender();openOv('ovSlide')}
+  function lbStep(d){carUser(carI+d);var w=$('lbWrap');w.classList.add('swap');setTimeout(function(){lbRender();w.classList.remove('swap')},150)}
+  $('lbPrev').addEventListener('click',function(){lbStep(-1)});
+  $('lbNext').addEventListener('click',function(){lbStep(1)});
+  $('lbClose').addEventListener('click',function(){closeOv('ovSlide')});
+  $('ovSlide').addEventListener('click',function(e){if(e.target===this||e.target.classList.contains('lbhint'))closeOv('ovSlide')});
+  var lbX=null;
+  $('lbWrap').addEventListener('pointerdown',function(e){lbX=e.clientX});
+  $('lbWrap').addEventListener('pointerup',function(e){if(lbX===null)return;var dx=e.clientX-lbX;lbX=null;if(Math.abs(dx)>50)lbStep(dx<0?1:-1)});
 
   /* Confirmação */
   function dayTxt(){var d=S.date;return WD[d.getDay()].replace(/^./,function(c){return c.toUpperCase()})+', '+d.getDate()+' de '+MS[d.getMonth()]}
@@ -1615,7 +1659,7 @@ svg.av{stroke:none!important}
   /* ---------- Reiniciar ---------- */
   function resetAll(){
     clearInterval(doneT);clearInterval(idleT);idleOpen=false;
-    ['ovCard','ovIdle','ovCancel'].forEach(closeOv);
+    ['ovCard','ovIdle','ovCancel','ovSlide'].forEach(closeOv);
     fresh();act=null;$('kb').classList.remove('on');K.classList.remove('kb-open');
     [].forEach.call(document.querySelectorAll('.opt[aria-pressed]'),function(x){x.setAttribute('aria-pressed','false')});
     checkPref();
