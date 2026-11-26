@@ -40,7 +40,8 @@ button{font:inherit;color:inherit;touch-action:manipulation}
 .slab{display:flex;justify-content:space-between;font-size:20px;font-weight:700;color:var(--muted);margin-top:10px}
 .slab b{color:var(--g600)}
 
-main{flex:1;position:relative;overflow:hidden}
+main{flex:1;position:relative;overflow:hidden;overflow:clip}
+.screen{overflow:clip}
 .screen{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateX(70px);transition:opacity .4s,transform .45s cubic-bezier(.3,1.1,.5,1),visibility .4s}
 .screen.on{opacity:1;visibility:visible;transform:none}
 .screen.out{transform:translateX(-70px)}
@@ -85,7 +86,10 @@ main{flex:1;position:relative;overflow:hidden}
 .chip{width:54px;height:40px;border-radius:9px;background:linear-gradient(135deg,#f3d98b,#c9a53f);position:relative}
 .chip::before{content:"";position:absolute;inset:8px 13px;border:2px solid rgba(90,60,0,.35);border-radius:4px}
 .ecg{width:100%;height:42px;display:block}
-.ecg path{fill:none;stroke:#16a34a;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:260;stroke-dashoffset:260;animation:beat 2.6s ease-in-out infinite}
+.ecg path{fill:none;stroke:#16a34a;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ecg .base{stroke-opacity:.3;stroke-width:2}
+.ecg .pulse{stroke-width:2.8;stroke-dasharray:.32 1.6;stroke-dashoffset:.34;animation:ecgRun 2.6s cubic-bezier(.45,.1,.55,.9) infinite}
+@keyframes ecgRun{from{stroke-dashoffset:.34}to{stroke-dashoffset:-1.02}}
 @keyframes beat{0%{stroke-dashoffset:260}60%,100%{stroke-dashoffset:0}}
 .card .lbl{font-size:15px;color:#53705f;font-weight:600}
 .card .nm{font-size:28px;font-weight:800;text-transform:uppercase;letter-spacing:.01em;min-height:1.3em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -344,9 +348,93 @@ svg.av{stroke:none!important}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  .ecg path{stroke-dashoffset:0}
+  .ecg .pulse{stroke-dasharray:none}
   .ticket{transform:none}
 }
+
+
+/* ===== Tela de acesso: identificação + carrossel da clínica ===== */
+.is-id .stepbar{display:none}
+#sId{background:radial-gradient(90% 70% at 85% 100%,#4cc477 0%,rgba(76,196,119,0) 62%),radial-gradient(70% 60% at 0% 0%,#f2fdf5,rgba(242,253,245,0) 70%),linear-gradient(160deg,#eefcf2 0%,#cdeeda 45%,#8fdcaa 100%);align-items:center;gap:18px;padding:26px 50px 28px;overflow:hidden}
+.lpanel{position:relative;z-index:2;width:100%;max-width:780px;background:#fff;border-radius:40px;padding:30px 46px 20px;box-shadow:0 34px 70px -34px rgba(0,60,30,.5);flex:none;display:flex;flex-direction:column}
+.lhead{display:flex;align-items:center;gap:18px}
+.lhead .lg{width:70px;height:70px;flex:none}
+.lhead span{border-left:2px solid var(--line);padding-left:18px}
+.lhead b{display:block;font-size:26px;font-weight:800}
+.lhead small{font-size:19px;color:var(--muted);font-weight:600}
+.lecg{display:block;width:100%;height:28px;margin:4px 0 2px}
+.lecg path{fill:none;stroke:var(--g600);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.lpanel h1{text-align:center;font-size:44px;font-weight:800;color:var(--g800);letter-spacing:-.02em}
+.lpanel .lsub{text-align:center;color:var(--muted);font-size:19px;margin:4px 0 2px;line-height:1.35}
+.lpanel .fld{margin-top:12px;padding:10px 22px 8px;border-radius:22px}
+.lpanel .fld .t{font-size:18px;color:var(--muted);gap:10px;white-space:nowrap}
+.lpanel .fld .t svg{width:24px;height:24px}
+.lpanel .fld .hint{margin-left:auto;font-size:15px;min-height:0;margin-top:0;max-width:56%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.lpanel .fld .status{margin-left:10px;width:28px;height:28px}
+.lpanel .fld .v{font-size:30px;min-height:38px;margin-top:2px}
+.lpanel .fld .v .phd{font-size:23px}
+.lpanel .fld .caret{height:32px}
+.lpanel .prog{margin-top:14px}
+.lpanel .prog span{font-size:16px;min-width:130px}
+.lpanel .bar{height:10px}
+.lbtns{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+.lbtns .go{height:90px;font-size:28px;margin:0;border-radius:26px}
+.lbtns .go svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.lbtns .cad{height:90px;border-radius:26px;border:3px solid var(--g700);background:#fff;color:var(--g800);font-weight:800;font-size:27px;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer}
+.lbtns .cad:active{background:var(--g100)}
+.lbtns .cad svg{width:32px;height:32px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lstat{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:18px;color:var(--muted);font-weight:600}
+.lstat .on{display:flex;align-items:center;gap:10px}
+.lstat .on i{width:12px;height:12px;border-radius:50%;background:var(--g600);animation:pulseDot 2s infinite}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(22,163,74,.55)}70%{box-shadow:0 0 0 12px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
+.lstat button{border:0;background:none;color:var(--txt-g);font-weight:800;font-size:18px;cursor:pointer;padding:8px 4px}
+
+.carr{position:relative;width:100%;height:790px;flex:none;z-index:1;order:-1}
+.carr .stage{position:absolute;left:0;right:0;top:0;height:760px;perspective:1700px;transform-style:preserve-3d;touch-action:pan-y;transform:scale(.92);transform-origin:top center}
+.slide{position:absolute;left:50%;top:0;width:560px;height:760px;margin-left:-280px;border-radius:44px;overflow:hidden;color:#fff;padding:34px 38px 0;display:flex;flex-direction:column;background:radial-gradient(120% 80% at 20% 0%,#25b75a,#0f8a45 50%,#06612f);border:3px solid rgba(255,255,255,.65);box-shadow:0 40px 80px -30px rgba(0,50,25,.65);transition:transform .8s cubic-bezier(.3,1,.35,1),filter .8s;cursor:pointer}
+.slide.pos-c{transform:none;z-index:3;cursor:default}
+.slide.pos-l{transform:translateX(-400px) translateZ(-300px) rotateY(34deg);z-index:2;filter:brightness(.78) saturate(.9)}
+.slide.pos-r{transform:translateX(400px) translateZ(-300px) rotateY(-34deg);z-index:2;filter:brightness(.78) saturate(.9)}
+.sh{display:flex;align-items:center;gap:16px;flex:none;position:relative;z-index:1}
+.sh .lgw{width:68px;height:68px;border-radius:18px;background:#fff;display:grid;place-items:center;flex:none;box-shadow:0 8px 18px -8px rgba(0,0,0,.4)}
+.sh .lgw svg{width:52px;height:52px}
+.sh .sn{border-left:2px solid rgba(255,255,255,.5);padding-left:16px;font-size:22px;font-weight:800;line-height:1.1;letter-spacing:.01em}
+.slide h2{font-size:56px;font-weight:800;line-height:1.02;letter-spacing:-.03em;margin-top:26px;position:relative;z-index:1}
+.slide h2.sm{font-size:46px}
+.slide h2 em{font-style:normal;color:#d7f36a}
+.slide p{font-size:20px;line-height:1.38;font-weight:600;color:#e6fbec;margin-top:14px;position:relative;z-index:1}
+.crows{margin-top:18px;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1}
+.crow{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.42);border-radius:22px;padding:12px 16px}
+.crow .ci{width:56px;height:56px;flex:none}
+.crow .ci svg{width:56px;height:56px;display:block}
+.crow b{flex:1;font-size:21px;line-height:1.12}
+.crow .loc{display:flex;align-items:center;gap:8px;border-left:2px solid rgba(255,255,255,.42);padding-left:14px;width:190px;font-size:16px;line-height:1.2;font-weight:600}
+.crow .loc svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2;flex:none}
+.slide .wave{position:absolute;left:0;bottom:0;width:100%;height:130px;pointer-events:none}
+.pic{flex:1;min-height:0;margin:16px -38px 0;position:relative}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.sfoot{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:700;padding:14px 0 18px;flex:none}
+.sfoot svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
+.fgrid{display:grid;grid-template-columns:1fr 230px;gap:14px;margin-top:12px;flex:1;min-height:0;position:relative;z-index:1}
+.flist .fi{margin-top:4px;font-size:19px}
+.it{display:flex;align-items:center;gap:14px;margin-top:16px;font-size:18px;font-weight:600;line-height:1.3}
+.it i{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.35);display:grid;place-items:center;flex:none}
+.it svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fphoto{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:26px}
+.fphoto{position:relative}
+.fphoto img{width:290px;height:400px;object-fit:cover;object-position:52% 18%;display:block;margin-right:-38px;align-self:flex-end;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 34%),linear-gradient(to top,transparent 0,#000 34%),linear-gradient(to bottom,transparent 0,#000 16%);-webkit-mask-composite:source-in,source-in;mask-image:linear-gradient(to right,transparent 0,#000 34%),linear-gradient(to top,transparent 0,#000 34%),linear-gradient(to bottom,transparent 0,#000 16%);mask-composite:intersect}
+.fname{text-align:center;margin-top:-70px;position:relative;text-shadow:0 2px 10px rgba(0,40,20,.55)}
+.fname b{display:block;font-size:23px;line-height:1.1}
+.badge{display:inline-block;margin:8px 0 4px;background:#e9f56e;color:#0b4d2b;font-weight:800;font-size:16px;border-radius:99px;padding:4px 14px}
+.fname small{display:block;font-size:16px;font-weight:700}
+.cnav{position:absolute;left:0;right:0;bottom:0;height:72px;display:flex;align-items:center;justify-content:center;gap:56px}
+.arr{width:72px;height:72px;border-radius:50%;border:0;background:#fff;box-shadow:0 12px 26px -10px rgba(0,60,30,.5);display:grid;place-items:center;cursor:pointer}
+.arr svg{width:34px;height:34px;stroke:var(--g800);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.arr:active{transform:scale(.94)}
+.dots{display:flex;gap:12px;align-items:center}
+.dots i{width:18px;height:18px;border-radius:99px;background:rgba(255,255,255,.8);box-shadow:inset 0 0 0 2px rgba(11,90,53,.25);transition:width .35s;cursor:pointer}
+.dots i.on{width:60px;background:#fff;box-shadow:0 4px 10px -4px rgba(0,60,30,.5)}
+.kb-open #sId .carr{display:none}
 
 /* ================================================================
    LAYOUT HORIZONTAL — 1920 x 1080
@@ -386,7 +474,7 @@ svg.av{stroke:none!important}
 .fld .v{font-size:36px;min-height:46px}
 #sId .prog{margin-top:22px}
 #sId .actions.btn2{width:100%}
-.kb{left:0;right:auto;top:0;bottom:0;width:860px;height:auto;transform:translateX(-102%);border-top:0;border-right:2px solid var(--line);display:flex;flex-direction:column;padding:26px 26px 30px;box-shadow:24px 0 50px -24px rgba(0,40,20,.4);visibility:hidden;transition:transform .35s cubic-bezier(.3,1.1,.5,1),visibility .35s}
+.kb{left:auto;right:0;top:0;bottom:0;width:1000px;height:auto;transform:translateX(102%);border-top:0;border-left:2px solid var(--line);display:flex;flex-direction:column;padding:26px 26px 30px;box-shadow:-24px 0 50px -24px rgba(0,40,20,.4);visibility:hidden;transition:transform .35s cubic-bezier(.3,1.1,.5,1),visibility .35s}
 .kb.on{transform:none;visibility:visible}
 #kbKeys{flex:1;display:flex;flex-direction:column;justify-content:center}
 .krow{gap:8px;margin-bottom:12px}
@@ -492,6 +580,13 @@ svg.av{stroke:none!important}
 .revcard{perspective:1400px}
 .screen.on .tilt .card .sheen{animation:sheen 3.6s ease-in-out .9s infinite}
 #sConf .cardhint{margin:16px 0 0!important}
+
+/* Tela de acesso no horizontal: painel à esquerda, carrossel à direita, teclado abre por cima do carrossel */
+#sId{flex-direction:row;justify-content:center;gap:40px;padding:24px 60px}
+#sId .lpanel{width:640px;max-width:none}
+#sId .carr{width:1120px;height:850px;order:0}
+#sId .carr .stage{height:770px;transform:none}
+.kb-open #sId .carr{display:block}
 </style>
 </head>
 <body>
@@ -535,43 +630,80 @@ svg.av{stroke:none!important}
       <div class="hcard"><div class="card" data-card></div></div>
     </section>
 
-    <!-- 1. Identificação -->
+    <!-- 1. Identificação (tela de acesso com carrossel) -->
     <section class="screen" id="sId" aria-label="Identificação">
-      <div class="mstage green">
-        <div class="crosses" aria-hidden="true"></div>
-        <h2>Sua carteirinha fica pronta após a confirmação</h2>
-        <div class="card" data-card></div>
-      </div>
-      <div class="pnl">
-        <h1>Confirme sua identidade</h1>
-        <p class="sub">Toque em cada campo e use o teclado da tela.</p>
+      <div class="lpanel">
+        <div class="lhead">
+          <svg class="lg" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 36C7 27 3 19 6 13c3-6 10-6 14 0 4-6 11-6 14 0 3 6-1 14-14 23z" fill="#16a34a"/><path d="M20 14v12M14 20h12" stroke="#fff" stroke-width="3.6" stroke-linecap="round"/></svg>
+          <span><b>Policlínica São Francisco de Paula</b><small>Portal do paciente</small></span>
+        </div>
+        <svg class="lecg" viewBox="0 0 560 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16h230l12-12 14 24 12-18 10 6h282"/></svg>
+        <h1>Acesse sua conta</h1>
+        <p class="lsub">Gerencie seus agendamentos e atendimentos de forma rápida e prática.</p>
 
         <button class="fld" id="fNome" data-f="nome" type="button">
-          <span class="t"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg>Nome completo do paciente<span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
+          <span class="t"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg>Nome e sobrenome<span class="hint" id="hNome"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
           <span class="v" id="vNome"></span>
-          <span class="hint" id="hNome"></span>
         </button>
         <button class="fld" id="fNasc" data-f="nasc" type="button">
-          <span class="t"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Data de nascimento<span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
+          <span class="t"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Data de nascimento<span class="hint" id="hNasc"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
           <span class="v" id="vNasc"></span>
-          <span class="hint" id="hNasc"></span>
         </button>
         <button class="fld" id="fCpf" data-f="cpf" type="button">
-          <span class="t"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 11h18"/></svg>CPF<span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
+          <span class="t"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 11h18"/></svg>CPF<span class="hint" id="hCpf"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
           <span class="v" id="vCpf"></span>
-          <span class="hint" id="hCpf"></span>
         </button>
         <button class="fld" id="fTel" data-f="tel" type="button">
-          <span class="t"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Celular / WhatsApp<span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
+          <span class="t"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Número de celular<span class="hint" id="hTel"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
           <span class="v" id="vTel"></span>
-          <span class="hint" id="hTel"></span>
         </button>
 
-        <div class="prog" aria-live="polite"><div class="bar"><i id="barFill"></i></div><span id="barTxt">Faltam 3 passos</span></div>
+        <div class="prog" aria-live="polite"><div class="bar"><i id="barFill"></i></div><span id="barTxt">Faltam 4 passos</span></div>
 
-        <div class="actions btn2">
-          <button class="back" id="clearId" type="button">Limpar campos</button>
-          <button class="go" id="goId" type="button" disabled><span class="spin" aria-hidden="true"></span><span id="goIdTxt">Confirmar e continuar</span></button>
+        <div class="lbtns">
+          <button class="go" id="goId" type="button" disabled><span class="spin" aria-hidden="true"></span><span id="goIdTxt">Entrar</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="lstat"><span class="on"><i></i>Plataforma disponível agora</span><button type="button" id="clearId">Limpar campos</button></div>
+      </div>
+
+      <div class="carr" id="carr">
+        <div class="stage" id="slides">
+          <article class="slide">
+            <div class="sh"><span class="lgw"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 36C7 27 3 19 6 13c3-6 10-6 14 0 4-6 11-6 14 0 3 6-1 14-14 23z" fill="#16a34a"/><path d="M20 14v12M14 20h12" stroke="#fff" stroke-width="3.6" stroke-linecap="round"/></svg></span><span class="sn">POLICLÍNICA<br>SÃO FRANCISCO DE PAULA</span></div>
+            <h2 class="sm">Uma história de cuidado que faz parte de <em>Vilar dos Teles.</em></h2>
+            <p>Há décadas, a Policlínica São Francisco de Paula acompanha gerações com consultas, exames e atendimento acolhedor, unindo tradição, confiança e compromisso com a saúde da nossa comunidade.</p>
+            <div class="pic"><img id="imgFachada" alt="Fachada da Policlínica São Francisco de Paula"></div>
+            <div class="sfoot"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Vilar dos Teles • São João de Meriti</div>
+          </article>
+          <article class="slide">
+            <div class="sh"><span class="lgw"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 36C7 27 3 19 6 13c3-6 10-6 14 0 4-6 11-6 14 0 3 6-1 14-14 23z" fill="#16a34a"/><path d="M20 14v12M14 20h12" stroke="#fff" stroke-width="3.6" stroke-linecap="round"/></svg></span><span class="sn">POLICLÍNICA<br>SÃO FRANCISCO DE PAULA</span></div>
+            <h2>Um legado de cuidado que <em>se multiplica.</em></h2>
+            <p>Além da Policlínica São Francisco de Paula, em Vilar dos Teles, contamos também com mais duas unidades para cuidar da sua saúde:</p>
+            <div class="crows" id="crows"></div>
+            <svg class="wave" viewBox="0 0 560 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80C150 30 310 130 560 50V130H0z" fill="rgba(255,255,255,.10)"/><path d="M0 105C170 70 330 140 560 90V130H0z" fill="rgba(200,255,120,.18)"/></svg>
+          </article>
+          <article class="slide">
+            <div class="sh"><span class="lgw"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 36C7 27 3 19 6 13c3-6 10-6 14 0 4-6 11-6 14 0 3 6-1 14-14 23z" fill="#16a34a"/><path d="M20 14v12M14 20h12" stroke="#fff" stroke-width="3.6" stroke-linecap="round"/></svg></span><span class="sn">POLICLÍNICA<br>SÃO FRANCISCO DE PAULA</span></div>
+            <h2 class="sm">Uma vida dedicada a <em>cuidar de pessoas.</em></h2>
+            <div class="fgrid">
+              <div class="flist">
+                <p class="fi">Conheça a história do nosso fundador, <b>Dr. Márcio de Castro</b>.</p>
+                <div class="it"><i><svg viewBox="0 0 24 24"><path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/></svg></i><span>Médico, empreendedor e homem de fé.</span></div>
+                <div class="it"><i><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c.8-4 3.5-6 7-6s6.2 2 7 6M15 14.5c3 0 5.5 1.6 6.5 5"/></svg></i><span>Idealizador de três clínicas que atendem a milhares de famílias.</span></div>
+                <div class="it"><i><svg viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></svg></i><span>Um legado de saúde, acolhimento e compromisso com a vida.</span></div>
+              </div>
+              <div class="fphoto">
+                <img id="imgFundador" alt="Dr. Márcio de Castro">
+                <div class="fname"><b>Dr. Márcio de Castro</b><span class="badge">Fundador</span><small>1935 – 2026</small></div>
+              </div>
+            </div>
+            <svg class="wave" viewBox="0 0 560 130" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80C150 30 310 130 560 50V130H0z" fill="rgba(255,255,255,.10)"/></svg>
+          </article>
+        </div>
+        <div class="cnav">
+          <button class="arr" id="cPrev" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div class="dots" id="cDots"><i></i><i></i><i></i></div>
+          <button class="arr" id="cNext" type="button" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
     </section>
@@ -708,7 +840,7 @@ svg.av{stroke:none!important}
           <div class="ticket" id="ticket">
             <div class="tl">Sua senha</div>
             <div class="senha" id="tSenha">A000</div>
-            <svg class="ecg" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16h80l10-12 12 24 10-18 8 6h180"/></svg>
+            <svg class="ecg" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 16h96c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h162"/><path class="pulse" pathLength="1" d="M0 16h96c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h162"/></svg>
             <dl id="tDl"></dl>
             <p class="tf">Apresente esta senha na recepção.<br>Policlínica São Francisco de Paula</p>
           </div>
@@ -811,7 +943,7 @@ svg.av{stroke:none!important}
 
   /* ---------- Carteirinha ---------- */
   var CARD='<div class="row"><div class="logo">'+LOGO+'<span>Policlínica<br>São Francisco de Paula</span></div><div class="chip" aria-hidden="true"></div></div>'+
-    '<svg class="ecg" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16h80l10-12 12 24 10-18 8 6h180"/></svg>'+
+    '<svg class="ecg" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 16h96c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h162"/><path class="pulse" pathLength="1" d="M0 16h96c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h162"/></svg>'+
     '<div><div class="lbl">Paciente</div><div class="nm" data-c="nome"></div></div>'+
     '<div class="meta"><div><div class="lbl">Nascimento</div><div class="val" data-c="nasc"></div></div><div><div class="lbl">CPF</div><div class="val" data-c="cpf"></div></div>'+
     '<button class="eye" data-eye type="button" aria-label="Mostrar ou ocultar CPF" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>'+
@@ -875,7 +1007,7 @@ svg.av{stroke:none!important}
     // Celular
     var ti=telInfo();
     $('vTel').innerHTML=S.tel||act==='tel'?masked(S.tel,'(00) 00000-0000',act==='tel'):'<span class="phd">Toque para digitar · (00) 00000-0000</span>';
-    setF('fTel','hTel',ti.ok,touched.tel,ti.ok?ti.msg:(touched.tel?ti.msg:'Usaremos para avisos sobre seu atendimento.'));
+    setF('fTel','hTel',ti.ok,touched.tel,ti.ok?ti.msg:(touched.tel?ti.msg:'Para avisos do atendimento.'));
     ['fNome','fNasc','fCpf','fTel'].forEach(function(id){$(id).classList.toggle('act',$(id).dataset.f===act)});
     // Progresso
     $('barFill').style.width=(n/4*100)+'%';
@@ -897,7 +1029,7 @@ svg.av{stroke:none!important}
     [].forEach.call(document.querySelectorAll('[data-c=nasc]'),function(e){e.textContent=dt;e.classList.toggle('empty',!d)});
     [].forEach.call(document.querySelectorAll('[data-c=cpf]'),function(e){e.textContent=c?(S.showCpf?fmtCpf(c):maskCpf(c)):'---.---.---';e.classList.toggle('empty',!c)});
     [].forEach.call(document.querySelectorAll('[data-eye]'),function(e){e.setAttribute('aria-pressed',S.showCpf)});
-    $('sId').querySelector('.card').classList.toggle('ok',!!all);
+    var sc=$('sId').querySelector('.card');if(sc)sc.classList.toggle('ok',!!all);
   }
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-eye]');if(!b)return;
@@ -981,7 +1113,7 @@ svg.av{stroke:none!important}
     cur=id;
     if(confFx){if(id==='sConf')confFx.start();else confFx.stop()}
     K.classList.toggle('is-home',id==='sHome');
-    K.classList.toggle('is-done',id==='sDone');
+    K.classList.toggle('is-done',id==='sDone');K.classList.toggle('is-id',id==='sId');
     if(STEP[id]){
       var n=STEP[id][0];
       [].forEach.call($('steps').children,function(el,i){el.classList.toggle('on',i<n)});
@@ -992,7 +1124,7 @@ svg.av{stroke:none!important}
   [].forEach.call(document.querySelectorAll('[data-back]'),function(b){b.addEventListener('click',function(){show(b.dataset.back)})});
 
   /* Início */
-  $('sHome').addEventListener('click',function(){show('sId');setTimeout(function(){openKb('nome')},450)});
+  $('sHome').addEventListener('click',function(){show('sId')});
 
   /* Identificação */
   $('clearId').addEventListener('click',function(){S.nome=S.nasc=S.cpf=S.tel='';touched={nome:false,nasc:false,cpf:false,tel:false};openKb('nome')});
@@ -1000,7 +1132,7 @@ svg.av{stroke:none!important}
     var go=this;if(go.disabled)return;
     go.classList.add('load');go.disabled=true;$('goIdTxt').textContent='Localizando cadastro…';
     buscarCadastro(S.nome.trim(),S.nasc,S.cpf).then(function(achou){
-      go.classList.remove('load');$('goIdTxt').textContent='Confirmar e continuar';paint();
+      go.classList.remove('load');$('goIdTxt').textContent='Entrar';paint();
       if(achou){
         S.novo=false;
         $('ovCardT').textContent='Tudo certo, '+firstName()+'!';
@@ -1008,7 +1140,11 @@ svg.av{stroke:none!important}
         $('ovCardGo').textContent='Continuar →';
         openOv('ovCard');
       }else{
-        show('sNf');
+        S.novo=true;
+        $('ovCardT').textContent='Cadastro não localizado';
+        $('ovCardP').textContent='Não encontramos seu cadastro. Deseja se cadastrar agora com estes dados?';
+        $('ovCardGo').textContent='Sim, cadastrar agora →';
+        openOv('ovCard');
       }
     });
   });
@@ -1020,7 +1156,17 @@ svg.av{stroke:none!important}
     return new Promise(function(ok){setTimeout(function(){ok(+cpf.slice(-1)%2===0)},1300)});
   }
 
-  $('ovCardGo').addEventListener('click',function(){closeOv('ovCard');show('sPref')});
+  $('ovCardGo').addEventListener('click',function(){
+    var b=this;if(b.disabled)return;
+    if(!S.novo){closeOv('ovCard');show('sPref');return}
+    b.disabled=true;b.textContent='Criando seu cadastro…';
+    criarCadastro(S).then(function(){
+      b.disabled=false;closeOv('ovCard');show('sPref');
+    });
+  });
+  /* Criação do cadastro com os dados digitados.
+     TROCAR AQUI pelo envio ao sistema da clínica. Demonstração: só aguarda um instante. */
+  function criarCadastro(dados){return new Promise(function(ok){setTimeout(ok,1100)})}
   $('ovCardFix').addEventListener('click',function(){closeOv('ovCard');show('sId');setTimeout(function(){openKb('nome')},300)});
 
   /* Cadastro não localizado */
@@ -1253,6 +1399,77 @@ svg.av{stroke:none!important}
     S.date=days()[S.day];S.clin=clinica(S.cid).nome;
     buildConf();show('sConf');
   });
+
+  /* ===== Tela de acesso: carrossel com a história da clínica ===== */
+  /* Fotos reais (opcional): coloque o caminho das imagens, ex.: 'fotos/fachada.jpg' e 'fotos/fundador.jpg'.
+     Enquanto estiver vazio, aparece uma ilustração. */
+  var FOTOS_TELA={fachada:'',fundador:'fotos/fundador.jpg'};
+  (function(){
+    function uri(svg){return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)}
+    var FACHADA='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe8d0"/><stop offset="1" stop-color="#eef9f2"/></linearGradient></defs>'+
+      '<rect width="480" height="300" fill="url(#sk)"/>'+
+      '<circle cx="34" cy="86" r="48" fill="#3f9e5d"/><circle cx="12" cy="140" r="40" fill="#2f8a4d"/><rect x="28" y="120" width="9" height="140" fill="#6b4a2b"/>'+
+      '<rect x="60" y="80" width="400" height="200" fill="#f6f3ea"/>'+
+      '<rect x="50" y="64" width="420" height="22" rx="4" fill="#0f7a45"/>'+
+      '<rect x="60" y="86" width="400" height="10" fill="#e2ddcf"/>'+
+      '<rect x="262" y="104" width="190" height="86" rx="12" fill="#0f7a45"/>'+
+      '<circle cx="290" cy="147" r="18" fill="#fff"/><path d="M290 158c-9-6-11-12-8-15 2-3 6-2 8 1 2-3 6-4 8-1 3 3 1 9-8 15z" fill="#16a34a"/>'+
+      '<text x="316" y="130" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#fff">Policlínica</text>'+
+      '<text x="316" y="147" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#fff">São Francisco</text>'+
+      '<text x="316" y="164" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#fff">de Paula</text>'+
+      '<text x="316" y="180" font-family="Arial,Helvetica,sans-serif" font-size="10" fill="#bbf0cf">Desde 1974</text>'+
+      '<rect x="80" y="128" width="172" height="150" fill="#2f5d52"/>'+
+      '<rect x="86" y="134" width="77" height="144" fill="#a9d8cc"/><rect x="169" y="134" width="77" height="144" fill="#a9d8cc"/>'+
+      '<path d="M96 146l42 42M180 146l42 42" stroke="#fff" stroke-opacity=".55" stroke-width="7"/>'+
+      '<rect x="272" y="204" width="72" height="58" fill="#a9d8cc" stroke="#2f5d52" stroke-width="5"/><rect x="364" y="204" width="72" height="58" fill="#a9d8cc" stroke="#2f5d52" stroke-width="5"/>'+
+      '<rect x="0" y="276" width="480" height="24" fill="#d8d2c2"/>'+
+      '<ellipse cx="70" cy="268" rx="28" ry="22" fill="#2f8a4d"/><rect x="57" y="266" width="26" height="14" fill="#b07a4f"/>'+
+      '<ellipse cx="452" cy="260" rx="32" ry="30" fill="#3f9e5d"/><rect x="438" y="262" width="28" height="16" fill="#b07a4f"/></svg>';
+    var FUNDADOR='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 300">'+
+      '<path d="M8 300c4-62 40-94 102-94s98 32 102 94z" fill="#0b4d2b"/>'+
+      '<path d="M80 210l30 52 30-52z" fill="#fff"/>'+
+      '<path d="M104 220h12l4 10-10 48-10-48z" fill="#16a34a"/>'+
+      '<path d="M66 216l40 84H74zM154 216l-40 84h32z" fill="#0f5f36"/>'+
+      '<rect x="94" y="166" width="32" height="48" rx="12" fill="#e8b892"/>'+
+      '<ellipse cx="60" cy="132" rx="9" ry="14" fill="#e8b892"/><ellipse cx="160" cy="132" rx="9" ry="14" fill="#e8b892"/>'+
+      '<ellipse cx="110" cy="128" rx="50" ry="58" fill="#f0c6a4"/>'+
+      '<path d="M62 122c-5-30 6-58 24-64-9 18-11 38-9 62z" fill="#f4f4f4"/><path d="M158 122c5-30-6-58-24-64 9 18 11 38 9 62z" fill="#f4f4f4"/>'+
+      '<path d="M80 108q12-8 24 0M116 108q12-8 24 0" stroke="#e8e8e8" stroke-width="5" fill="none" stroke-linecap="round"/>'+
+      '<circle cx="92" cy="124" r="4" fill="#3a2a20"/><circle cx="128" cy="124" r="4" fill="#3a2a20"/>'+
+      '<rect x="78" y="114" width="28" height="20" rx="8" fill="none" stroke="#7a6a5a" stroke-width="3"/><rect x="114" y="114" width="28" height="20" rx="8" fill="none" stroke="#7a6a5a" stroke-width="3"/><path d="M106 122h8" stroke="#7a6a5a" stroke-width="3"/>'+
+      '<path d="M110 128c-3 10-3 14 3 16" stroke="#c99472" stroke-width="3" fill="none" stroke-linecap="round"/>'+
+      '<path d="M92 156q18 14 36 0" stroke="#9a4e3a" stroke-width="4" fill="none" stroke-linecap="round"/></svg>';
+    $('imgFachada').src=FOTOS_TELA.fachada||uri(FACHADA);
+    $('imgFundador').src=FOTOS_TELA.fundador||uri(FUNDADOR);
+    var CICON={
+      sfp:'<svg viewBox="0 0 40 40"><path d="M20 36C7 27 3 19 6 13c3-6 10-6 14 0 4-6 11-6 14 0 3 6-1 14-14 23z" fill="#fff"/><path d="M20 14v12M14 20h12" stroke="#16a34a" stroke-width="3.6" stroke-linecap="round"/></svg>',
+      mj:'<svg viewBox="0 0 40 40"><path d="M20 36C7 27 3 19 6 13c3-6 10-6 14 0 4-6 11-6 14 0 3 6-1 14-14 23z" fill="#ef4444" stroke="#fff" stroke-width="2.4"/><path d="M20 14v12M14 20h12" stroke="#fff" stroke-width="3.6" stroke-linecap="round"/></svg>',
+      ch:'<svg viewBox="0 0 40 40"><path d="M15 4h10v11h11v10H25v11H15V25H4V15h11z" fill="#2f8cf0" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>'
+    };
+    $('crows').innerHTML=CLINICAS.map(function(c){
+      var p=c.endereco.split(' – '),i=c.nome.indexOf(' ');
+      return '<div class="crow"><span class="ci">'+(CICON[c.id]||CICON.sfp)+'</span><b>'+c.nome.slice(0,i)+'<br>'+c.nome.slice(i+1)+'</b><span class="loc">'+PIN+'<span>'+p.join('<br>')+'</span></span></div>';
+    }).join('');
+  })();
+  var carI=1,carPause=0,slides=[].slice.call(document.querySelectorAll('#slides .slide'));
+  function carGo(i){
+    carI=(i+slides.length)%slides.length;
+    slides.forEach(function(s,k){var o=(k-carI+slides.length)%slides.length;s.classList.remove('pos-c','pos-l','pos-r');s.classList.add(o===0?'pos-c':(o===1?'pos-r':'pos-l'))});
+    [].forEach.call($('cDots').children,function(d,k){d.classList.toggle('on',k===carI)});
+  }
+  function carUser(i){carPause=Date.now();carGo(i)}
+  $('cPrev').addEventListener('click',function(){carUser(carI-1)});
+  $('cNext').addEventListener('click',function(){carUser(carI+1)});
+  $('cDots').addEventListener('click',function(e){var i=[].indexOf.call(this.children,e.target);if(i>=0)carUser(i)});
+  var carX=null;
+  $('slides').addEventListener('pointerdown',function(e){carX=e.clientX});
+  $('slides').addEventListener('pointerup',function(e){
+    if(carX===null)return;var dx=e.clientX-carX;carX=null;
+    if(Math.abs(dx)>50){carUser(carI+(dx<0?1:-1));return}
+    var s=e.target.closest('.slide');if(s&&!s.classList.contains('pos-c'))carUser(slides.indexOf(s));
+  });
+  setInterval(function(){if(cur!=='sId'||act||Date.now()-carPause<12000)return;carGo(carI+1)},7000);
+  carGo(1);
 
   /* Confirmação */
   function dayTxt(){var d=S.date;return WD[d.getDay()].replace(/^./,function(c){return c.toUpperCase()})+', '+d.getDate()+' de '+MS[d.getMonth()]}
