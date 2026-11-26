@@ -587,6 +587,20 @@ svg.av{stroke:none!important}
 #sId .carr{width:1120px;height:850px;order:0}
 #sId .carr .stage{height:770px;transform:none}
 .kb-open #sId .carr{display:block}
+
+/* Convênio identificado pelo CPF */
+.card .cvb{margin-left:auto;margin-right:12px;background:#0b5a35;color:#fff;font-size:13px;font-weight:800;letter-spacing:.06em;border-radius:99px;padding:5px 12px;text-transform:uppercase;white-space:nowrap}
+.card .cvb:empty{display:none}
+.convrow{background:#fff;border:2px solid var(--line);border-radius:24px;padding:14px 16px;margin:-12px 0 22px;text-align:left}
+.convrow[hidden]{display:none}
+.cvinfo{display:flex;align-items:center;gap:14px}
+.cvinfo svg{width:44px;height:44px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.cvinfo small{display:block;font-size:15px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.cvinfo b{display:block;font-size:25px;font-weight:800;color:var(--ink)}
+.cvinfo em{display:block;font-style:normal;font-size:17px;color:var(--muted);font-weight:600}
+.convrow .seg{margin-top:12px;background:var(--g100);border-radius:99px;padding:6px}
+.convrow .seg button{height:60px;font-size:21px}
+#ovCard.hasconv .cardhint{display:none}
 </style>
 </head>
 <body>
@@ -870,6 +884,10 @@ svg.av{stroke:none!important}
       <h2 id="ovCardT">Cadastro confirmado!</h2>
       <p id="ovCardP">Confira seus dados na carteirinha antes de continuar.</p>
       <div class="tilt" id="tilt"><div class="card ok" data-card></div></div>
+      <div class="convrow" id="convRow" hidden>
+        <div class="cvinfo"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12h6M12 9v6"/></svg><span><small>Convênio identificado pelo CPF</small><b id="cvNome"></b><em id="cvDet"></em></span></div>
+        <div class="seg" id="cvSeg"><button type="button" data-u="1">Usar convênio</button><button type="button" data-u="0">Particular</button></div>
+      </div>
       <p class="cardhint"><svg viewBox="0 0 24 24"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg>Deslize o dedo pela tela ou toque na carteirinha</p>
       <button class="go" id="ovCardGo" type="button">Continuar →</button>
       <button class="back" id="ovCardFix" type="button">Corrigir meus dados</button>
@@ -937,12 +955,12 @@ svg.av{stroke:none!important}
   });
 
   /* ---------- Ícones ---------- */
-  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M12 14v4M10 16h4"/>',bk:'<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',tel:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',baby:'<circle cx="12" cy="8" r="5"/><path d="M10 8h.01M14 8h.01M10.5 10.5c.8.6 2.2.6 3 0M7 21v-2a5 5 0 0 1 10 0v2"/>',eye:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',brain:'<path d="M12 5a3 3 0 0 0-5.8-1A3 3 0 0 0 4 8.5a3 3 0 0 0 .5 5.3A3.5 3.5 0 0 0 9 19a3 3 0 0 0 3-1M12 5a3 3 0 0 1 5.8-1A3 3 0 0 1 20 8.5a3 3 0 0 1-.5 5.3A3.5 3.5 0 0 1 15 19a3 3 0 0 1-3-1M12 5v13"/>',drop:'<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',flask:'<path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7 15h10"/>',chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>',ear:'<path d="M6 9a6 6 0 0 1 12 0c0 3-2 4-3 5.5S14 18 12 20a3 3 0 0 1-5-2"/><path d="M9 9a3 3 0 0 1 6 0c0 1.5-1.5 2-2 3"/>',apple:'<path d="M12 7c-2-2-7-1.5-7 4 0 4 3 9 5 9 1 0 1.5-.5 2-.5s1 .5 2 .5c2 0 5-5 5-9 0-5.5-5-6-7-4zM12 7c0-2 1-4 3-4"/>',bld:'<path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M12 6v4M10 8h4"/>'};
+  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M12 14v4M10 16h4"/>',bk:'<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',tel:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',baby:'<circle cx="12" cy="8" r="5"/><path d="M10 8h.01M14 8h.01M10.5 10.5c.8.6 2.2.6 3 0M7 21v-2a5 5 0 0 1 10 0v2"/>',eye:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',brain:'<path d="M12 5a3 3 0 0 0-5.8-1A3 3 0 0 0 4 8.5a3 3 0 0 0 .5 5.3A3.5 3.5 0 0 0 9 19a3 3 0 0 0 3-1M12 5a3 3 0 0 1 5.8-1A3 3 0 0 1 20 8.5a3 3 0 0 1-.5 5.3A3.5 3.5 0 0 1 15 19a3 3 0 0 1-3-1M12 5v13"/>',drop:'<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',flask:'<path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7 15h10"/>',chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>',ear:'<path d="M6 9a6 6 0 0 1 12 0c0 3-2 4-3 5.5S14 18 12 20a3 3 0 0 1-5-2"/><path d="M9 9a3 3 0 0 1 6 0c0 1.5-1.5 2-2 3"/>',apple:'<path d="M12 7c-2-2-7-1.5-7 4 0 4 3 9 5 9 1 0 1.5-.5 2-.5s1 .5 2 .5c2 0 5-5 5-9 0-5.5-5-6-7-4zM12 7c0-2 1-4 3-4"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12h6M12 9v6"/>',bld:'<path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M12 6v4M10 8h4"/>'};
   var ic=function(k){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+I[k]+'</svg>'};
   var LOGO='<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#16a34a"/><path d="M20 33C9 25 7 18 10 14c3-4 8-3 10 1 2-4 7-5 10-1 3 4 1 11-10 19z" fill="#fff"/><path d="M20 15v9M15.5 19.5h9" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/></svg>';
 
   /* ---------- Carteirinha ---------- */
-  var CARD='<div class="row"><div class="logo">'+LOGO+'<span>Policlínica<br>São Francisco de Paula</span></div><div class="chip" aria-hidden="true"></div></div>'+
+  var CARD='<div class="row"><div class="logo">'+LOGO+'<span>Policlínica<br>São Francisco de Paula</span></div><span class="cvb" data-c="conv"></span><div class="chip" aria-hidden="true"></div></div>'+
     '<svg class="ecg" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 16h96c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h162"/><path class="pulse" pathLength="1" d="M0 16h96c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h162"/></svg>'+
     '<div><div class="lbl">Paciente</div><div class="nm" data-c="nome"></div></div>'+
     '<div class="meta"><div><div class="lbl">Nascimento</div><div class="val" data-c="nasc"></div></div><div><div class="lbl">CPF</div><div class="val" data-c="cpf"></div></div>'+
@@ -953,7 +971,7 @@ svg.av{stroke:none!important}
   /* ---------- Estado ---------- */
   var S,touched,act=null,kbMode='alpha';
   function fresh(){
-    S={nome:'',nasc:'',cpf:'',tel:'',esp:'',pri:'',per:'',day:-1,doc:'',hora:'',clin:'',cid:'',date:null,fsel:null,showCpf:false};
+    S={nome:'',nasc:'',cpf:'',tel:'',esp:'',pri:'',per:'',day:-1,doc:'',hora:'',clin:'',cid:'',conv:null,usarConv:false,date:null,fsel:null,showCpf:false};
     touched={nome:false,nasc:false,cpf:false,tel:false};
   }
   fresh();
@@ -1027,6 +1045,7 @@ svg.av{stroke:none!important}
     [].forEach.call(document.querySelectorAll('[data-c=nome]'),function(e){e.textContent=nm||'Seu nome aparece aqui';e.classList.toggle('empty',!nm)});
     var dt=d?((d.slice(0,2)+'--').slice(0,2)+'/'+(d.slice(2,4)+'--').slice(0,2)+'/'+(d.slice(4)+'----').slice(0,4)):'--/--/----';
     [].forEach.call(document.querySelectorAll('[data-c=nasc]'),function(e){e.textContent=dt;e.classList.toggle('empty',!d)});
+    [].forEach.call(document.querySelectorAll('[data-c=conv]'),function(e){e.textContent=S.conv&&S.usarConv?S.conv.nome:''});
     [].forEach.call(document.querySelectorAll('[data-c=cpf]'),function(e){e.textContent=c?(S.showCpf?fmtCpf(c):maskCpf(c)):'---.---.---';e.classList.toggle('empty',!c)});
     [].forEach.call(document.querySelectorAll('[data-eye]'),function(e){e.setAttribute('aria-pressed',S.showCpf)});
     var sc=$('sId').querySelector('.card');if(sc)sc.classList.toggle('ok',!!all);
@@ -1134,13 +1153,14 @@ svg.av{stroke:none!important}
     buscarCadastro(S.nome.trim(),S.nasc,S.cpf).then(function(achou){
       go.classList.remove('load');$('goIdTxt').textContent='Entrar';paint();
       if(achou){
-        S.novo=false;
+        S.novo=false;S.conv=achou.convenio||null;S.usarConv=!!S.conv;
         $('ovCardT').textContent='Tudo certo, '+firstName()+'!';
-        $('ovCardP').textContent='Confira seus dados na carteirinha antes de continuar.';
+        $('ovCardP').textContent=S.conv?'Identificamos seu convênio pelo CPF. Como deseja ser atendido(a)?':'Confira seus dados na carteirinha antes de continuar.';
+        showConv();
         $('ovCardGo').textContent='Continuar →';
         openOv('ovCard');
       }else{
-        S.novo=true;
+        S.novo=true;S.conv=null;S.usarConv=false;showConv();
         $('ovCardT').textContent='Cadastro não localizado';
         $('ovCardP').textContent='Não encontramos seu cadastro. Deseja se cadastrar agora com estes dados?';
         $('ovCardGo').textContent='Sim, cadastrar agora →';
@@ -1149,12 +1169,30 @@ svg.av{stroke:none!important}
     });
   });
 
-  /* Busca do cadastro.
-     TROCAR AQUI pela consulta ao sistema da clínica (deve devolver true/false).
-     Demonstração: CPF terminado em número PAR = cadastro encontrado; ÍMPAR = não localizado. */
+  /* Busca do cadastro pelo CPF.
+     TROCAR AQUI pela consulta ao sistema da clínica. Deve devolver:
+       null                                  -> cadastro não encontrado
+       {convenio:null}                       -> paciente particular
+       {convenio:{nome:'Unimed', plano:'Enfermaria', carteirinha:'0123 4567 8901'}} -> paciente com convênio
+     Demonstração: CPF terminado em ímpar = não localizado; em 2 ou 6 = particular; em 0, 4 ou 8 = com convênio. */
+  var CONVENIOS_DEMO=['Unimed','Amil','Bradesco Saúde','SulAmérica','Golden Cross'];
   function buscarCadastro(nome,nasc,cpf){
-    return new Promise(function(ok){setTimeout(function(){ok(+cpf.slice(-1)%2===0)},1300)});
+    return new Promise(function(ok){setTimeout(function(){
+      var u=+cpf.slice(-1);
+      if(u%2)return ok(null);
+      if(u%4===2)return ok({convenio:null});
+      var h=hsh(cpf),n=String(h).padStart(12,'0').slice(-12);
+      ok({convenio:{nome:CONVENIOS_DEMO[h%CONVENIOS_DEMO.length],plano:['Enfermaria','Apartamento'][h%2],carteirinha:n.slice(0,4)+' '+n.slice(4,8)+' '+n.slice(8)}});
+    },1300)});
   }
+  function showConv(){
+    $('convRow').hidden=!S.conv;
+    $('ovCard').classList.toggle('hasconv',!!S.conv);
+    if(S.conv){$('cvNome').textContent=S.conv.nome+(S.conv.plano?' · '+S.conv.plano:'');$('cvDet').textContent='Carteirinha '+S.conv.carteirinha}
+    [].forEach.call($('cvSeg').children,function(b){b.setAttribute('aria-pressed',String((b.dataset.u==='1')===S.usarConv))});
+    paintCards(allOk());
+  }
+  $('cvSeg').addEventListener('click',function(e){var b=e.target.closest('[data-u]');if(!b)return;S.usarConv=b.dataset.u==='1';showConv()});
 
   $('ovCardGo').addEventListener('click',function(){
     var b=this;if(b.disabled)return;
@@ -1475,10 +1513,10 @@ svg.av{stroke:none!important}
   function dayTxt(){var d=S.date;return WD[d.getDay()].replace(/^./,function(c){return c.toUpperCase()})+', '+d.getDate()+' de '+MS[d.getMonth()]}
   function buildConf(){
     var hs=horScr();
-    var rows=[['user','Paciente',esc(S.nome.trim()),'sId'],['tel','Celular',fmtTel(S.tel),'sId'],['steth','Especialidade',esc(S.esp),'sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
-    $('review').innerHTML=rows.map(function(r){return '<div class="rrow"><span class="ri'+(r[0]==='doc'?' rph':'')+'">'+(r[0]==='doc'?foto(S.doc):ic(r[0]))+'</span><span><small>'+r[1]+'</small><b>'+r[2]+'</b></span><button type="button" class="edit" data-go="'+r[3]+'">Alterar</button></div>'}).join('');
+    var rows=[['user','Paciente · '+fmtTel(S.tel),esc(S.nome.trim()),'sId'],['shield','Atendimento',S.conv&&S.usarConv?'Convênio '+esc(S.conv.nome)+(S.conv.plano?' · '+esc(S.conv.plano):''):'Particular',S.conv?'conv':''],['steth','Especialidade',esc(S.esp),'sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
+    $('review').innerHTML=rows.map(function(r){return '<div class="rrow"><span class="ri'+(r[0]==='doc'?' rph':'')+'">'+(r[0]==='doc'?foto(S.doc):ic(r[0]))+'</span><span><small>'+r[1]+'</small><b>'+r[2]+'</b></span>'+(r[3]?'<button type="button" class="edit" data-go="'+r[3]+'">'+(r[3]==='conv'?'Trocar':'Alterar')+'</button>':'')+'</div>'}).join('');
   }
-  $('review').addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b)show(b.dataset.go)});
+  $('review').addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(!b)return;if(b.dataset.go==='conv'){S.usarConv=!S.usarConv;buildConf();paintCards(true);return}show(b.dataset.go)});
   $('confBack').addEventListener('click',function(){show(horScr())});
   $('goConf').addEventListener('click',function(){
     var go=this;if(go.classList.contains('load'))return;
@@ -1496,7 +1534,7 @@ svg.av{stroke:none!important}
     $('tSenha').textContent=senha;
     $('doneH').textContent='Tudo certo, '+firstName()+'!';
     var d=S.date;
-    $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Local</dt><dd>'+esc(S.clin)+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>Profissional</dt><dd>'+esc(S.doc)+'</dd><dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
+    $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd><dt>Local</dt><dd>'+esc(S.clin)+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>Profissional</dt><dd>'+esc(S.doc)+'</dd><dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
     var t=$('ticket');t.style.animation='none';void t.offsetWidth;t.style.animation='';
     show('sDone');confetti();
     var n=30;$('count').textContent='Voltando ao início em '+n+'s';
