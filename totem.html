@@ -828,6 +828,52 @@ svg.av{stroke:none!important}
 .pena2{position:absolute;width:14px;height:26px;border-radius:50%/70% 70% 30% 30%;background:#d5dde6;z-index:59;pointer-events:none;animation:pPena 1.6s ease-out forwards}
 .sendb.busy{pointer-events:none}
 .sendb.pegou{animation:ckPop .4s cubic-bezier(.3,1.6,.5,1)}
+
+/* Faixa "Agendando agora" nas telas de horário */
+.ibanner{display:flex;align-items:center;gap:20px;background:linear-gradient(135deg,var(--g600),var(--g800,#0b5a35));color:#fff;border-radius:26px;padding:16px 22px;margin-top:18px;box-shadow:0 16px 34px -20px rgba(7,59,36,.8);flex:none}
+.ibanner .ibi{width:66px;height:66px;border-radius:20px;background:rgba(255,255,255,.16);display:grid;place-items:center;flex:none}
+.ibanner .ibi svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ibtx{min-width:0}
+.ibtx small{display:block;font-size:16px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#bbf0cf}
+.ibtx b{display:block;font-size:34px;font-weight:800;line-height:1.1;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ibtx em{display:block;font-style:normal;font-size:18px;font-weight:600;color:#d7f5e3}
+.ibsteps{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;max-width:52%}
+.ibs{display:flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:99px;background:rgba(255,255,255,.12);color:#d7f5e3;font-size:16px;font-weight:700;white-space:nowrap;max-width:260px;overflow:hidden;text-overflow:ellipsis}
+.ibs i{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22);font-size:13px;font-weight:800;flex:none}
+.ibs.cur{background:#fff;color:var(--g700)}
+.ibs.cur i{background:var(--g600);color:#fff}
+.ibs.ok i{background:#4ade80;color:#073b24}
+.ibanner.n1 .ibsteps{display:none}
+.ibanner.pulse{animation:ibPulse .6s ease-out}
+@keyframes ibPulse{0%{transform:scale(.97);box-shadow:0 0 0 0 rgba(74,222,128,.7)}100%{transform:none;box-shadow:0 0 0 22px rgba(74,222,128,0)}}
+
+.ibanner{flex-wrap:wrap}
+.ibsteps{max-width:100%;width:100%;justify-content:flex-start;margin-left:0}
+
+/* Revisão com muitos itens: a lista rola e os botões ficam fixos */
+#sConf .pnl{min-height:0}
+#sConf .pnl>*:not(.review){flex-shrink:0}
+#sConf .review{flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+
+/* Balão de fala do Francisco */
+.pbalao{position:absolute;left:0;top:0;z-index:62;pointer-events:none;transform:translate(-50%,-100%);width:max-content;max-width:520px;background:#fff;color:var(--ink);border:3px solid var(--g600);border-radius:26px;padding:16px 24px 16px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 22px 44px -18px rgba(0,30,15,.6);animation:pbIn .45s cubic-bezier(.3,1.6,.5,1) both}
+.pbalao::after{content:"";position:absolute;left:50%;bottom:-15px;margin-left:-14px;width:26px;height:26px;background:#fff;border-right:3px solid var(--g600);border-bottom:3px solid var(--g600);transform:rotate(45deg);border-bottom-right-radius:6px}
+.pbalao .pbi svg{width:30px;height:30px;stroke:var(--g700);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pbalao.ok .pbi svg{stroke:#fff;stroke-width:3}
+.pbalao.bad .pbi svg{stroke:#b42318}
+.pbalao .pbi{width:54px;height:54px;border-radius:50%;background:var(--g100);display:grid;place-items:center;flex:none;font-size:30px;line-height:1}
+.pbalao b{display:block;white-space:nowrap;font-size:26px;font-weight:800;line-height:1.15;color:var(--g700)}
+.pbalao small{display:block;white-space:nowrap;font-size:18px;font-weight:600;color:var(--muted);margin-top:2px}
+.pbalao.ok{background:var(--g600);border-color:var(--g600)}
+.pbalao.ok::after{background:var(--g600)}
+.pbalao.ok b,.pbalao.ok small{color:#fff}
+.pbalao.ok .pbi{background:rgba(255,255,255,.2)}
+.pbalao.bad{border-color:#d92d20}.pbalao.bad::after{border-color:#d92d20}.pbalao.bad b{color:#b42318}
+.pbalao.swap{animation:pbSwap .4s cubic-bezier(.3,1.6,.5,1)}
+.pbalao.out{animation:pbOut .4s ease-in forwards}
+@keyframes pbIn{from{transform:translate(-50%,-100%) scale(.4);opacity:0}to{transform:translate(-50%,-100%);opacity:1}}
+@keyframes pbSwap{0%{transform:translate(-50%,-100%) scale(.85)}100%{transform:translate(-50%,-100%)}}
+@keyframes pbOut{to{transform:translate(-50%,-100%) scale(.7) translateY(-30px);opacity:0}}
 </style>
 </head>
 <body>
@@ -999,6 +1045,7 @@ svg.av{stroke:none!important}
       <div class="pnl">
         <h1>Escolha o dia e o horário</h1>
         <p class="sub" id="horSub"></p>
+        <div class="ibanner" id="hItem"></div>
         <div class="sec"><h3>Dia</h3><div class="days" id="gDays"></div></div>
         <div class="sec" id="secDoc"><h3>Profissional</h3><div class="docs" id="gDocs"></div></div>
         <div class="sec"><div class="locrow" id="locRow" hidden><b><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Local</b><div class="seg" id="gLocs"></div></div><p class="locaddr" id="locAddr"></p><h3 id="slotTitle">Horários disponíveis</h3><div class="slots" id="gSlots"></div>
@@ -1016,6 +1063,7 @@ svg.av{stroke:none!important}
       <div class="pnl">
         <h1 class="ttl"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Atendimento mais rápido</h1>
         <p class="sub">Compare os horários disponíveis nas três clínicas.</p>
+        <div class="ibanner" id="fItem"></div>
         <div class="fbox">
           <b id="fEsp">Clínico Geral</b>
           <div class="seg" id="fSeg"></div>
@@ -1801,8 +1849,16 @@ svg.av{stroke:none!important}
     var ts=day.getTime(),on=S.fsel&&S.fsel.ci===ci&&S.fsel.ts===ts&&S.fsel.t===t;
     return '<button type="button" class="slot" data-ci="'+ci+'" data-ts="'+ts+'" data-t="'+t+'" aria-pressed="'+!!on+'"'+(ocupado(day,hm(t,':'))?' disabled':'')+'>'+hm(t,'h')+'</button>';
   }
+  function itemBanner(id){
+    var e=$(id);if(!e)return;
+    var it=S.itens[S.cur]||{esp:S.esp,tipo:S.tipo,exame:S.exame},n=S.itens.length||1,ex=it.tipo==='Exame';
+    e.classList.toggle('n1',n<2);
+    e.innerHTML='<span class="ibi">'+ic(ex?'flask':espIcon(it.esp))+'</span><span class="ibtx"><small>Agendando agora'+(n>1?' · item '+(S.cur+1)+' de '+n:'')+'</small><b>'+esc(ex?it.exame:it.esp)+'</b><em>'+esc(ex?(SO_EXAME[it.esp]?it.esp:'Exame · '+it.esp):'Consulta')+'</em></span>'+
+      '<span class="ibsteps">'+S.itens.map(function(x,i){return '<span class="ibs'+(i===S.cur?' cur':i<S.cur?' ok':'')+'"><i>'+(i<S.cur?'✓':i+1)+'</i>'+esc(x.tipo==='Exame'?x.exame:x.esp)+'</span>'}).join('')+'</span>';
+    if(e.dataset.cur!==String(S.cur)){e.dataset.cur=S.cur;e.classList.remove('pulse');void e.offsetWidth;e.classList.add('pulse')}
+  }
   function buildFast(){
-    $('fEsp').textContent=espTxt();
+    $('fEsp').textContent='Período';itemBanner('fItem');
     $('fSeg').innerHTML=['Manhã','Tarde','Noite','Todos'].map(function(p){return '<button type="button" data-p="'+p+'" aria-pressed="'+(p===fastPer)+'">'+p+'</button>'}).join('');
     var DS=nextDays(6),r=FPER[fastPer];
     var list=CLINICAS.map(function(c,ci){
@@ -1878,7 +1934,7 @@ svg.av{stroke:none!important}
     var m=medico(S.doc);
     if(m&&m.clinicas.indexOf(S.cid)<0)S.cid=m.clinicas[0];
     if(!m)S.cid='';
-    $('horSub').textContent=espTxt()+' · '+S.per+' · escolha o profissional e o local';
+    $('horSub').textContent=S.per+' · escolha o profissional, o local e o horário';itemBanner('hItem');
     $('gDays').innerHTML=DS.map(function(d,i){
       var diff=Math.round((d-today)/864e5);
       var lbl=diff===0?'Hoje':(diff===1?'Amanhã':WDS[d.getDay()]);
@@ -2227,15 +2283,19 @@ svg.av{stroke:none!important}
     enPaint();
   }
   $('enBody').addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b&&!enBusy)emKey(b.dataset.k)});
-  /* Pombo-correio: voa até o botão, pega a mensagem e leva embora */
+  /* Francisco, o pombo-correio: voa até o botão, pega a mensagem e leva embora */
   var vooId=0;
-  function voarPombo(btn,envio,okTxt){
+  function voarPombo(btn,envio,okTxt,dest){
     if(btn.classList.contains('sent')||btn.classList.contains('busy'))return;
     var id=++vooId,sp=btn.querySelector('span');
-    btn.classList.add('busy');sp.textContent='Chamando o pombo…';
+    btn.classList.add('busy');sp.textContent='Francisco a caminho…';
     var kr=K.getBoundingClientRect(),s=kr.width/K.offsetWidth||1,br=btn.getBoundingClientRect();
     var bx=(br.left+br.width/2-kr.left)/s,by=(br.top+br.height/2-kr.top)/s,W=K.offsetWidth;
     var hx=bx-115,hy=(br.top-kr.top)/s-120;
+    [].forEach.call(K.querySelectorAll('.pbalao'),function(e){e.remove()});
+    var bl=document.createElement('div');bl.className='pbalao';bl.style.left=Math.max(280,Math.min(W-280,bx))+'px';bl.style.top=((br.top-kr.top)/s-140)+'px';K.appendChild(bl);
+    function fala(ic,t,sub,cls){bl.className='pbalao'+(cls?' '+cls:'');bl.innerHTML='<span class="pbi">'+ic+'</span><span><b>'+t+'</b><small>'+sub+'</small></span>';if(bl.dataset.on){void bl.offsetWidth;bl.classList.add('swap')}bl.dataset.on=1}
+    fala('<svg viewBox="0 0 24 24"><path d="M3 13c4 0 6-2 8-6 1 3 3 5 6 5l4-2-1 4c-2 4-6 6-11 6-3 0-5-1-6-3l4-1z"/><circle cx="16.5" cy="9" r=".6"/></svg>','Francisco está a caminho!','Nosso pombo-correio vem buscar sua mensagem');
     var p=document.createElement('div');p.className='pvoo';p.innerHTML='<div class="pombo">'+POMBO+'</div>';K.appendChild(p);
     var a1=p.animate([{transform:'translate(-280px,'+(hy-460)+'px) scale(.55)'},{transform:'translate('+(hx-70)+'px,'+(hy-70)+'px) scale(.95)',offset:.75},{transform:'translate('+hx+'px,'+hy+'px) scale(1)'}],{duration:1100,easing:'ease-out',fill:'forwards'});
     var t0=Date.now(),res=null;
@@ -2244,7 +2304,8 @@ svg.av{stroke:none!important}
       if(id!==vooId)return;
       var c=document.createElement('span');c.className='cartinha';c.innerHTML='<svg viewBox="0 0 40 27"><rect x="1.5" y="1.5" width="37" height="24" rx="4" fill="#fff" stroke="#16a34a" stroke-width="3"/><path d="M2 3l18 13L38 3" fill="none" stroke="#16a34a" stroke-width="3"/></svg>';K.appendChild(c);
       c.animate([{transform:'translate('+(bx-20)+'px,'+(by-14)+'px) scale(.4)',opacity:0},{transform:'translate('+(bx-20)+'px,'+(by-60)+'px) scale(1.1)',opacity:1,offset:.45},{transform:'translate('+(hx+172)+'px,'+(hy+52)+'px) scale(1)',opacity:1}],{duration:420,easing:'ease-out',fill:'forwards'}).onfinish=function(){c.remove();if(id!==vooId)return;p.classList.add('pega')};
-      btn.classList.add('pegou');sp.textContent='Pombo pegou a mensagem!';
+      btn.classList.add('pegou');sp.textContent='Mensagem com o Francisco';
+      fala('<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>','Francisco pegou sua mensagem!','Preparando a decolagem…');
       var iv=setInterval(function(){
         if(id!==vooId){clearInterval(iv);return}
         if(!res||Date.now()-t0<2000)return;clearInterval(iv);
@@ -2254,11 +2315,13 @@ svg.av{stroke:none!important}
         var a2=p.animate([{transform:'translate('+hx+'px,'+hy+'px)'},{transform:'translate('+(hx-30)+'px,'+(hy+22)+'px) rotate(8deg)',offset:.15},{transform:'translate('+(W+120)+'px,'+(hy-900)+'px) rotate(-22deg) scale(.5)'}],{duration:1400,easing:'cubic-bezier(.55,0,.75,.6)',fill:'forwards'});
         a2.onfinish=function(){p.remove()};
         btn.classList.remove('busy','pegou');
-        if(res.ok){btn.classList.add('sent');sp.textContent=okTxt}else sp.textContent='Não enviou · tocar de novo';
+        if(res.ok){btn.classList.add('sent');sp.textContent=okTxt;fala('<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>','Francisco levou sua mensagem!','Entregue para '+esc(dest),'ok')}
+        else{sp.textContent='Não enviou · tocar de novo';fala('<svg viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>','Francisco não conseguiu entregar','Toque no botão para tentar de novo','bad')}
+        setTimeout(function(){if(id!==vooId)return;bl.classList.add('out');setTimeout(function(){bl.remove()},400)},3200);
       },60);
     };
   }
-  $('sendWa').addEventListener('click',function(){voarPombo(this,function(){return enviarWhatsApp(S.tel,msgConfirmacao())},'Enviado no WhatsApp')});
+  $('sendWa').addEventListener('click',function(){voarPombo(this,function(){return enviarWhatsApp(S.tel,msgConfirmacao())},'Enviado no WhatsApp',fmtTel(S.tel))});
   $('sendMail').addEventListener('click',function(){if(this.classList.contains('sent')||this.classList.contains('busy'))return;abrirEnvio('mail')});
   $('enCancel').addEventListener('click',function(){if(!enBusy)closeOv('ovEnvio')});
   $('enGo').addEventListener('click',function(){
@@ -2266,7 +2329,7 @@ svg.av{stroke:none!important}
     if(enModo==='mail'&&!emValido(enMail)){$('emInp').classList.add('bad');$('emHint').classList.add('bad');$('emHint').textContent='Confira o e-mail digitado. Exemplo: nome@gmail.com';return}
     closeOv('ovEnvio');
     var msg=msgConfirmacao(),mail=enMail;
-    setTimeout(function(){voarPombo($('sendMail'),function(){return enviarEmail(mail,'Confirmação do seu atendimento · Policlínica São Francisco de Paula',msg)},'Enviado por e-mail')},250);
+    setTimeout(function(){voarPombo($('sendMail'),function(){return enviarEmail(mail,'Confirmação do seu atendimento · Policlínica São Francisco de Paula',msg)},'Enviado por e-mail',mail)},250);
   });
   document.addEventListener('keydown',function(e){
     if(!$('ovEnvio').classList.contains('on')||e.ctrlKey||e.metaKey||e.altKey)return;
@@ -2278,7 +2341,7 @@ svg.av{stroke:none!important}
   });
   function resetEnvio(){
     enMail='';vooId++;
-    [].forEach.call(K.querySelectorAll('.pvoo,.pena2,.cartinha'),function(e){e.remove()});
+    [].forEach.call(K.querySelectorAll('.pvoo,.pena2,.cartinha,.pbalao'),function(e){e.remove()});
     [['sendWa','Enviar por WhatsApp'],['sendMail','Enviar por e-mail']].forEach(function(x){var b=$(x[0]);b.classList.remove('sent','busy','pegou');b.querySelector('span').textContent=x[1]});
   }
   function finishFlow(){
