@@ -391,10 +391,7 @@ svg.av{stroke:none!important}
 .cardhint{display:flex;align-items:center;justify-content:center;gap:10px;font-size:19px!important;color:var(--txt-g)!important;font-weight:700;margin:-14px 0 26px!important}
 .cardhint svg{width:26px;height:26px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;animation:wiggle 1.8s ease-in-out infinite}
 @keyframes wiggle{0%,100%{transform:translateX(-6px) rotate(-12deg)}50%{transform:translateX(6px) rotate(12deg)}}
-.ov.on#ovCard h2{animation:upIn .5s .1s both}
-.ov.on#ovCard .dlg>p{animation:upIn .5s .2s both}
-.ov.on#ovCard .go,.ov.on#ovCard .back{animation:upIn .5s .95s both}
-.ov.on#ovCard .cardhint{animation:upIn .5s 1.2s both}
+.ov.on#ovCard h2,.ov.on#ovCard .dlg>p,.ov.on#ovCard .convrow,.ov.on#ovCard .go,.ov.on#ovCard .back,.ov.on#ovCard .cardhint{animation:upIn .45s .05s both}
 @keyframes upIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 
 /* Carteirinha interativa também na revisão */
@@ -708,6 +705,129 @@ svg.av{stroke:none!important}
 #sDone .sendrow{width:820px}
 #sDone .dfoot{gap:16px}
 #sDone.hasprep .dfoot .cta{height:104px}
+
+/* Rodapé com formas de pagamento */
+.foot{justify-content:space-between;padding:0 48px}
+.fpriv{flex:1;min-width:0}
+.fpay{display:flex;align-items:center;gap:10px;flex:none}
+.fpay small{font-size:17px;font-weight:800;color:var(--g700);text-transform:uppercase;letter-spacing:.06em;margin-right:4px}
+.fchip{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 15px;border-radius:999px;background:var(--g100);color:var(--g700);font-size:18px;font-weight:800;border:1.5px solid rgba(22,163,74,.25)}
+.fchip svg{width:20px;height:20px}
+
+.foot{padding:0 32px;gap:16px}
+.fpriv{font-size:16px;line-height:1.25}
+.fchip{padding:0 12px;font-size:17px}
+
+/* Selo de desconto do Cartão Consulta junto do Continuar */
+.cvtag{display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 40px);margin:6px 22px -20px auto;position:relative;z-index:2;padding:8px 16px;border-radius:999px;background:#f5b301;color:#3d2a00;font-size:18px;font-weight:800;box-shadow:0 8px 18px -8px rgba(0,0,0,.45);animation:cvpop .5s cubic-bezier(.2,1.4,.4,1) both}
+.cvtag[hidden]{display:none}
+.cvtag svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round;flex:none}
+.cvtag.off{background:#fff;color:var(--g700);border:2px dashed #f5b301}
+@keyframes cvpop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+
+/* Desconto do Cartão Consulta na tela de pagamento */
+.pgde{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:8px}
+.pgde[hidden]{display:none}
+.pgde s{font-size:24px;font-weight:700;color:var(--g200);opacity:.85}
+.pgde em{font-style:normal;font-size:17px;font-weight:800;color:#3d2a00;background:#f5b301;border-radius:999px;padding:5px 14px}
+.pgsum>b{margin-top:2px}
+
+/* Várias escolhas: lista de selecionados */
+.cart{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:14px 18px;margin-top:22px;box-shadow:0 14px 30px -24px rgba(11,90,53,.5)}
+.cth{display:flex;align-items:center;gap:10px;min-width:0}
+.cth b{font-size:21px;font-weight:800}
+.ctn{min-width:32px;height:32px;padding:0 9px;border-radius:99px;background:var(--g600);color:#fff;font-weight:800;font-size:17px;display:grid;place-items:center}
+.ctn:empty{display:none}
+.cth small{font-size:17px;color:var(--muted);font-weight:600;margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chips{display:flex;gap:10px;overflow-x:auto;padding:12px 2px 2px;scrollbar-width:none}
+.chips:empty{display:none}
+.chips::-webkit-scrollbar{display:none}
+.itchip{flex:none;display:flex;align-items:center;gap:10px;height:56px;padding:0 10px 0 16px;border-radius:16px;border:2px solid var(--g200);background:var(--g50);font:inherit;color:var(--ink);cursor:pointer;text-align:left}
+.itchip .ci2 svg{width:24px;height:24px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
+.itchip span b{display:block;font-size:18px;font-weight:800;line-height:1.1}
+.itchip span small{display:block;font-size:14px;font-weight:700;color:var(--g700)}
+.itchip i{width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid var(--line);display:grid;place-items:center;flex:none}
+.itchip i svg{width:14px;height:14px;stroke:var(--muted);stroke-width:3;fill:none;stroke-linecap:round}
+/* lista de exames com várias escolhas */
+.tex{position:relative;padding-right:52px}
+.tex::after{content:"";position:absolute;right:14px;top:50%;margin-top:-14px;width:28px;height:28px;border-radius:50%;border:2.5px solid var(--line);background:#fff}
+.tex[aria-pressed=true]{border-color:var(--g600);background:var(--g100)}
+.tex[aria-pressed=true]::after{border-color:var(--g600);background:var(--g600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/16px no-repeat}
+.tpfoot{display:flex;gap:16px;margin-top:20px}
+.tpfoot .back{flex:1;margin:0}
+.tpfoot .back[hidden]{display:none}
+.tpfoot .go{flex:2;margin:0}
+/* revisão com vários itens */
+.rrow em{display:block;font-style:normal;font-size:18px;color:var(--muted);font-weight:600;margin-top:2px}
+.review.multi .rrow{padding:14px 0}
+.review.multi .rrow b{font-size:24px}
+.ihead{font-size:18px;font-weight:800;color:var(--g700);margin:6px 0 2px}
+.prep li.hd{padding-left:0;font-weight:800;color:var(--g700);margin-top:6px}
+.prep li.hd::before{display:none}
+
+#sPref .cart{margin-top:24px}
+
+#prep.multi ul{max-height:430px;overflow-y:auto}
+
+/* Resumo "Meus atendimentos" e janela para gerenciar */
+.cart{display:flex;align-items:center;gap:16px;padding:16px 18px}
+.cart.has{border-color:var(--g600);border-width:2.5px}
+.cti{width:56px;height:56px;border-radius:16px;background:var(--g100);display:grid;place-items:center;flex:none}
+.cti svg{width:30px;height:30px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cttx{min-width:0}
+.cttx b{display:block;font-size:24px;font-weight:800;line-height:1.15}
+.cttx small{display:block;font-size:18px;color:var(--muted);font-weight:600;margin-top:2px}
+.ctgo{margin-left:auto;flex:none;display:flex;align-items:center;gap:6px;height:62px;padding:0 22px 0 26px;border-radius:18px;border:0;background:var(--g100);color:var(--g700);font:inherit;font-size:21px;font-weight:800;cursor:pointer}
+.ctgo svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.ctgo:disabled{opacity:.4;cursor:default}
+.idlg .thead small{text-transform:none;letter-spacing:0;font-size:20px;font-weight:600}
+.idlg .thead h2{font-size:42px}
+.itn{margin-left:auto;min-width:64px;height:64px;padding:0 14px;border-radius:99px;background:var(--g600);color:#fff;font-size:30px;font-weight:800;display:grid;place-items:center}
+.itn:empty{display:none}
+.itlist{display:grid;gap:12px;max-height:640px;overflow-y:auto;margin:22px 0 6px;padding:2px}
+.itrow{display:flex;align-items:center;gap:18px;background:var(--card);border:2px solid var(--line);border-radius:22px;padding:16px 18px}
+.iti{width:64px;height:64px;border-radius:18px;background:var(--g100);display:grid;place-items:center;flex:none}
+.iti svg{width:32px;height:32px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.itx{min-width:0}
+.itx b{display:block;font-size:26px;font-weight:800;line-height:1.15}
+.itx small{display:block;font-size:18px;color:var(--muted);font-weight:600;margin-top:2px}
+.itrm{margin-left:auto;flex:none;display:flex;align-items:center;gap:8px;height:62px;padding:0 22px;border-radius:18px;border:0;background:#fdeaea;color:#b42318;font:inherit;font-size:20px;font-weight:800;cursor:pointer}
+.itrm svg,.itclr svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.itclr{display:flex;align-items:center;gap:10px;margin:12px auto 0;height:56px;padding:0 20px;background:none;border:0;color:#d92d20;font:inherit;font-size:21px;font-weight:800;cursor:pointer}
+.itclr[hidden]{display:none}
+.itempty{text-align:center;padding:40px 20px;font-size:23px;color:var(--muted);font-weight:600;background:var(--card);border:2px dashed var(--line);border-radius:22px}
+
+/* Pombo-correio levando a confirmação */
+.enpombo{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:26px 0 12px;text-align:center}
+.enpombo p{font-size:24px!important;margin:0!important;font-weight:700;color:var(--g700)!important}
+.enpombo small{font-size:18px;color:var(--muted);font-weight:600}
+.pombo{width:260px;height:178px;position:relative;z-index:5;animation:pBob 1s ease-in-out infinite alternate}
+.pombo svg{width:100%;height:100%;overflow:visible;display:block}
+.pombo .pwf,.pombo .pwb{transform-box:view-box;transform-origin:100px 78px;animation:pFlap .2s ease-in-out infinite alternate}
+.pombo .pwb{animation-delay:-.1s}
+.pombo .pcarta{transform-box:view-box;transform-origin:176px 62px;animation:pCarta .4s ease-in-out infinite alternate}
+@keyframes pFlap{from{transform:rotate(6deg)}to{transform:rotate(-16deg) scaleY(-.75)}}
+@keyframes pCarta{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
+@keyframes pBob{from{transform:translateY(6px)}to{transform:translateY(-8px)}}
+.pombo.voa{animation:pVoo 1.5s cubic-bezier(.55,0,.75,.6) forwards}
+.pombo.voa .pwf,.pombo.voa .pwb{animation-duration:.12s}
+@keyframes pVoo{0%{transform:translate(0,0) rotate(0)}18%{transform:translate(-30px,22px) rotate(10deg)}100%{transform:translate(1150px,-950px) rotate(-24deg) scale(.45)}}
+.pena{position:absolute;left:50%;top:90px;width:16px;height:30px;border-radius:50% 50% 50% 50%/70% 70% 30% 30%;background:#c9d3de;opacity:0;pointer-events:none;animation:pPena 1.6s ease-out forwards}
+@keyframes pPena{0%{opacity:0;transform:translate(0,0) rotate(0)}15%{opacity:1}100%{opacity:0;transform:translate(var(--x),150px) rotate(var(--r))}}
+.pnuvem{position:absolute;left:50%;top:150px;width:120px;height:30px;margin-left:-60px;border-radius:50%;background:rgba(22,163,74,.18);animation:pNuv .8s ease-out forwards}
+@keyframes pNuv{from{transform:scale(.3);opacity:1}to{transform:scale(2.2);opacity:0}}
+
+/* Pombo voando até o botão */
+.pvoo{position:absolute;left:0;top:0;width:220px;height:150px;z-index:60;pointer-events:none}
+.pvoo .pombo{width:220px;height:150px}
+.pvoo .pcarta{opacity:0;transition:opacity .15s}
+.pvoo.pega .pcarta{opacity:1}
+.cartinha{position:absolute;left:0;top:0;width:40px;height:27px;z-index:61;pointer-events:none}
+.cartinha svg{width:100%;height:100%;display:block}
+.pvoo.rapido .pwf,.pvoo.rapido .pwb{animation-duration:.12s}
+.pena2{position:absolute;width:14px;height:26px;border-radius:50%/70% 70% 30% 30%;background:#d5dde6;z-index:59;pointer-events:none;animation:pPena 1.6s ease-out forwards}
+.sendb.busy{pointer-events:none}
+.sendb.pegou{animation:ckPop .4s cubic-bezier(.3,1.6,.5,1)}
 </style>
 </head>
 <body>
@@ -862,6 +982,11 @@ svg.av{stroke:none!important}
         </div>
         <div class="sec"><h3>2. Qual é sua prioridade?</h3><div class="g2" id="gPri"></div></div>
         <div class="sec"><h3>3. Qual período você prefere?</h3><div class="g4" id="gPer"></div></div>
+        <div class="cart" id="cart">
+          <span class="cti"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg></span>
+          <div class="cttx"><b>Meus atendimentos</b><small id="cartHint"></small></div>
+          <button type="button" class="ctgo" id="cartGo" disabled>Gerenciar <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
         <div class="actions btn2">
           <button class="back" data-back="sId" type="button">← Voltar</button>
           <button class="go" id="goPref" type="button" disabled>Continuar →</button>
@@ -923,10 +1048,11 @@ svg.av{stroke:none!important}
     <section class="screen" id="sPag" aria-label="Pagamento">
       <div class="pnl">
         <h1>Pagamento</h1>
-        <p class="sub">Atendimento particular · escolha como deseja pagar.</p>
+        <p class="sub" id="pgSub">Atendimento particular · escolha como deseja pagar.</p>
         <div class="pgcols">
           <div class="pgsum">
             <small>Valor a pagar</small>
+            <span class="pgde" id="pgDe" hidden></span>
             <b id="pgVal">R$ 0,00</b>
             <dl id="pgDl"></dl>
           </div>
@@ -991,7 +1117,14 @@ svg.av{stroke:none!important}
 
   <footer class="foot">
     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5L15.5 10"/></svg>
-    Seus dados são usados apenas para o seu atendimento. · ClínicaOS • Autoatendimento
+    <span class="fpriv">Seus dados são usados apenas para o seu atendimento.</span>
+    <div class="fpay" aria-label="Formas de pagamento aceitas">
+      <small>Aceitamos</small>
+      <span class="fchip"><svg viewBox="0 0 24 24"><path d="M12 2.5l4 4-4 4-4-4zM12 13.5l4 4-4 4-4-4zM2.5 12l4-4 4 4-4 4zM13.5 12l4-4 4 4-4 4z"/></svg>Pix</span>
+      <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></svg>Débito</span>
+      <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></svg>Crédito</span>
+      <span class="fchip"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v8M8 12h8"/></svg>Cartão Consulta</span>
+    </div>
   </footer>
 
   <!-- Carteirinha confirmada -->
@@ -1001,10 +1134,11 @@ svg.av{stroke:none!important}
       <p id="ovCardP">Confira seus dados na carteirinha antes de continuar.</p>
       <div class="tilt" id="tilt"><div class="card ok" data-card></div></div>
       <div class="convrow" id="convRow" hidden>
-        <div class="cvinfo"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12h6M12 9v6"/></svg><span><small>Convênio identificado pelo CPF</small><b id="cvNome"></b><em id="cvDet"></em></span></div>
-        <div class="seg" id="cvSeg"><button type="button" data-u="1">Usar convênio</button><button type="button" data-u="0">Particular</button></div>
+        <div class="cvinfo"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12h6M12 9v6"/></svg><span><small>Cartão Consulta identificado pelo CPF</small><b id="cvNome"></b><em id="cvDet"></em></span></div>
+        <div class="seg" id="cvSeg"><button type="button" data-u="1">Usar Cartão Consulta</button><button type="button" data-u="0">Particular</button></div>
       </div>
       <p class="cardhint"><svg viewBox="0 0 24 24"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg>Deslize o dedo pela tela ou toque na carteirinha</p>
+      <span class="cvtag" id="cvTag" hidden><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="8" cy="8" r="1.6"/></svg><span id="cvTagT"></span></span>
       <button class="go" id="ovCardGo" type="button">Continuar →</button>
       <button class="back" id="ovCardFix" type="button">Corrigir meus dados</button>
     </div>
@@ -1040,7 +1174,7 @@ svg.av{stroke:none!important}
           </div>
           <div class="tkb" id="tpKb"></div>
         </div>
-        <button class="back" id="tpBack" type="button">← Voltar</button>
+        <div class="tpfoot"><button class="back" id="tpBack" type="button">← Voltar</button><button class="go" id="tpDone" type="button">Concluir</button></div>
       </div>
     </div>
   </div>
@@ -1053,6 +1187,19 @@ svg.av{stroke:none!important}
       <div class="btn2 enbtns" id="enBtns">
         <button class="back" id="enCancel" type="button">Cancelar</button>
         <button class="go" id="enGo" type="button"><span class="spin" aria-hidden="true"></span><span id="enGoTxt">Enviar</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Meus atendimentos: gerenciar itens selecionados -->
+  <div class="ov" id="ovItens" role="dialog" aria-modal="true" aria-labelledby="itT">
+    <div class="dlg edlg idlg">
+      <div class="thead"><span class="tico"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg></span><div><small id="itSub"></small><h2 id="itT">Meus atendimentos</h2></div><span class="itn" id="itN"></span></div>
+      <div class="itlist" id="itList"></div>
+      <button type="button" class="itclr" id="itClr"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>Limpar todas as seleções</button>
+      <div class="btn2 enbtns">
+        <button class="back" id="itAdd" type="button">+ Adicionar mais</button>
+        <button class="go" id="itOk" type="button">Pronto</button>
       </div>
     </div>
   </div>
@@ -1137,7 +1284,7 @@ svg.av{stroke:none!important}
   /* ---------- Estado ---------- */
   var S,touched,act=null,kbMode='alpha';
   function fresh(){
-    S={nome:'',nasc:'',cpf:'',tel:'',esp:'',tipo:'',exame:'',pri:'',per:'',day:-1,doc:'',hora:'',clin:'',cid:'',conv:null,usarConv:false,pag:null,date:null,fsel:null,showCpf:false};
+    S={nome:'',nasc:'',cpf:'',tel:'',esp:'',tipo:'',exame:'',itens:[],cur:0,pri:'',per:'',day:-1,doc:'',hora:'',clin:'',cid:'',conv:null,usarConv:false,pag:null,date:null,fsel:null,showCpf:false};
     touched={nome:false,nasc:false,cpf:false,tel:false};
   }
   fresh();
@@ -1323,7 +1470,7 @@ svg.av{stroke:none!important}
       if(achou){
         S.novo=false;S.conv=achou.convenio||null;S.usarConv=!!S.conv;
         $('ovCardT').textContent='Tudo certo, '+firstName()+'!';
-        $('ovCardP').textContent=S.conv?'Identificamos seu convênio pelo CPF. Como deseja ser atendido(a)?':'Confira seus dados na carteirinha antes de continuar.';
+        $('ovCardP').textContent=S.conv?'Identificamos seu Cartão Consulta pelo CPF. Como deseja ser atendido(a)?':'Confira seus dados na carteirinha antes de continuar.';
         showConv();
         $('ovCardGo').textContent='Continuar →';
         openOv('ovCard');
@@ -1341,16 +1488,17 @@ svg.av{stroke:none!important}
      TROCAR AQUI pela consulta ao sistema da clínica. Deve devolver:
        null                                  -> cadastro não encontrado
        {convenio:null}                       -> paciente particular
-       {convenio:{nome:'Unimed', plano:'Enfermaria', carteirinha:'0123 4567 8901'}} -> paciente com convênio
+       {convenio:{nome:'Cartão Consulta', plano:'Titular', carteirinha:'0123 4567 8901', desconto:30}} -> paciente com Cartão Consulta
+       desconto = porcentagem de desconto do Cartão Consulta, vinda do sistema (0 ou ausente = sem desconto)
      Demonstração: CPF terminado em ímpar = não localizado; em 2 ou 6 = particular; em 0, 4 ou 8 = com convênio. */
-  var CONVENIOS_DEMO=['Unimed','Amil','Bradesco Saúde','SulAmérica','Golden Cross'];
+  var CONVENIOS_DEMO=['Cartão Consulta'];
   function buscarCadastro(nome,nasc,cpf){
     return new Promise(function(ok){setTimeout(function(){
       var u=+cpf.slice(-1);
       if(u%2)return ok(null);
       if(u%4===2)return ok({convenio:null});
       var h=hsh(cpf),n=String(h).padStart(12,'0').slice(-12);
-      ok({convenio:{nome:CONVENIOS_DEMO[h%CONVENIOS_DEMO.length],plano:['Enfermaria','Apartamento'][h%2],carteirinha:n.slice(0,4)+' '+n.slice(4,8)+' '+n.slice(8)}});
+      ok({convenio:{nome:CONVENIOS_DEMO[h%CONVENIOS_DEMO.length],plano:['Titular','Dependente'][h%2],desconto:30,carteirinha:n.slice(0,4)+' '+n.slice(4,8)+' '+n.slice(8)}});
     },1300)});
   }
   function showConv(){
@@ -1358,6 +1506,8 @@ svg.av{stroke:none!important}
     $('ovCard').classList.toggle('hasconv',!!S.conv);
     if(S.conv){$('cvNome').textContent=S.conv.nome+(S.conv.plano?' · '+S.conv.plano:'');$('cvDet').textContent='Carteirinha '+S.conv.carteirinha}
     [].forEach.call($('cvSeg').children,function(b){b.setAttribute('aria-pressed',String((b.dataset.u==='1')===S.usarConv))});
+    $('cvTag').hidden=!S.conv;$('cvTag').classList.toggle('off',!S.usarConv);
+    var dp=S.conv&&+S.conv.desconto;$('cvTagT').textContent=S.usarConv?(dp?'Você paga com '+dp+'% de desconto':'Você paga com desconto no Cartão Consulta'):(dp?'Use o Cartão Consulta e ganhe '+dp+'% de desconto':'Use o Cartão Consulta e pague com desconto');
     paintCards(allOk());
   }
   $('cvSeg').addEventListener('click',function(e){var b=e.target.closest('[data-u]');if(!b)return;S.usarConv=b.dataset.u==='1';showConv()});
@@ -1403,12 +1553,12 @@ svg.av{stroke:none!important}
   (function(){var g=$('gEsp');g.innerHTML='';esp.forEach(function(it){
     var b=document.createElement('button');b.type='button';b.className='opt';b.dataset.esp=it[0];b.setAttribute('aria-pressed','false');
     b.innerHTML=ic(it[1])+'<span>'+(it[2]||it[0])+'</span><span class="sel"></span>';
-    b.addEventListener('click',function(){if(!(EXAMES[it[0]]||[]).length)pickTipo(it[0],'Consulta');else abrirTipo(it[0])});
+    b.addEventListener('click',function(){if(!(EXAMES[it[0]]||[]).length)toggleItem(it[0],'Consulta');else abrirTipo(it[0])});
     g.appendChild(b);
   })})();
   tiles('gPri',pri,'pri','pri',function(i){return ic(i[1])+'<span>'+i[0]+'</span><small>'+i[2]+'</small>'});
   tiles('gPer',per,'per','per',function(i){return ic(i[1])+i[0]});
-  function checkPref(){$('goPref').disabled=!(S.esp&&S.tipo&&S.pri&&S.per)}
+  function checkPref(){$('goPref').disabled=!(S.itens.length&&S.pri&&S.per)}
   /* ---------- Especialidade: consulta ou exame ----------
      TROCAR AQUI pela lista de exames de cada especialidade vinda do sistema da clínica.
      Especialidade sem exames vai direto para consulta. */
@@ -1432,18 +1582,68 @@ svg.av{stroke:none!important}
   };
   /* Caixas que só têm exames (não abrem a escolha consulta/exame) */
   var SO_EXAME={'Exames de Imagem':1,'Exames de Laboratório':1};
-  function espTxt(){if(SO_EXAME[S.esp])return 'Exame: '+S.exame+' · '+S.esp;return S.esp+(S.tipo==='Exame'?' · Exame: '+S.exame:' · Consulta')}
+  function espTxt(){return itemPre()+espTxt1()}
+  function espTxt1(){if(SO_EXAME[S.esp])return 'Exame: '+S.exame+' · '+S.esp;return S.esp+(S.tipo==='Exame'?' · Exame: '+S.exame:' · Consulta')}
   var tpEsp='',tpQ='';
   function semAc(t){return t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
   function espIcon(n){for(var i=0;i<esp.length;i++)if(esp[i][0]===n)return esp[i][1];return 'steth'}
   function pickTipo(e,tipo,exame){
-    S.esp=e;S.tipo=tipo;S.exame=exame||'';
-    [].forEach.call($('gEsp').children,function(b){
-      var on=b.dataset.esp===e;b.setAttribute('aria-pressed',String(on));
-      b.querySelector('.sel').textContent=on?(tipo==='Exame'?exame:'Consulta'):'';
-    });
-    closeOv('ovTipo');checkPref();
+    if(achaItem(e,tipo,exame)<0)toggleItem(e,tipo,exame);
+    closeOv('ovTipo');
   }
+  /* ---------- Várias escolhas (consultas e exames) ---------- */
+  function lista(){return S.itens.length?S.itens:(S.esp?[{esp:S.esp,tipo:S.tipo||'Consulta',exame:S.exame}]:[])}
+  function itKey(e,t,x){return e+'|'+t+'|'+(x||'')}
+  function itNome(it){return it.tipo==='Exame'?it.exame:it.esp}
+  function itSub(it){return it.tipo==='Exame'?(SO_EXAME[it.esp]?it.esp:'Exame · '+it.esp):'Consulta'}
+  function temExame(){return S.itens.some(function(it){return it.tipo==='Exame'})}
+  function achaItem(e,t,x){var k=itKey(e,t,x);for(var i=0;i<S.itens.length;i++)if(itKey(S.itens[i].esp,S.itens[i].tipo,S.itens[i].exame)===k)return i;return -1}
+  function paintItens(){
+    [].forEach.call($('gEsp').children,function(b){
+      var l=S.itens.filter(function(it){return it.esp===b.dataset.esp});
+      b.setAttribute('aria-pressed',String(!!l.length));
+      b.querySelector('.sel').textContent=l.length>1?l.length+' itens':l.length?(l[0].tipo==='Exame'?l[0].exame:'Consulta'):'';
+    });
+    var n=S.itens.length,txt=n+(n>1?' procedimentos selecionados':' procedimento selecionado');
+    $('cart').classList.toggle('has',!!n);
+    $('cartHint').textContent=n?txt:'Você pode escolher mais de uma especialidade ou exame.';
+    $('cartGo').disabled=!n;
+    $('goPref').textContent=n?'Continuar ('+n+') →':'Continuar →';
+    $('itN').textContent=n||'';
+    $('itSub').textContent=n?txt:'Nenhum procedimento selecionado';
+    $('itClr').hidden=!n;
+    $('itList').innerHTML=n?S.itens.map(function(it,i){
+      return '<div class="itrow"><span class="iti">'+ic(espIcon(it.esp))+'</span><span class="itx"><b>'+esc(itNome(it))+'</b><small>'+esc(itSub(it))+'</small></span><button type="button" class="itrm" data-i="'+i+'"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>Remover</button></div>';
+    }).join(''):'<div class="itempty">Nenhum atendimento selecionado.<br>Toque em uma especialidade para escolher.</div>';
+    var d=$('tpDone');if(d)d.textContent=n?'Concluir · '+n+(n>1?' selecionados':' selecionado'):'Concluir';
+    checkPref();
+  }
+  function toggleItem(e,tipo,exame){
+    var i=achaItem(e,tipo,exame);
+    if(i>=0)S.itens.splice(i,1);else S.itens.push({esp:e,tipo:tipo,exame:exame||''});
+    paintItens();
+  }
+  $('cartGo').addEventListener('click',function(){if(S.itens.length)openOv('ovItens')});
+  $('itList').addEventListener('click',function(e){var b=e.target.closest('[data-i]');if(!b)return;S.itens.splice(+b.dataset.i,1);paintItens()});
+  $('itClr').addEventListener('click',function(){S.itens=[];paintItens()});
+  $('itAdd').addEventListener('click',function(){closeOv('ovItens')});
+  $('itOk').addEventListener('click',function(){closeOv('ovItens')});
+  $('ovItens').addEventListener('click',function(e){if(e.target===this)closeOv('ovItens')});
+  function loadItem(i){var it=S.itens[i];S.cur=i;S.esp=it.esp;S.tipo=it.tipo;S.exame=it.exame;S.day=0;S.doc='';S.cid='';S.hora='';S.fsel=null}
+  function saveItem(){var it=S.itens[S.cur];it.doc=S.doc;it.hora=S.hora;it.date=S.date;it.cid=S.cid;it.clin=S.clin}
+  function itemPre(){return S.itens.length>1?'Item '+(S.cur+1)+' de '+S.itens.length+' · ':''}
+  function ocupado(d,hh){for(var j=0;j<S.cur;j++){var it=S.itens[j];if(it.date&&it.hora===hh&&it.date.toDateString()===d.toDateString())return true}return false}
+  function proxItem(scr){
+    saveItem();
+    if(S.cur<S.itens.length-1){
+      loadItem(S.cur+1);
+      if(scr==='sFast'){fastOpen={};buildFast();$('fList').scrollTop=0}else buildHor();
+      return;
+    }
+    buildConf();show('sConf');
+  }
+  function goLbl(){return S.cur<S.itens.length-1?'Próximo: '+itNome(S.itens[S.cur+1])+' →':'Continuar →'}
+
   function abrirTipo(e){
     tpEsp=e;tpQ='';
     $('tpT').textContent=e;$('tpIco').innerHTML=ic(espIcon(e));
@@ -1451,7 +1651,7 @@ svg.av{stroke:none!important}
     $('tpExN').textContent=n?n+(n>1?' exames disponíveis':' exame disponível'):'Pesquise entre todos os exames';
     var so=!!SO_EXAME[e];
     $('ovTipo').querySelector('.thead small').textContent=so?'Agendar exame':'Especialidade';
-    $('tpBack').textContent=so?'Cancelar':'← Voltar';
+    $('tpBack').hidden=so;$('tpBack').textContent='← Voltar';paintItens();
     $('tpS1').hidden=so;$('tpS2').hidden=!so;if(so)tpList();
     openOv('ovTipo');
   }
@@ -1467,7 +1667,7 @@ svg.av{stroke:none!important}
     h=lst.map(function(x){
       var nm=esc(x[0]);
       if(q&&x[2]==='Exame'){var i=semAc(x[0]).indexOf(q);if(i>=0)nm=esc(x[0].slice(0,i))+'<mark>'+esc(x[0].slice(i,i+q.length))+'</mark>'+esc(x[0].slice(i+q.length))}
-      return '<button type="button" class="tex'+(x[2]==='Consulta'?' cons':'')+'" data-ex="'+esc(x[0])+'" data-esp="'+esc(x[1])+'" data-tp="'+x[2]+'"><span>'+nm+'</span><small>'+esc(x[1])+'</small></button>';
+      return '<button type="button" class="tex'+(x[2]==='Consulta'?' cons':'')+'" aria-pressed="'+(achaItem(x[1],x[2],x[2]==='Exame'?x[0]:'')>=0)+'" data-ex="'+esc(x[0])+'" data-esp="'+esc(x[1])+'" data-tp="'+x[2]+'"><span>'+nm+'</span><small>'+esc(x[1])+'</small></button>';
     }).join('');
     if(!lst.length)h='<div class="tnone">'+(q?'Não encontramos esse exame. Tente outra palavra ou procure a recepção.':'Use o teclado para pesquisar. Ex.: hemograma, raio-x, cardiologia.')+'</div>';
     $('tpList').innerHTML=h;$('tpList').scrollTop=0;
@@ -1477,7 +1677,7 @@ svg.av{stroke:none!important}
     tpEsp='';tpQ='';
     $('tpT').textContent='Pesquisar';$('tpIco').innerHTML='<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>';
     $('ovTipo').querySelector('.thead small').textContent='Exame ou consulta';
-    $('tpBack').textContent='Cancelar';
+    $('tpBack').hidden=true;paintItens();
     $('tpS1').hidden=true;$('tpS2').hidden=false;tpList();
     openOv('ovTipo');
   }
@@ -1499,8 +1699,10 @@ svg.av{stroke:none!important}
     if(b.dataset.t==='Consulta')return pickTipo(tpEsp,'Consulta');
     tpQ='';$('tpS1').hidden=true;$('tpS2').hidden=false;tpList();
   })});
-  $('tpList').addEventListener('click',function(e){var b=e.target.closest('[data-ex]');if(b)pickTipo(b.dataset.esp,b.dataset.tp,b.dataset.tp==='Exame'?b.dataset.ex:'')});
+  $('tpList').addEventListener('click',function(e){var b=e.target.closest('[data-ex]');if(!b)return;toggleItem(b.dataset.esp,b.dataset.tp,b.dataset.tp==='Exame'?b.dataset.ex:'');b.setAttribute('aria-pressed',String(b.getAttribute('aria-pressed')!=='true'))});
+  $('tpDone').addEventListener('click',function(){closeOv('ovTipo')});
   $('tpBack').addEventListener('click',function(){if(!tpEsp||SO_EXAME[tpEsp])return closeOv('ovTipo');$('tpS1').hidden=false;$('tpS2').hidden=true});
+  $('tpBack').hidden=false;
   $('tpCancel').addEventListener('click',function(){closeOv('ovTipo')});
   $('ovTipo').addEventListener('click',function(e){if(e.target===this)closeOv('ovTipo')});
   document.addEventListener('keydown',function(e){
@@ -1513,7 +1715,7 @@ svg.av{stroke:none!important}
 
   $('goPref').addEventListener('click',function(){
     if(this.disabled)return;
-    S.day=0;S.doc='';S.cid='';S.hora='';S.fsel=null;
+    loadItem(0);
     if(S.pri==='Atendimento mais rápido'){
       fastPer=S.per==='Qualquer horário'?'Todos':S.per;fastOpen={};
       buildFast();show('sFast');$('fList').scrollTop=0;
@@ -1597,7 +1799,7 @@ svg.av{stroke:none!important}
   function dmy(d){return p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()}
   function slotBtn(ci,day,t){
     var ts=day.getTime(),on=S.fsel&&S.fsel.ci===ci&&S.fsel.ts===ts&&S.fsel.t===t;
-    return '<button type="button" class="slot" data-ci="'+ci+'" data-ts="'+ts+'" data-t="'+t+'" aria-pressed="'+!!on+'">'+hm(t,'h')+'</button>';
+    return '<button type="button" class="slot" data-ci="'+ci+'" data-ts="'+ts+'" data-t="'+t+'" aria-pressed="'+!!on+'"'+(ocupado(day,hm(t,':'))?' disabled':'')+'>'+hm(t,'h')+'</button>';
   }
   function buildFast(){
     $('fEsp').textContent=espTxt();
@@ -1632,7 +1834,7 @@ svg.av{stroke:none!important}
         (best?'<div class="tag"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>HORÁRIO MAIS PRÓXIMO</div>':'')+
         '<div class="ch"><span class="bi">'+BLD+'</span><span><b>'+x.c.nome+'</b><small>'+x.c.endereco+'</small></span></div>'+body+'</div>';
     }).join('');
-    $('goFast').disabled=!S.fsel;
+    $('goFast').disabled=!S.fsel;$('goFast').textContent=goLbl();
   }
   $('fSeg').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b)return;fastPer=b.dataset.p;S.fsel=null;fastOpen={};buildFast();$('fList').scrollTop=0});
   $('fList').addEventListener('click',function(e){
@@ -1645,7 +1847,7 @@ svg.av{stroke:none!important}
     S.per=t<12*60?'Manhã':(t<18*60?'Tarde':'Noite');
     buildFast();$('fList').scrollTop=y2;
   });
-  $('goFast').addEventListener('click',function(){if(this.disabled)return;buildConf();show('sConf')});
+  $('goFast').addEventListener('click',function(){if(this.disabled)return;proxItem('sFast')});
 
   /* Médico específico: dia, profissional, local e horário */
   var PER={'Manhã':[7,12],'Tarde':[13,18],'Noite':[18,21],'Qualquer horário':[7,21]};
@@ -1697,7 +1899,7 @@ svg.av{stroke:none!important}
     else{
       var livres=horariosLivres(m,S.cid,day,r[0]*60,r[1]*60,30);
       for(var t=r[0]*60;t<r[1]*60;t+=30){
-        var hh=hm(t,':'),busy=livres.indexOf(t)<0;
+        var hh=hm(t,':'),busy=livres.indexOf(t)<0||ocupado(day,hh);
         if(!busy)any=true;
         h+='<button type="button" class="slot" data-h="'+hh+'"'+(busy?' disabled':'')+' aria-pressed="'+(S.hora===hh)+'">'+hh+'</button>';
       }
@@ -1705,7 +1907,7 @@ svg.av{stroke:none!important}
     }
     $('gSlots').innerHTML=h;
     $('slotTitle').textContent='Horários disponíveis · '+S.per;
-    $('goHor').disabled=!(S.hora&&m&&S.cid);
+    $('goHor').disabled=!(S.hora&&m&&S.cid);$('goHor').textContent=goLbl();
   }
   $('gDays').addEventListener('click',function(e){var b=e.target.closest('[data-d]');if(!b)return;S.day=+b.dataset.d;S.hora='';buildHor()});
   $('gDocs').addEventListener('click',function(e){var b=e.target.closest('[data-doc]');if(!b)return;S.doc=b.dataset.doc;S.hora='';buildHor()});
@@ -1714,7 +1916,7 @@ svg.av{stroke:none!important}
   $('goHor').addEventListener('click',function(){
     if(this.disabled)return;
     S.date=days()[S.day];S.clin=clinica(S.cid).nome;
-    buildConf();show('sConf');
+    proxItem('sHor');
   });
 
   /* ===== Tela de acesso: carrossel com a história da clínica ===== */
@@ -1812,7 +2014,9 @@ svg.av{stroke:none!important}
   function buildConf(){
     $('goConfTxt').textContent=confTxt();
     var hs=horScr();
-    var rows=[['user','Paciente · '+fmtTel(S.tel),esc(S.nome.trim()),'sId'],['shield','Atendimento',S.conv&&S.usarConv?'Convênio '+esc(S.conv.nome)+(S.conv.plano?' · '+esc(S.conv.plano):''):'Particular',S.conv?'conv':''],[S.tipo==='Exame'?'flask':'steth',S.tipo==='Exame'?'Exame':'Especialidade',S.tipo==='Exame'?esc(S.exame)+' · '+esc(S.esp):esc(S.esp)+' · Consulta','sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
+    var rows=[['user','Paciente · '+fmtTel(S.tel),esc(S.nome.trim()),'sId'],['shield','Atendimento',S.conv&&S.usarConv?esc(S.conv.nome)+(S.conv.plano?' · '+esc(S.conv.plano):''):'Particular',S.conv?'conv':''],[S.tipo==='Exame'?'flask':'steth',S.tipo==='Exame'?'Exame':'Especialidade',S.tipo==='Exame'?esc(S.exame)+' · '+esc(S.esp):esc(S.esp)+' · Consulta','sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
+    var multi=S.itens.length>1;$('review').classList.toggle('multi',multi);
+    if(multi)rows=rows.slice(0,2).concat(S.itens.map(function(it){var d=it.date;return [it.tipo==='Exame'?'flask':'steth',itSub(it),esc(itNome(it))+'<em>'+esc(it.doc)+' · '+esc((clinica(it.cid)||{}).curto||it.clin)+' · '+p2(d.getDate())+'/'+p2(d.getMonth()+1)+' às '+it.hora+'</em>','sPref']}));
     $('review').innerHTML=rows.map(function(r){return '<div class="rrow"><span class="ri'+(r[0]==='doc'?' rph':'')+'">'+(r[0]==='doc'?foto(S.doc):ic(r[0]))+'</span><span><small>'+r[1]+'</small><b>'+r[2]+'</b></span>'+(r[3]?'<button type="button" class="edit" data-go="'+r[3]+'">'+(r[3]==='conv'?'Trocar':'Alterar')+'</button>':'')+'</div>'}).join('');
   }
   $('review').addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(!b)return;if(b.dataset.go==='conv'){S.usarConv=!S.usarConv;buildConf();paintCards(true);return}show(b.dataset.go)});
@@ -1822,10 +2026,10 @@ svg.av{stroke:none!important}
   var PRECO_CONSULTA={'Clínico Geral':150,'Pediatria':180,'Nutrição':160,'Psiquiatria':280,'Odontologia':140};
   var PRECO_EXAME={'Hemograma completo':25,'Glicemia em jejum':15,'Hemoglobina glicada':35,'Colesterol total e frações':40,'Triglicerídeos':20,'TSH e T4 livre':55,'Creatinina e ureia':30,'Vitamina D':80,'Vitamina B12':60,'PSA':50,'Beta HCG':45,'Exame de urina (EAS)':20,'Urocultura':35,'Exame de fezes (EPF)':20,
     'Raio-X':90,'Ultrassonografia':180,'Tomografia computadorizada':450,'Ressonância magnética':850,'Mamografia':160,'Densitometria óssea':150,'Ecocardiograma':280,'Doppler vascular':300,'Eletrocardiograma':80,'Teste ergométrico':250,'Holter 24 horas':280,'MAPA 24 horas':250};
-  function valorAtendimento(){
-    if(S.tipo==='Exame')return PRECO_EXAME[S.exame]||150;
-    return PRECO_CONSULTA[S.esp]||220;
-  }
+  function precoItem(it){return it.tipo==='Exame'?(PRECO_EXAME[it.exame]||150):(PRECO_CONSULTA[it.esp]||220)}
+  function valorCheio(){return lista().reduce(function(a,it){return a+precoItem(it)},0)}
+  function descontoPct(){return S.conv&&S.usarConv?Math.max(0,Math.min(100,+S.conv.desconto||0)):0}
+  function valorAtendimento(){return Math.round(valorCheio()*(100-descontoPct()))/100}
   function brl(v){return 'R$ '+v.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
   /* TROCAR AQUI pela integração real:
      - Pix: gerar a cobrança no banco/PSP e consultar se foi paga;
@@ -1870,7 +2074,11 @@ svg.av{stroke:none!important}
     S.pag=null;pagBusy=false;clearInterval(pagT);
     var v=valorAtendimento(),d=S.date;
     $('pgVal').textContent=brl(v);
-    $('pgDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>'+(S.tipo==='Exame'?'Exame':'Consulta')+'</dt><dd>'+esc(S.tipo==='Exame'?S.exame:S.esp)+'</dd><dt>Profissional</dt><dd>'+esc(S.doc)+'</dd><dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+' · '+S.hora+'</dd>';
+    var pc=descontoPct();
+    $('pgDe').hidden=!pc;$('pgDe').innerHTML=pc?'<s>De '+brl(valorCheio())+'</s><em>'+pc+'% off · Cartão Consulta</em>':'';
+    $('pgSub').textContent=S.conv&&S.usarConv?(pc?'Cartão Consulta · desconto já aplicado. Escolha como deseja pagar.':'Cartão Consulta · escolha como deseja pagar.'):'Atendimento particular · escolha como deseja pagar.';
+    if(S.itens.length>1)$('pgDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd>'+S.itens.map(function(it){return '<dt>'+esc(itNome(it))+'</dt><dd>'+brl(precoItem(it))+'</dd>'}).join('');
+    else $('pgDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>'+(S.tipo==='Exame'?'Exame':'Consulta')+'</dt><dd>'+esc(S.tipo==='Exame'?S.exame:S.esp)+'</dd><dt>Profissional</dt><dd>'+esc(S.doc)+'</dd><dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+' · '+S.hora+'</dd>';
     [].forEach.call($('pgOpts').children,function(x){x.setAttribute('aria-pressed','false')});
     $('pgPanel').innerHTML='';pagBtn();
   }
@@ -1891,14 +2099,14 @@ svg.av{stroke:none!important}
   });
   $('pagBack').addEventListener('click',function(){if(pagBusy)return;clearInterval(pagT);show('sConf')});
   function particular(){return !(S.conv&&S.usarConv)}
-  function confTxt(){return particular()?'Continuar para pagamento →':'Confirmar atendimento'}
+  function confTxt(){return 'Continuar para pagamento →'}
   $('confBack').addEventListener('click',function(){show(horScr())});
   $('goConf').addEventListener('click',function(){
     var go=this;if(go.classList.contains('load'))return;
-    go.classList.add('load');$('goConfTxt').textContent=particular()?'Preparando pagamento…':'Confirmando…';
+    go.classList.add('load');$('goConfTxt').textContent='Preparando pagamento…';
     setTimeout(function(){
       go.classList.remove('load');$('goConfTxt').textContent=confTxt();
-      if(particular()){buildPag();show('sPag')}else finishFlow();
+      buildPag();show('sPag');
     },1300);
   });
 
@@ -1939,7 +2147,17 @@ svg.av{stroke:none!important}
     'Bioimpedância':{curto:'Jejum de 4 horas',itens:['Jejum de 4 horas.','Não faça exercícios nas 12 horas antes.','Evite café e álcool nas 24 horas antes.','Urine 30 minutos antes do exame.']}
   };
   function showPrep(){
-    var ex=S.tipo==='Exame',p=ex?PREPARO[S.exame]:null;
+    $('prep').classList.remove('multi');
+    var exs=lista().filter(function(it){return it.tipo==='Exame'});
+    if(exs.length>1){
+      var algum=exs.some(function(it){return PREPARO[it.exame]});
+      $('prep').hidden=false;$('prep').classList.toggle('none',!algum);$('prep').classList.add('multi');$('sDone').classList.add('hasprep');
+      $('prepT').textContent=exs.length+' exames';
+      $('prepL').innerHTML=exs.map(function(it){var p=PREPARO[it.exame];return '<li class="hd">'+esc(it.exame)+'</li>'+(p?p.itens:['Não precisa de preparo.']).map(function(t){return '<li>'+esc(t)+'</li>'}).join('')}).join('');
+      return algum?1:0;
+    }
+    if(exs.length===1){S.esp=exs[0].esp;S.tipo='Exame';S.exame=exs[0].exame}
+    var ex=exs.length===1,p=ex?PREPARO[S.exame]:null;
     $('prep').hidden=!ex;$('prep').classList.toggle('none',ex&&!p);
     $('sDone').classList.toggle('hasprep',ex);
     if(!ex)return 0;
@@ -1955,19 +2173,23 @@ svg.av{stroke:none!important}
   function enviarWhatsApp(telefone,mensagem){return new Promise(function(ok){setTimeout(function(){ok({ok:true})},1500)})}
   function enviarEmail(email,assunto,mensagem){return new Promise(function(ok){setTimeout(function(){ok({ok:true})},1500)})}
   function msgConfirmacao(){
-    var d=S.date,ex=S.tipo==='Exame',p=ex?PREPARO[S.exame]:null,L=[];
+    var d=S.date,ex=S.tipo==='Exame',p=ex?PREPARO[S.exame]:null,L=[],mult=S.itens.length>1;
     L.push('Policlínica São Francisco de Paula');
-    L.push(ex?'Exame confirmado ✅':'Consulta confirmada ✅');
+    L.push(mult?S.itens.length+' atendimentos confirmados ✅':ex?'Exame confirmado ✅':'Consulta confirmada ✅');
     L.push('');
     L.push('Senha: '+$('tSenha').textContent);
     L.push('Paciente: '+S.nome.trim());
+    if(S.itens.length>1){S.itens.forEach(function(it,i){var dd=it.date;L.push('');L.push((i+1)+'. '+(it.tipo==='Exame'?'Exame: '+it.exame:'Consulta: '+it.esp));L.push('   '+it.doc+' · '+it.clin);L.push('   '+p2(dd.getDate())+'/'+p2(dd.getMonth()+1)+'/'+dd.getFullYear()+' às '+it.hora)});L.push('')}
+    else{
     if(ex){L.push('Exame: '+S.exame);if(!SO_EXAME[S.esp])L.push('Especialidade: '+S.esp)}else L.push('Especialidade: '+S.esp);
     L.push('Profissional: '+S.doc);
     L.push('Local: '+S.clin);
     L.push('Data: '+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+' às '+S.hora);
-    L.push('Atendimento: '+(S.conv&&S.usarConv?'Convênio '+S.conv.nome:'Particular'));
-    if(S.pag&&S.pag.aut)L.push('Pagamento: '+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val));
-    if(ex){
+    }
+    L.push('Atendimento: '+(S.conv&&S.usarConv?S.conv.nome+(S.conv.plano?' · '+S.conv.plano:''):'Particular'));
+    if(S.pag&&S.pag.aut)L.push('Pagamento: '+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+(descontoPct()?' (com '+descontoPct()+'% de desconto do Cartão Consulta)':''));
+    if(mult){S.itens.filter(function(it){return it.tipo==='Exame'}).forEach(function(it){var pp=PREPARO[it.exame];L.push('');L.push('Preparo · '+it.exame+':');(pp?pp.itens:['Não precisa de preparo.']).forEach(function(t){L.push('• '+t)})})}
+    else if(ex){
       L.push('');L.push('Preparo para o exame:');
       (p?p.itens:['Este exame não precisa de preparo.']).forEach(function(t){L.push('• '+t)});
     }
@@ -1975,17 +2197,18 @@ svg.av{stroke:none!important}
     return L.join('\n');
   }
   var enModo='',enMail='',enBusy=false,enIcons={wa:"<svg viewBox=\"0 0 24 24\"><path d=\"M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.2A8.5 8.5 0 1 1 20.5 11.6z\"/><path d=\"M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8c-1-.4-2.3-1.7-2.7-2.7l.8-1-1-2z\"/></svg>",mail:"<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2.5\"/><path d=\"M3.5 6.5l8.5 6.5 8.5-6.5\"/></svg>"};
+  var POMBO='<svg viewBox="0 0 220 150" aria-hidden="true"><g class="pwb"><path d="M92 74 Q70 18 124 6 Q118 44 108 76 Z" fill="#7f8fa3"/></g><path d="M44 80 L8 66 L14 86 L6 102 L48 92 Z" fill="#7f8fa3"/><path d="M14 86 L44 84" stroke="#66778c" stroke-width="2"/><ellipse cx="90" cy="84" rx="54" ry="30" fill="#b9c5d3"/><ellipse cx="100" cy="95" rx="40" ry="17" fill="#e3e9f0"/><path d="M118 112 l-4 12 M124 112 l2 12" stroke="#e98b3a" stroke-width="4" stroke-linecap="round"/><ellipse cx="130" cy="74" rx="18" ry="15" fill="#5aa889"/><ellipse cx="134" cy="76" rx="12" ry="10" fill="#8a6fb0" opacity=".55"/><circle cx="146" cy="56" r="22" fill="#9eadbf"/><circle cx="153" cy="51" r="5" fill="#fff"/><circle cx="154" cy="51" r="2.6" fill="#1f2a37"/><path d="M164 56 L182 61 L164 66 Z" fill="#f2a23c"/><path d="M163 55 q4-3 8 0" stroke="#fff" stroke-width="2" fill="none"/><g class="pcarta"><rect x="172" y="52" width="40" height="27" rx="4" fill="#fff" stroke="#16a34a" stroke-width="3"/><path d="M173 54 L192 68 L211 54" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"/><circle cx="192" cy="72" r="4.5" fill="#16a34a"/></g><g class="pwf"><path d="M86 80 Q52 30 100 0 Q122 38 116 82 Z" fill="#a6b4c5"/><path d="M96 74 Q82 46 100 16 M106 78 Q100 50 108 26" stroke="#8394a8" stroke-width="2.5" fill="none" stroke-linecap="round"/></g></svg>';
   function emValido(e){return /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(e)}
   function enPaint(){
     var q=$('emQ');if(!q)return;q.textContent=enMail;$('emPh').hidden=!!enMail;
     $('emInp').classList.remove('bad');$('emHint').classList.remove('bad');
-    $('emHint').textContent='Você receberá a confirmação'+(S.tipo==='Exame'?' e o preparo do exame':'')+' neste e-mail.';
+    $('emHint').textContent='Você receberá a confirmação'+(temExame()?' e o preparo do exame':'')+' neste e-mail.';
   }
   function abrirEnvio(modo){
     enModo=modo;enBusy=false;
     $('enIco').innerHTML=enIcons[modo];
     $('enT').textContent=modo==='wa'?'Enviar por WhatsApp':'Enviar por e-mail';
-    $('enSm').textContent=S.tipo==='Exame'?'Confirmação e preparo do exame':'Confirmação do atendimento';
+    $('enSm').textContent=temExame()?'Confirmação e preparo do exame':'Confirmação do atendimento';
     $('enBtns').hidden=false;$('enGo').disabled=false;$('enGoTxt').textContent='Enviar';$('enCancel').textContent='Cancelar';
     if(modo==='wa'){
       $('enBody').innerHTML='<div class="ento"><small>Enviaremos para o número</small><b>'+esc(fmtTel(S.tel))+'</b></div><div class="enprev">'+esc(msgConfirmacao())+'</div>';
@@ -2004,23 +2227,46 @@ svg.av{stroke:none!important}
     enPaint();
   }
   $('enBody').addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b&&!enBusy)emKey(b.dataset.k)});
-  $('sendWa').addEventListener('click',function(){abrirEnvio('wa')});
-  $('sendMail').addEventListener('click',function(){abrirEnvio('mail')});
+  /* Pombo-correio: voa até o botão, pega a mensagem e leva embora */
+  var vooId=0;
+  function voarPombo(btn,envio,okTxt){
+    if(btn.classList.contains('sent')||btn.classList.contains('busy'))return;
+    var id=++vooId,sp=btn.querySelector('span');
+    btn.classList.add('busy');sp.textContent='Chamando o pombo…';
+    var kr=K.getBoundingClientRect(),s=kr.width/K.offsetWidth||1,br=btn.getBoundingClientRect();
+    var bx=(br.left+br.width/2-kr.left)/s,by=(br.top+br.height/2-kr.top)/s,W=K.offsetWidth;
+    var hx=bx-115,hy=(br.top-kr.top)/s-120;
+    var p=document.createElement('div');p.className='pvoo';p.innerHTML='<div class="pombo">'+POMBO+'</div>';K.appendChild(p);
+    var a1=p.animate([{transform:'translate(-280px,'+(hy-460)+'px) scale(.55)'},{transform:'translate('+(hx-70)+'px,'+(hy-70)+'px) scale(.95)',offset:.75},{transform:'translate('+hx+'px,'+hy+'px) scale(1)'}],{duration:1100,easing:'ease-out',fill:'forwards'});
+    var t0=Date.now(),res=null;
+    envio().then(function(r){res=r||{ok:false}},function(){res={ok:false}});
+    a1.onfinish=function(){
+      if(id!==vooId)return;
+      var c=document.createElement('span');c.className='cartinha';c.innerHTML='<svg viewBox="0 0 40 27"><rect x="1.5" y="1.5" width="37" height="24" rx="4" fill="#fff" stroke="#16a34a" stroke-width="3"/><path d="M2 3l18 13L38 3" fill="none" stroke="#16a34a" stroke-width="3"/></svg>';K.appendChild(c);
+      c.animate([{transform:'translate('+(bx-20)+'px,'+(by-14)+'px) scale(.4)',opacity:0},{transform:'translate('+(bx-20)+'px,'+(by-60)+'px) scale(1.1)',opacity:1,offset:.45},{transform:'translate('+(hx+172)+'px,'+(hy+52)+'px) scale(1)',opacity:1}],{duration:420,easing:'ease-out',fill:'forwards'}).onfinish=function(){c.remove();if(id!==vooId)return;p.classList.add('pega')};
+      btn.classList.add('pegou');sp.textContent='Pombo pegou a mensagem!';
+      var iv=setInterval(function(){
+        if(id!==vooId){clearInterval(iv);return}
+        if(!res||Date.now()-t0<2000)return;clearInterval(iv);
+        if(!res.ok)p.classList.remove('pega');
+        [-1,0,1].forEach(function(i){var f=document.createElement('span');f.className='pena2';f.style.left=(bx-8+i*22)+'px';f.style.top=(by-40)+'px';f.style.setProperty('--x',i*70+'px');f.style.setProperty('--r',(i*90+40)+'deg');K.appendChild(f);setTimeout(function(){f.remove()},1700)});
+        p.classList.add('rapido');
+        var a2=p.animate([{transform:'translate('+hx+'px,'+hy+'px)'},{transform:'translate('+(hx-30)+'px,'+(hy+22)+'px) rotate(8deg)',offset:.15},{transform:'translate('+(W+120)+'px,'+(hy-900)+'px) rotate(-22deg) scale(.5)'}],{duration:1400,easing:'cubic-bezier(.55,0,.75,.6)',fill:'forwards'});
+        a2.onfinish=function(){p.remove()};
+        btn.classList.remove('busy','pegou');
+        if(res.ok){btn.classList.add('sent');sp.textContent=okTxt}else sp.textContent='Não enviou · tocar de novo';
+      },60);
+    };
+  }
+  $('sendWa').addEventListener('click',function(){voarPombo(this,function(){return enviarWhatsApp(S.tel,msgConfirmacao())},'Enviado no WhatsApp')});
+  $('sendMail').addEventListener('click',function(){if(this.classList.contains('sent')||this.classList.contains('busy'))return;abrirEnvio('mail')});
   $('enCancel').addEventListener('click',function(){if(!enBusy)closeOv('ovEnvio')});
   $('enGo').addEventListener('click',function(){
     if(enBusy)return;
-    if($('enGoTxt').textContent==='Concluir')return closeOv('ovEnvio');
     if(enModo==='mail'&&!emValido(enMail)){$('emInp').classList.add('bad');$('emHint').classList.add('bad');$('emHint').textContent='Confira o e-mail digitado. Exemplo: nome@gmail.com';return}
-    var g=this;enBusy=true;g.classList.add('load');$('enGoTxt').textContent='Enviando…';
-    var msg=msgConfirmacao(),pr=enModo==='wa'?enviarWhatsApp(S.tel,msg):enviarEmail(enMail,'Confirmação do seu atendimento · Policlínica São Francisco de Paula',msg);
-    pr.then(function(r){
-      g.classList.remove('load');enBusy=false;
-      if(!r.ok){$('enGoTxt').textContent='Tentar novamente';return}
-      var dest=enModo==='wa'?fmtTel(S.tel):enMail;
-      $('enBody').innerHTML='<div class="endone"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>Enviado!</b><p>'+(S.tipo==='Exame'?'A confirmação e o preparo do exame foram enviados':'A confirmação foi enviada')+' para<br><strong>'+esc(dest)+'</strong></p></div>';
-      $('enGoTxt').textContent='Concluir';$('enCancel').textContent='Fechar';
-      var sb=$(enModo==='wa'?'sendWa':'sendMail');sb.classList.add('sent');sb.querySelector('span').textContent=enModo==='wa'?'Enviado no WhatsApp':'Enviado por e-mail';
-    });
+    closeOv('ovEnvio');
+    var msg=msgConfirmacao(),mail=enMail;
+    setTimeout(function(){voarPombo($('sendMail'),function(){return enviarEmail(mail,'Confirmação do seu atendimento · Policlínica São Francisco de Paula',msg)},'Enviado por e-mail')},250);
   });
   document.addEventListener('keydown',function(e){
     if(!$('ovEnvio').classList.contains('on')||e.ctrlKey||e.metaKey||e.altKey)return;
@@ -2031,14 +2277,18 @@ svg.av{stroke:none!important}
     else if(e.key.length===1&&/[a-z0-9@._+-]/i.test(e.key)){e.preventDefault();emKey(e.key)}
   });
   function resetEnvio(){
-    enMail='';
-    [['sendWa','Enviar por WhatsApp'],['sendMail','Enviar por e-mail']].forEach(function(x){var b=$(x[0]);b.classList.remove('sent');b.querySelector('span').textContent=x[1]});
+    enMail='';vooId++;
+    [].forEach.call(K.querySelectorAll('.pvoo,.pena2,.cartinha'),function(e){e.remove()});
+    [['sendWa','Enviar por WhatsApp'],['sendMail','Enviar por e-mail']].forEach(function(x){var b=$(x[0]);b.classList.remove('sent','busy','pegou');b.querySelector('span').textContent=x[1]});
   }
   function finishFlow(){
     var senha=(S.pri==='Atendimento mais rápido'?'R':'M')+p2(Math.floor(Math.random()*90)+10)+Math.floor(Math.random()*10);
     $('tSenha').textContent=senha;
     $('doneH').textContent='Tudo certo, '+firstName()+'!';
     var d=S.date;
+    if(S.itens.length>1){S.date=S.itens[0].date;S.hora=S.itens[0].hora;S.clin=S.itens[0].clin;S.doc=S.itens[0].doc;d=S.date;
+      $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd>'+S.itens.map(function(it){var dd=it.date;return '<dt>'+p2(dd.getDate())+'/'+p2(dd.getMonth()+1)+' '+it.hora+'</dt><dd>'+esc(itNome(it))+'</dd>'}).join('')+(S.pag&&S.pag.aut?'<dt>Pagamento</dt><dd>'+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+'</dd>':'');
+    }else
     $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd><dt>Local</dt><dd>'+esc(S.clin)+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>'+(S.tipo==='Exame'?'Exame':'Tipo')+'</dt><dd>'+(S.tipo==='Exame'?esc(S.exame):'Consulta')+'</dd>'+(S.tipo==='Exame'&&PREPARO[S.exame]?'<dt>Preparo</dt><dd>'+esc(PREPARO[S.exame].curto)+'</dd>':'')+'<dt>Profissional</dt><dd>'+esc(S.doc)+'</dd>'+(S.pag&&S.pag.aut?'<dt>Pagamento</dt><dd>'+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+'</dd>':'')+'<dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
     var t=$('ticket');t.style.animation='none';void t.offsetWidth;t.style.animation='';
     var temPrep=showPrep();resetEnvio();
@@ -2134,9 +2384,9 @@ svg.av{stroke:none!important}
   function resetAll(){
     clearInterval(pagT);pagBusy=false;
     clearInterval(doneT);clearInterval(idleT);idleOpen=false;
-    ['ovCard','ovIdle','ovCancel','ovSlide','ovTipo','ovEnvio'].forEach(closeOv);
+    ['ovCard','ovIdle','ovCancel','ovSlide','ovTipo','ovEnvio','ovItens'].forEach(closeOv);
     [].forEach.call(document.querySelectorAll('#gEsp .sel'),function(x){x.textContent=''});
-    fresh();act=null;$('kb').classList.remove('on');K.classList.remove('kb-open');
+    fresh();paintItens();act=null;$('kb').classList.remove('on');K.classList.remove('kb-open');
     [].forEach.call(document.querySelectorAll('.opt[aria-pressed]'),function(x){x.setAttribute('aria-pressed','false')});
     checkPref();
     ['fNome','fNasc','fCpf','fTel'].forEach(function(id){$(id).classList.remove('ok','bad','act')});
