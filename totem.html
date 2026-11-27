@@ -86,9 +86,9 @@ main{flex:1;position:relative;overflow:hidden;overflow:clip}
 .chip{width:54px;height:40px;border-radius:9px;background:linear-gradient(135deg,#f3d98b,#c9a53f);position:relative}
 .chip::before{content:"";position:absolute;inset:8px 13px;border:2px solid rgba(90,60,0,.35);border-radius:4px}
 .ecg{width:100%;height:42px;display:block}
-.ecg path{fill:none;stroke:#16a34a;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-.ecg .base{stroke-opacity:.3;stroke-width:2}
-.ecg .pulse{stroke-width:2.8;stroke-dasharray:.32 1.6;stroke-dashoffset:.34;animation:ecgRun 2.6s cubic-bezier(.45,.1,.55,.9) infinite}
+.ecg path{fill:none;stroke:#16a34a;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.ecg .base{stroke:#4ade80;stroke-opacity:.75;stroke-width:3}
+.ecg .pulse{stroke:#0f7a45;stroke-width:4.2;filter:drop-shadow(0 0 4px rgba(22,163,74,.55));stroke-dasharray:.32 1.6;stroke-dashoffset:.34;animation:ecgRun 2.6s cubic-bezier(.45,.1,.55,.9) infinite}
 @keyframes ecgRun{from{stroke-dashoffset:.34}to{stroke-dashoffset:-1.02}}
 @keyframes beat{0%{stroke-dashoffset:260}60%,100%{stroke-dashoffset:0}}
 .card .lbl{font-size:15px;color:#53705f;font-weight:600}
@@ -300,7 +300,7 @@ svg.av{stroke:none!important}
 @keyframes print{to{transform:none}}
 .ticket .tl{font-size:20px;font-weight:700;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
 .ticket .senha{font-size:140px;font-weight:800;letter-spacing:-.04em;color:var(--g700);line-height:1;margin:6px 0 10px}
-.ticket .ecg{height:36px;margin-bottom:12px}
+.ticket .ecg{height:46px;margin-bottom:12px}
 .ticket dl{display:grid;grid-template-columns:auto 1fr;gap:12px 20px;text-align:left;font-size:22px;border-top:3px dashed var(--line);padding-top:24px;margin-top:6px}
 .ticket dt{color:var(--muted);font-weight:600}
 .ticket dd{font-weight:800;margin:0;text-align:right}
@@ -561,6 +561,153 @@ svg.av{stroke:none!important}
 .stecg .sb{stroke:var(--g200);stroke-width:5.5}
 .stecg .sf{stroke:var(--g600);stroke-width:6.5;stroke-dasharray:1 1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.3,1,.4,1);filter:drop-shadow(0 0 4px rgba(22,163,74,.45))}
 .stecg .sp{stroke:#bbf7d0;stroke-width:8;stroke-dasharray:.06 2;stroke-dashoffset:.07;filter:drop-shadow(0 0 5px rgba(74,222,128,.9));opacity:0}
+
+/* Especialidade: consulta ou exame (com pesquisa de exames) */
+#gEsp .opt .sel{display:block;font-size:15px;font-weight:800;color:var(--g700);background:#fff;border-radius:99px;padding:3px 10px;margin-top:2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#gEsp .opt .sel:empty{display:none}
+.tdlg{width:960px;text-align:left;padding:40px 44px 36px}
+.thead{display:flex;align-items:center;gap:22px;margin-bottom:8px}
+.tico{width:96px;height:96px;border-radius:50%;background:var(--card);display:grid;place-items:center;flex:none}
+.tico svg,.tci svg{width:54px;height:54px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thead small{display:block;font-size:18px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.thead h2{font-size:46px;line-height:1.05}
+.tdlg .tstep>p{margin:14px 0 22px}
+.tstep[hidden]{display:none}
+.tcards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tcard{padding:34px 20px;gap:10px}
+.tcard .tci{width:110px;height:110px;border-radius:50%;background:var(--g100);display:grid;place-items:center}
+.tcard b{font-size:34px;font-weight:800}
+.tcard small{font-size:19px;color:var(--muted);font-weight:600}
+.tdlg .back{margin-top:22px}
+.tsearch{display:flex;align-items:center;gap:14px;height:88px;background:#fff;border:2.5px solid var(--g600);border-radius:24px;padding:0 14px 0 22px;box-shadow:0 0 0 5px rgba(22,163,74,.15);margin-top:20px}
+.tsearch>svg{width:36px;height:36px;stroke:var(--g600);fill:none;stroke-width:2.4;stroke-linecap:round;flex:none}
+.tsearch .q{font-size:30px;font-weight:700;white-space:pre;overflow:hidden}
+.tsearch .q::after{content:"";display:inline-block;width:3px;height:34px;background:var(--g600);vertical-align:-5px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.tsearch .ph{font-size:26px;color:var(--muted);font-weight:600}
+.tsearch .ph[hidden]{display:none}
+.tsearch .clr{margin-left:auto;width:60px;height:60px;border-radius:50%;border:0;background:var(--g100);display:grid;place-items:center;cursor:pointer}
+.tsearch .clr[hidden]{display:none}
+.tsearch .clr svg{width:28px;height:28px;stroke:var(--g800);fill:none;stroke-width:2.6;stroke-linecap:round}
+.tlab{font-size:19px!important;font-weight:800;color:var(--muted)!important;text-transform:uppercase;letter-spacing:.05em;margin:18px 0 10px!important}
+.tlist{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-height:430px;overflow:auto;align-content:start;padding:4px}
+.tex{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;background:var(--card);border:2.5px solid var(--line);border-radius:20px;padding:16px 18px;cursor:pointer;font-size:23px;font-weight:800;color:var(--ink)}
+.tex:active{border-color:var(--g600);background:var(--g100)}
+.tex small{font-size:16px;font-weight:700;color:var(--g700)}
+.tex mark{background:var(--g200);color:inherit;border-radius:4px}
+.tnone{grid-column:1/-1;background:var(--card);border-radius:20px;padding:26px;text-align:center;font-size:22px;font-weight:700;color:var(--muted)}
+.tkb{margin-top:18px}
+.tkb .krow{margin-bottom:8px}
+.tkb .k{height:78px;font-size:30px}
+
+/* Barra de pesquisa na tela de especialidades */
+.psearch{display:flex;align-items:center;gap:16px;width:100%;height:84px;margin-top:22px;background:#fff;border:2.5px solid var(--line);border-radius:24px;padding:0 10px 0 24px;cursor:pointer;text-align:left;box-shadow:0 10px 24px -16px rgba(0,60,30,.35)}
+.psearch:active{border-color:var(--g600)}
+.psearch svg{width:34px;height:34px;stroke:var(--g600);fill:none;stroke-width:2.4;stroke-linecap:round;flex:none}
+.psearch span{flex:1;font-size:24px;font-weight:600;color:var(--muted)}
+.psearch b{height:62px;padding:0 28px;border-radius:18px;background:linear-gradient(135deg,var(--g600),var(--g700));color:#fff;font-size:22px;font-weight:800;display:grid;place-items:center}
+.tex.cons{border-color:var(--g200);background:var(--g50)}
+
+/* Preparo pré-exame (tela final) */
+.prep{background:#fff;color:var(--ink);border-radius:28px;padding:26px 30px 22px;text-align:left;box-shadow:0 24px 50px -24px rgba(0,0,0,.55)}
+.prep[hidden]{display:none}
+.prh{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.pri2{width:64px;height:64px;border-radius:50%;background:var(--g100);display:grid;place-items:center;flex:none}
+.pri2 svg{width:36px;height:36px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.prh small{display:block;font-size:16px;font-weight:800;color:var(--g700);text-transform:uppercase;letter-spacing:.06em}
+.prh b{display:block;font-size:28px;font-weight:800;line-height:1.15}
+.prep ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.prep li{position:relative;padding-left:38px;font-size:22px;font-weight:600;line-height:1.3}
+.prep li::before{content:"";position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:50%;background:var(--g600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/15px no-repeat}
+.prep.none li::before{background-color:var(--g400)}
+.prf{margin-top:14px;font-size:17px;color:var(--muted);font-weight:600}
+
+.prep{width:100%;margin:22px 0 10px}
+#sDone.hasprep .big{width:110px;height:110px;margin:0 auto 16px}
+#sDone.hasprep .big svg{width:60px;height:60px}
+
+/* Pagamento */
+.pgcols{display:grid;grid-template-columns:1fr;gap:26px;margin-top:26px}
+.pgsum{background:linear-gradient(135deg,var(--g700),var(--g900));color:#fff;border-radius:30px;padding:28px 34px;box-shadow:0 24px 50px -26px rgba(7,59,36,.8)}
+.pgsum>small{display:block;font-size:18px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--g200)}
+.pgsum>b{display:block;font-size:72px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:4px 0 16px;font-variant-numeric:tabular-nums}
+.pgsum dl{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:20px;border-top:2px dashed rgba(255,255,255,.25);padding-top:16px;margin:0}
+.pgsum dt{color:var(--g200);font-weight:600}
+.pgsum dd{margin:0;font-weight:800;text-align:right}
+.pgright h3{font-size:25px;font-weight:800;margin-bottom:14px}
+.pgopts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pgopts .opt{padding:20px 10px;gap:6px}
+.pgopts .opt b{font-size:28px;font-weight:800}
+.pgopts .opt small{font-size:17px;color:var(--muted);font-weight:600}
+.pgi{width:64px;height:64px;border-radius:50%;background:var(--g100);display:grid;place-items:center}
+.pgi svg{width:36px;height:36px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pgpanel{margin-top:18px;background:var(--card);border:2px solid var(--line);border-radius:28px;min-height:330px;padding:26px 30px;display:flex;align-items:center;gap:30px;position:relative;overflow:hidden}
+.pgpanel:empty{display:none}
+.pgpanel .pgtx h4{font-size:28px;font-weight:800;margin-bottom:8px}
+.pgpanel .pgtx p{font-size:20px;color:var(--muted);font-weight:600;line-height:1.35}
+.pgpanel ol{margin:12px 0 0;padding-left:26px;font-size:20px;font-weight:600;line-height:1.5}
+.qr{width:250px;height:250px;flex:none;background:#fff;border:2px solid var(--line);border-radius:18px;padding:12px}
+.qr svg{width:100%;height:100%;display:block}
+.pxt{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:var(--g100);color:var(--g800);font-weight:800;font-size:19px;border-radius:99px;padding:8px 16px;font-variant-numeric:tabular-nums}
+.pos{width:170px;height:250px;flex:none;margin-top:56px;border-radius:26px;background:linear-gradient(180deg,#24313a,#11181d);position:relative;box-shadow:0 20px 34px -18px rgba(0,0,0,.6)}
+.pos::before{content:"";position:absolute;left:18px;right:18px;top:20px;height:80px;border-radius:10px;background:linear-gradient(135deg,#bbf0cf,#4ade80)}
+.pos::after{content:"";position:absolute;left:24px;right:24px;top:118px;height:118px;background:radial-gradient(circle,#55636c 9px,transparent 10px) 0 0/44px 40px}
+.pos .cardani{position:absolute;left:30px;top:-70px;width:110px;height:70px;border-radius:10px;background:linear-gradient(135deg,var(--g600),var(--g800));box-shadow:0 8px 16px -6px rgba(0,0,0,.5);animation:cardIn 2.2s ease-in-out infinite}
+.pos .cardani::before{content:"";position:absolute;left:12px;top:22px;width:22px;height:16px;border-radius:4px;background:#e9c46a}
+@keyframes cardIn{0%,15%{transform:translateY(-10px)}55%,80%{transform:translateY(40px)}100%{transform:translateY(-10px)}}
+.parc{display:flex;gap:10px;margin-top:16px}
+.parc button{flex:1;height:70px;border-radius:18px;border:2.5px solid var(--line);background:#fff;font-size:20px;font-weight:800;color:var(--ink);cursor:pointer;line-height:1.1}
+.parc button small{display:block;font-size:15px;color:var(--muted);font-weight:700}
+.parc button[aria-pressed=true]{border-color:var(--g600);background:var(--g100);box-shadow:0 0 0 4px rgba(22,163,74,.2)}
+.pgok{position:absolute;inset:0;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;animation:upIn .4s both}
+.pgok .ck{width:120px;height:120px;border-radius:50%;background:var(--g600);display:grid;place-items:center;animation:ckPop .5s cubic-bezier(.3,1.6,.5,1) both}
+.pgok .ck svg{width:66px;height:66px;stroke:#fff;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.pgok b{font-size:34px;font-weight:800}
+.pgok small{font-size:19px;color:var(--muted);font-weight:600}
+@keyframes ckPop{from{transform:scale(.3)}}
+.pgwait{display:flex;align-items:center;gap:12px;margin-top:14px;font-size:20px;font-weight:800;color:var(--g700)}
+.pgwait i{width:22px;height:22px;border-radius:50%;border:3px solid var(--g200);border-top-color:var(--g600);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Enviar confirmação por WhatsApp / e-mail */
+.sendrow{display:flex;gap:14px;width:100%}
+.sendb{flex:1;height:84px;border-radius:24px;border:2.5px solid rgba(255,255,255,.55);background:rgba(255,255,255,.12);color:#fff;font-size:22px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;transition:.2s}
+.sendb svg{width:34px;height:34px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.sendb:active{background:rgba(255,255,255,.25)}
+.sendb.sent{background:#fff;color:var(--g800);border-color:#fff}
+.sendb.sent svg{stroke:var(--g600)}
+.edlg{width:960px;text-align:left;padding:40px 44px 36px}
+.edlg .tico svg{width:52px;height:52px}
+.enbtns{margin-top:24px}
+.enbtns .back{height:108px;margin:0}
+.ento{background:#fff;border:2.5px solid var(--line);border-radius:24px;padding:22px 26px;margin-top:22px}
+.ento small{display:block;font-size:17px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.ento b{display:block;font-size:40px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.enprev{margin-top:16px;background:#dcf8c6;border-radius:20px 20px 20px 6px;padding:18px 22px;font-size:19px;line-height:1.4;white-space:pre-wrap;max-height:330px;overflow:auto;color:#163a26;box-shadow:0 6px 14px -10px rgba(0,0,0,.4)}
+.enprev.mail{background:#fff;border:2px solid var(--line);border-radius:20px}
+.eminp{display:flex;align-items:center;gap:14px;height:88px;background:#fff;border:2.5px solid var(--g600);border-radius:24px;padding:0 22px;box-shadow:0 0 0 5px rgba(22,163,74,.15);margin-top:22px}
+.eminp.bad{border-color:#dc2626;box-shadow:0 0 0 5px rgba(220,38,38,.15)}
+.eminp svg{width:34px;height:34px;stroke:var(--g600);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.eminp .q{font-size:30px;font-weight:700;white-space:pre;overflow:hidden;text-overflow:ellipsis}
+.eminp .q::after{content:"";display:inline-block;width:3px;height:34px;background:var(--g600);vertical-align:-5px;margin-left:2px;animation:blink 1s steps(1) infinite}
+.eminp .ph{font-size:26px;color:var(--muted);font-weight:600}
+.eminp .ph[hidden]{display:none}
+.emhint{font-size:18px!important;margin:10px 0 0!important;color:var(--muted)!important;font-weight:600}
+.emhint.bad{color:#dc2626!important}
+.emkb{margin-top:16px}
+.emkb .krow{margin-bottom:8px}
+.emkb .k{height:72px;font-size:28px}
+.emkb .k.fn{font-size:21px}
+.emkb .krow:last-child .k{font-size:18px;padding:0 4px}
+.endone{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:30px 0 10px}
+.endone .ck{width:120px;height:120px;border-radius:50%;background:var(--g600);display:grid;place-items:center;animation:ckPop .5s cubic-bezier(.3,1.6,.5,1) both}
+.endone .ck svg{width:66px;height:66px;stroke:#fff;fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.endone b{font-size:36px;font-weight:800}
+.endone p{font-size:22px!important;margin:0!important}
+
+#sDone .sendrow{width:820px}
+#sDone .dfoot{gap:16px}
+#sDone.hasprep .dfoot .cta{height:104px}
 </style>
 </head>
 <body>
@@ -708,6 +855,7 @@ svg.av{stroke:none!important}
       <div class="pnl">
         <h1>Como podemos atender você?</h1>
         <p class="sub">Selecione suas preferências de atendimento.</p>
+        <button type="button" class="psearch" id="prefBusca"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Pesquisar exame ou especialidade…</span><b>Buscar</b></button>
         <div class="sec">
           <h3>1. Escolha a especialidade</h3>
           <div class="g3" id="gEsp"></div>
@@ -771,6 +919,34 @@ svg.av{stroke:none!important}
       </div>
     </section>
 
+    <!-- 4b. Pagamento (só atendimento particular) -->
+    <section class="screen" id="sPag" aria-label="Pagamento">
+      <div class="pnl">
+        <h1>Pagamento</h1>
+        <p class="sub">Atendimento particular · escolha como deseja pagar.</p>
+        <div class="pgcols">
+          <div class="pgsum">
+            <small>Valor a pagar</small>
+            <b id="pgVal">R$ 0,00</b>
+            <dl id="pgDl"></dl>
+          </div>
+          <div class="pgright">
+            <h3>Forma de pagamento</h3>
+            <div class="pgopts" id="pgOpts">
+              <button type="button" class="opt" data-m="pix" aria-pressed="false"><span class="pgi" data-i="pix"></span><b>Pix</b><small>Aprovação na hora</small></button>
+              <button type="button" class="opt" data-m="debito" aria-pressed="false"><span class="pgi" data-i="card"></span><b>Débito</b><small>Na maquininha</small></button>
+              <button type="button" class="opt" data-m="credito" aria-pressed="false"><span class="pgi" data-i="card"></span><b>Crédito</b><small>Até 3x sem juros</small></button>
+            </div>
+            <div class="pgpanel" id="pgPanel"></div>
+          </div>
+        </div>
+        <div class="actions btn2">
+          <button class="back" id="pagBack" type="button">← Voltar</button>
+          <button class="go" id="goPag" type="button" disabled><span class="spin" aria-hidden="true"></span><span id="goPagTxt">Escolha a forma de pagamento</span></button>
+        </div>
+      </div>
+    </section>
+
     <!-- 5. Concluído -->
     <section class="screen green" id="sDone" aria-label="Concluído">
       <div class="crosses" aria-hidden="true"></div>
@@ -787,7 +963,16 @@ svg.av{stroke:none!important}
           <p class="tf">Apresente esta senha na recepção.<br>Policlínica São Francisco de Paula</p>
         </div>
       </div>
+      <div class="prep" id="prep" hidden>
+        <div class="prh"><span class="pri2"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg></span><div><small>Preparo para o exame</small><b id="prepT"></b></div></div>
+        <ul id="prepL"></ul>
+        <p class="prf">Em caso de dúvida, fale com a recepção.</p>
+      </div>
       <div class="dfoot">
+        <div class="sendrow">
+          <button type="button" class="sendb" id="sendWa"><svg viewBox="0 0 24 24"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.2A8.5 8.5 0 1 1 20.5 11.6z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8c-1-.4-2.3-1.7-2.7-2.7l.8-1-1-2z"/></svg><span>Enviar por WhatsApp</span></button>
+          <button type="button" class="sendb" id="sendMail"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg><span>Enviar por e-mail</span></button>
+        </div>
         <button class="cta" id="finish" type="button">Finalizar</button>
         <p class="count" id="count">Voltando ao início em 30s</p>
       </div>
@@ -832,6 +1017,44 @@ svg.av{stroke:none!important}
     <div class="lbwrap" id="lbWrap"></div>
     <button class="arr lbn" id="lbNext" type="button" aria-label="Próximo"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
     <p class="lbhint">Toque fora do cartão para fechar</p>
+  </div>
+
+  <!-- Especialidade: consulta ou exame -->
+  <div class="ov" id="ovTipo" role="dialog" aria-modal="true" aria-labelledby="tpT">
+    <div class="dlg tdlg">
+      <div class="thead"><span class="tico" id="tpIco"></span><div><small>Especialidade</small><h2 id="tpT"></h2></div></div>
+      <div class="tstep" id="tpS1">
+        <p>O que você precisa agendar?</p>
+        <div class="tcards">
+          <button type="button" class="opt tcard" data-t="Consulta"><span class="tci" id="tpCi1"></span><b>Consulta</b><small>Avaliação com o médico especialista</small></button>
+          <button type="button" class="opt tcard" data-t="Exame"><span class="tci" id="tpCi2"></span><b>Exame</b><small id="tpExN"></small></button>
+        </div>
+        <button class="back" id="tpCancel" type="button">Cancelar</button>
+      </div>
+      <div class="tstep" id="tpS2" hidden>
+        <div class="tbody">
+          <div class="tleft">
+            <div class="tsearch" id="tpSearch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="q" id="tpQ"></span><span class="ph" id="tpPh">Pesquisar exame…</span><button type="button" class="clr" id="tpClr" aria-label="Limpar pesquisa" hidden><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+            <p class="tlab" id="tpLab"></p>
+            <div class="tlist" id="tpList"></div>
+          </div>
+          <div class="tkb" id="tpKb"></div>
+        </div>
+        <button class="back" id="tpBack" type="button">← Voltar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enviar confirmação (WhatsApp / e-mail) -->
+  <div class="ov" id="ovEnvio" role="dialog" aria-modal="true" aria-labelledby="enT">
+    <div class="dlg edlg">
+      <div class="thead"><span class="tico" id="enIco"></span><div><small id="enSm">Enviar confirmação</small><h2 id="enT"></h2></div></div>
+      <div id="enBody"></div>
+      <div class="btn2 enbtns" id="enBtns">
+        <button class="back" id="enCancel" type="button">Cancelar</button>
+        <button class="go" id="enGo" type="button"><span class="spin" aria-hidden="true"></span><span id="enGoTxt">Enviar</span></button>
+      </div>
+    </div>
   </div>
 
   <!-- Inatividade -->
@@ -898,7 +1121,7 @@ svg.av{stroke:none!important}
   });
 
   /* ---------- Ícones ---------- */
-  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M12 14v4M10 16h4"/>',bk:'<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',tel:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',baby:'<circle cx="12" cy="8" r="5"/><path d="M10 8h.01M14 8h.01M10.5 10.5c.8.6 2.2.6 3 0M7 21v-2a5 5 0 0 1 10 0v2"/>',eye:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',brain:'<path d="M12 5a3 3 0 0 0-5.8-1A3 3 0 0 0 4 8.5a3 3 0 0 0 .5 5.3A3.5 3.5 0 0 0 9 19a3 3 0 0 0 3-1M12 5a3 3 0 0 1 5.8-1A3 3 0 0 1 20 8.5a3 3 0 0 1-.5 5.3A3.5 3.5 0 0 1 15 19a3 3 0 0 1-3-1M12 5v13"/>',drop:'<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',flask:'<path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7 15h10"/>',chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>',ear:'<path d="M6 9a6 6 0 0 1 12 0c0 3-2 4-3 5.5S14 18 12 20a3 3 0 0 1-5-2"/><path d="M9 9a3 3 0 0 1 6 0c0 1.5-1.5 2-2 3"/>',apple:'<path d="M12 7c-2-2-7-1.5-7 4 0 4 3 9 5 9 1 0 1.5-.5 2-.5s1 .5 2 .5c2 0 5-5 5-9 0-5.5-5-6-7-4zM12 7c0-2 1-4 3-4"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12h6M12 9v6"/>',bld:'<path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M12 6v4M10 8h4"/>'};
+  var I={steth:'<path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/><path d="M6 12h3l1.5-3 3 6 1.5-3h3"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/>',fem:'<circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 18h6"/>',smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 3 4 3 4-3 4-3M9 9h.01M15 9h.01"/>',bone:'<path d="M8 16l8-8"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',rise:'<path d="M12 3v5M5 12H3M21 12h-2M7 8L5.5 6.5M17 8l1.5-1.5M6 17a6 6 0 0 1 12 0M3 21h18"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',doc:'<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M12 14v4M10 16h4"/>',bk:'<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',tel:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',baby:'<circle cx="12" cy="8" r="5"/><path d="M10 8h.01M14 8h.01M10.5 10.5c.8.6 2.2.6 3 0M7 21v-2a5 5 0 0 1 10 0v2"/>',eye:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',brain:'<path d="M12 5a3 3 0 0 0-5.8-1A3 3 0 0 0 4 8.5a3 3 0 0 0 .5 5.3A3.5 3.5 0 0 0 9 19a3 3 0 0 0 3-1M12 5a3 3 0 0 1 5.8-1A3 3 0 0 1 20 8.5a3 3 0 0 1-.5 5.3A3.5 3.5 0 0 1 15 19a3 3 0 0 1-3-1M12 5v13"/>',drop:'<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/>',flask:'<path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7 15h10"/>',chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h.01M12 11h.01M15 11h.01"/>',ear:'<path d="M6 9a6 6 0 0 1 12 0c0 3-2 4-3 5.5S14 18 12 20a3 3 0 0 1-5-2"/><path d="M9 9a3 3 0 0 1 6 0c0 1.5-1.5 2-2 3"/>',apple:'<path d="M12 7c-2-2-7-1.5-7 4 0 4 3 9 5 9 1 0 1.5-.5 2-.5s1 .5 2 .5c2 0 5-5 5-9 0-5.5-5-6-7-4zM12 7c0-2 1-4 3-4"/>',shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12h6M12 9v6"/>',scan:'<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M12 6v12M8.5 9c1.5.8 5.5.8 7 0M8 12.5c2 .8 6 .8 8 0M8.5 16c1.5.7 5.5.7 7 0"/>',tube:'<path d="M14.5 2.5l7 7M16 4L5.5 14.5a3.5 3.5 0 0 0 5 5L21 9M8 12h7"/>',bld:'<path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16M2 21h20M10 21v-4h4v4M12 6v4M10 8h4"/>'};
   var ic=function(k){return '<svg viewBox="0 0 24 24" aria-hidden="true">'+I[k]+'</svg>'};
   var LOGO='<img src="fotos/logo-icone.png" alt="">';
 
@@ -914,7 +1137,7 @@ svg.av{stroke:none!important}
   /* ---------- Estado ---------- */
   var S,touched,act=null,kbMode='alpha';
   function fresh(){
-    S={nome:'',nasc:'',cpf:'',tel:'',esp:'',pri:'',per:'',day:-1,doc:'',hora:'',clin:'',cid:'',conv:null,usarConv:false,date:null,fsel:null,showCpf:false};
+    S={nome:'',nasc:'',cpf:'',tel:'',esp:'',tipo:'',exame:'',pri:'',per:'',day:-1,doc:'',hora:'',clin:'',cid:'',conv:null,usarConv:false,pag:null,date:null,fsel:null,showCpf:false};
     touched={nome:false,nasc:false,cpf:false,tel:false};
   }
   fresh();
@@ -1066,7 +1289,7 @@ svg.av{stroke:none!important}
   ['fNome','fNasc','fCpf','fTel'].forEach(function(id){$(id).addEventListener('click',function(){openKb(this.dataset.f)})});
 
   /* ---------- Navegação ---------- */
-  var STEP={sId:[1,'Identificação'],sNf:[1,'Identificação'],sFast:[3,'Agendamento'],sPref:[2,'Preferências'],sHor:[3,'Dia e horário'],sConf:[4,'Confirmação']};
+  var STEP={sId:[1,'Identificação'],sNf:[1,'Identificação'],sFast:[3,'Agendamento'],sPref:[2,'Preferências'],sHor:[3,'Dia e horário'],sConf:[4,'Confirmação'],sPag:[4,'Pagamento']};
   var cur='sHome';
   function show(id){
     if(act)closeKb();
@@ -1163,7 +1386,7 @@ svg.av{stroke:none!important}
   });
 
   /* Preferências */
-  var esp=[['Clínico Geral','steth'],['Cardiologia','heart'],['Dermatologia','hand'],['Ginecologia','fem'],['Odontologia','smile'],['Ortopedia','bone'],['Pediatria','baby'],['Oftalmologia','eye'],['Neurologia','brain'],['Urologia','drop'],['Endocrinologia','flask'],['Psiquiatria','chat'],['Otorrinolaringologia','ear','Otorrinolaringo&shy;logia'],['Nutrição','apple']];
+  var esp=[['Clínico Geral','steth'],['Cardiologia','heart'],['Dermatologia','hand'],['Ginecologia','fem'],['Odontologia','smile'],['Ortopedia','bone'],['Pediatria','baby'],['Oftalmologia','eye'],['Neurologia','brain'],['Urologia','drop'],['Endocrinologia','flask'],['Psiquiatria','chat'],['Otorrinolaringologia','ear','Otorrinolaringo&shy;logia'],['Nutrição','apple'],['Exames de Imagem','scan'],['Exames de Laboratório','tube']];
   var pri=[['Atendimento mais rápido','bolt','Primeiro horário livre com qualquer profissional.'],['Médico específico','steth','Escolher o profissional de sua preferência.']];
   var per=[['Manhã','rise'],['Tarde','sun'],['Noite','moon'],['Qualquer horário','clock']];
   function tiles(id,list,key,cls,inner,onPick){
@@ -1177,10 +1400,117 @@ svg.av{stroke:none!important}
       g.appendChild(b);
     });
   }
-  tiles('gEsp',esp,'esp','',function(i){return ic(i[1])+'<span>'+(i[2]||i[0])+'</span>'});
+  (function(){var g=$('gEsp');g.innerHTML='';esp.forEach(function(it){
+    var b=document.createElement('button');b.type='button';b.className='opt';b.dataset.esp=it[0];b.setAttribute('aria-pressed','false');
+    b.innerHTML=ic(it[1])+'<span>'+(it[2]||it[0])+'</span><span class="sel"></span>';
+    b.addEventListener('click',function(){if(!(EXAMES[it[0]]||[]).length)pickTipo(it[0],'Consulta');else abrirTipo(it[0])});
+    g.appendChild(b);
+  })})();
   tiles('gPri',pri,'pri','pri',function(i){return ic(i[1])+'<span>'+i[0]+'</span><small>'+i[2]+'</small>'});
   tiles('gPer',per,'per','per',function(i){return ic(i[1])+i[0]});
-  function checkPref(){$('goPref').disabled=!(S.esp&&S.pri&&S.per)}
+  function checkPref(){$('goPref').disabled=!(S.esp&&S.tipo&&S.pri&&S.per)}
+  /* ---------- Especialidade: consulta ou exame ----------
+     TROCAR AQUI pela lista de exames de cada especialidade vinda do sistema da clínica.
+     Especialidade sem exames vai direto para consulta. */
+  var EXAMES={
+    'Clínico Geral':['Check-up geral','Eletrocardiograma'],
+    'Cardiologia':['Eletrocardiograma','Ecocardiograma','Teste ergométrico','Holter 24 horas','MAPA 24 horas'],
+    'Dermatologia':['Dermatoscopia','Biópsia de pele','Mapeamento de pintas'],
+    'Ginecologia':['Preventivo (Papanicolau)','Ultrassom transvaginal','Colposcopia','Mamografia'],
+    'Odontologia':['Radiografia panorâmica','Radiografia periapical'],
+    'Ortopedia':['Raio-X','Densitometria óssea','Ultrassom articular'],
+    'Pediatria':['Teste do pezinho','Teste da orelhinha','Teste do olhinho'],
+    'Oftalmologia':['Mapeamento de retina','Tonometria','Campimetria','Topografia de córnea'],
+    'Neurologia':['Eletroencefalograma','Eletroneuromiografia'],
+    'Urologia':['Ultrassom de próstata','Urofluxometria','Ultrassom de rins e vias urinárias'],
+    'Endocrinologia':['Ultrassom de tireoide','Densitometria óssea'],
+    'Psiquiatria':[],
+    'Otorrinolaringologia':['Audiometria','Videolaringoscopia','Nasofibroscopia'],
+    'Nutrição':['Bioimpedância'],
+    'Exames de Imagem':['Raio-X','Ultrassonografia','Tomografia computadorizada','Ressonância magnética','Mamografia','Densitometria óssea','Ecocardiograma','Doppler vascular'],
+    'Exames de Laboratório':['Hemograma completo','Glicemia em jejum','Hemoglobina glicada','Colesterol total e frações','Triglicerídeos','TSH e T4 livre','Creatinina e ureia','Vitamina D','Vitamina B12','PSA','Beta HCG','Exame de urina (EAS)','Urocultura','Exame de fezes (EPF)']
+  };
+  /* Caixas que só têm exames (não abrem a escolha consulta/exame) */
+  var SO_EXAME={'Exames de Imagem':1,'Exames de Laboratório':1};
+  function espTxt(){if(SO_EXAME[S.esp])return 'Exame: '+S.exame+' · '+S.esp;return S.esp+(S.tipo==='Exame'?' · Exame: '+S.exame:' · Consulta')}
+  var tpEsp='',tpQ='';
+  function semAc(t){return t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
+  function espIcon(n){for(var i=0;i<esp.length;i++)if(esp[i][0]===n)return esp[i][1];return 'steth'}
+  function pickTipo(e,tipo,exame){
+    S.esp=e;S.tipo=tipo;S.exame=exame||'';
+    [].forEach.call($('gEsp').children,function(b){
+      var on=b.dataset.esp===e;b.setAttribute('aria-pressed',String(on));
+      b.querySelector('.sel').textContent=on?(tipo==='Exame'?exame:'Consulta'):'';
+    });
+    closeOv('ovTipo');checkPref();
+  }
+  function abrirTipo(e){
+    tpEsp=e;tpQ='';
+    $('tpT').textContent=e;$('tpIco').innerHTML=ic(espIcon(e));
+    var n=(EXAMES[e]||[]).length;
+    $('tpExN').textContent=n?n+(n>1?' exames disponíveis':' exame disponível'):'Pesquise entre todos os exames';
+    var so=!!SO_EXAME[e];
+    $('ovTipo').querySelector('.thead small').textContent=so?'Agendar exame':'Especialidade';
+    $('tpBack').textContent=so?'Cancelar':'← Voltar';
+    $('tpS1').hidden=so;$('tpS2').hidden=!so;if(so)tpList();
+    openOv('ovTipo');
+  }
+  function tpList(){
+    var q=semAc(tpQ.trim()),h='',lst=[];
+    if(!q){(EXAMES[tpEsp]||[]).forEach(function(x){lst.push([x,tpEsp,'Exame'])})}
+    else{
+      if(!tpEsp)esp.forEach(function(it){var e=it[0];if(!SO_EXAME[e]&&semAc(e).indexOf(q)===0)lst.push(['Consulta',e,'Consulta'])});
+      Object.keys(EXAMES).forEach(function(e){EXAMES[e].forEach(function(x){if(semAc(x).indexOf(q)>=0||semAc(e).indexOf(q)===0)lst.push([x,e,'Exame'])})});
+      if(tpEsp)lst.sort(function(a,b){return (b[1]===tpEsp)-(a[1]===tpEsp)});
+    }
+    $('tpLab').textContent=q?(lst.length?lst.length+' resultado'+(lst.length>1?'s':'')+' para "'+tpQ.trim()+'"':'Nenhum resultado'):(!tpEsp?'Digite o nome do exame ou da especialidade':SO_EXAME[tpEsp]?'Escolha o exame':'Exames de '+tpEsp);
+    h=lst.map(function(x){
+      var nm=esc(x[0]);
+      if(q&&x[2]==='Exame'){var i=semAc(x[0]).indexOf(q);if(i>=0)nm=esc(x[0].slice(0,i))+'<mark>'+esc(x[0].slice(i,i+q.length))+'</mark>'+esc(x[0].slice(i+q.length))}
+      return '<button type="button" class="tex'+(x[2]==='Consulta'?' cons':'')+'" data-ex="'+esc(x[0])+'" data-esp="'+esc(x[1])+'" data-tp="'+x[2]+'"><span>'+nm+'</span><small>'+esc(x[1])+'</small></button>';
+    }).join('');
+    if(!lst.length)h='<div class="tnone">'+(q?'Não encontramos esse exame. Tente outra palavra ou procure a recepção.':'Use o teclado para pesquisar. Ex.: hemograma, raio-x, cardiologia.')+'</div>';
+    $('tpList').innerHTML=h;$('tpList').scrollTop=0;
+    $('tpQ').textContent=tpQ;$('tpPh').hidden=!!tpQ;$('tpClr').hidden=!tpQ;
+  }
+  function abrirBusca(){
+    tpEsp='';tpQ='';
+    $('tpT').textContent='Pesquisar';$('tpIco').innerHTML='<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>';
+    $('ovTipo').querySelector('.thead small').textContent='Exame ou consulta';
+    $('tpBack').textContent='Cancelar';
+    $('tpS1').hidden=true;$('tpS2').hidden=false;tpList();
+    openOv('ovTipo');
+  }
+  $('prefBusca').addEventListener('click',abrirBusca);
+  (function(){
+    var R=['QWERTYUIOP','ASDFGHJKLÇ','ZXCVBNM'],h='';
+    R.forEach(function(r,i){h+='<div class="krow">'+r.split('').map(function(c){return '<button type="button" class="k" data-k="'+c+'">'+c+'</button>'}).join('')+(i===2?'<button type="button" class="k fn w2" data-k="bk" aria-label="Apagar">'+ic('bk')+'</button>':'')+'</div>'});
+    h+='<div class="krow"><button type="button" class="k fn w2" data-k="clr">Limpar</button><button type="button" class="k w5" data-k=" ">espaço</button></div>';
+    $('tpKb').innerHTML=h;
+  })();
+  function tpKey(k){
+    if(k==='bk')tpQ=tpQ.slice(0,-1);else if(k==='clr')tpQ='';else if(tpQ.length<30&&!(k===' '&&(!tpQ||/ $/.test(tpQ))))tpQ+=k.toLowerCase();
+    tpList();
+  }
+  $('tpKb').addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b)tpKey(b.dataset.k)});
+  $('tpClr').addEventListener('click',function(){tpKey('clr')});
+  $('tpCi1').innerHTML=ic('doc');$('tpCi2').innerHTML=ic('flask');
+  [].forEach.call(document.querySelectorAll('.tcard'),function(b){b.addEventListener('click',function(){
+    if(b.dataset.t==='Consulta')return pickTipo(tpEsp,'Consulta');
+    tpQ='';$('tpS1').hidden=true;$('tpS2').hidden=false;tpList();
+  })});
+  $('tpList').addEventListener('click',function(e){var b=e.target.closest('[data-ex]');if(b)pickTipo(b.dataset.esp,b.dataset.tp,b.dataset.tp==='Exame'?b.dataset.ex:'')});
+  $('tpBack').addEventListener('click',function(){if(!tpEsp||SO_EXAME[tpEsp])return closeOv('ovTipo');$('tpS1').hidden=false;$('tpS2').hidden=true});
+  $('tpCancel').addEventListener('click',function(){closeOv('ovTipo')});
+  $('ovTipo').addEventListener('click',function(e){if(e.target===this)closeOv('ovTipo')});
+  document.addEventListener('keydown',function(e){
+    if(!$('ovTipo').classList.contains('on')||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='Escape'){closeOv('ovTipo');return}
+    if($('tpS2').hidden)return;
+    if(e.key==='Backspace'){e.preventDefault();tpKey('bk')}
+    else if(e.key.length===1&&/[\p{L}0-9 ()-]/u.test(e.key)){e.preventDefault();tpKey(e.key)}
+  });
+
   $('goPref').addEventListener('click',function(){
     if(this.disabled)return;
     S.day=0;S.doc='';S.cid='';S.hora='';S.fsel=null;
@@ -1227,7 +1557,11 @@ svg.av{stroke:none!important}
     {nome:'Dra. Vanessa Cardoso', crm:'CRM-RJ 52.64029-3',esp:['Endocrinologia','Nutrição'],     clinicas:['sfp','ch'],     foto:''},
     {nome:'Dr. Ricardo Lopes',    crm:'CRM-RJ 52.59164-7',esp:['Psiquiatria'],                   clinicas:['sfp','mj'],     foto:''},
     {nome:'Dra. Aline Castro',    crm:'CRM-RJ 52.72288-4',esp:['Otorrinolaringologia'],          clinicas:['sfp','ch'],     foto:''},
-    {nome:'Dra. Mariana Vieira',  crm:'CRN-4 12.345',esp:['Nutrição'],                    clinicas:['mj'],           foto:''}
+    {nome:'Dra. Mariana Vieira',  crm:'CRN-4 12.345',esp:['Nutrição'],                    clinicas:['mj'],           foto:''},
+    {nome:'Dr. Henrique Matos',   crm:'CRM-RJ 52.63390-1',esp:['Exames de Imagem'],              clinicas:['sfp','mj','ch'],foto:''},
+    {nome:'Dra. Sofia Antunes',   crm:'CRM-RJ 52.70855-6',esp:['Exames de Imagem'],              clinicas:['sfp','ch'],     foto:''},
+    {nome:'Dra. Cláudia Ramos',   crm:'CRBM-1 12.480',    esp:['Exames de Laboratório'],         clinicas:['sfp','mj','ch'],foto:''},
+    {nome:'Dr. Bruno Siqueira',   crm:'CRBM-1 15.233',    esp:['Exames de Laboratório'],         clinicas:['mj'],           foto:''}
   ];
   function clinica(id){for(var i=0;i<CLINICAS.length;i++)if(CLINICAS[i].id===id)return CLINICAS[i];return null}
   function medico(nome){for(var i=0;i<MEDICOS.length;i++)if(MEDICOS[i].nome===nome)return MEDICOS[i];return null}
@@ -1266,7 +1600,7 @@ svg.av{stroke:none!important}
     return '<button type="button" class="slot" data-ci="'+ci+'" data-ts="'+ts+'" data-t="'+t+'" aria-pressed="'+!!on+'">'+hm(t,'h')+'</button>';
   }
   function buildFast(){
-    $('fEsp').textContent=S.esp;
+    $('fEsp').textContent=espTxt();
     $('fSeg').innerHTML=['Manhã','Tarde','Noite','Todos'].map(function(p){return '<button type="button" data-p="'+p+'" aria-pressed="'+(p===fastPer)+'">'+p+'</button>'}).join('');
     var DS=nextDays(6),r=FPER[fastPer];
     var list=CLINICAS.map(function(c,ci){
@@ -1342,7 +1676,7 @@ svg.av{stroke:none!important}
     var m=medico(S.doc);
     if(m&&m.clinicas.indexOf(S.cid)<0)S.cid=m.clinicas[0];
     if(!m)S.cid='';
-    $('horSub').textContent=S.esp+' · '+S.per+' · escolha o profissional e o local';
+    $('horSub').textContent=espTxt()+' · '+S.per+' · escolha o profissional e o local';
     $('gDays').innerHTML=DS.map(function(d,i){
       var diff=Math.round((d-today)/864e5);
       var lbl=diff===0?'Hoje':(diff===1?'Amanhã':WDS[d.getDay()]);
@@ -1476,34 +1810,242 @@ svg.av{stroke:none!important}
   /* Confirmação */
   function dayTxt(){var d=S.date;return WD[d.getDay()].replace(/^./,function(c){return c.toUpperCase()})+', '+d.getDate()+' de '+MS[d.getMonth()]}
   function buildConf(){
+    $('goConfTxt').textContent=confTxt();
     var hs=horScr();
-    var rows=[['user','Paciente · '+fmtTel(S.tel),esc(S.nome.trim()),'sId'],['shield','Atendimento',S.conv&&S.usarConv?'Convênio '+esc(S.conv.nome)+(S.conv.plano?' · '+esc(S.conv.plano):''):'Particular',S.conv?'conv':''],['steth','Especialidade',esc(S.esp),'sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
+    var rows=[['user','Paciente · '+fmtTel(S.tel),esc(S.nome.trim()),'sId'],['shield','Atendimento',S.conv&&S.usarConv?'Convênio '+esc(S.conv.nome)+(S.conv.plano?' · '+esc(S.conv.plano):''):'Particular',S.conv?'conv':''],[S.tipo==='Exame'?'flask':'steth',S.tipo==='Exame'?'Exame':'Especialidade',S.tipo==='Exame'?esc(S.exame)+' · '+esc(S.esp):esc(S.esp)+' · Consulta','sPref'],['bld','Local',esc(S.clin),hs],['doc','Profissional',esc(S.doc),hs],['cal','Data e horário',dayTxt()+' · '+S.hora,hs]];
     $('review').innerHTML=rows.map(function(r){return '<div class="rrow"><span class="ri'+(r[0]==='doc'?' rph':'')+'">'+(r[0]==='doc'?foto(S.doc):ic(r[0]))+'</span><span><small>'+r[1]+'</small><b>'+r[2]+'</b></span>'+(r[3]?'<button type="button" class="edit" data-go="'+r[3]+'">'+(r[3]==='conv'?'Trocar':'Alterar')+'</button>':'')+'</div>'}).join('');
   }
   $('review').addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(!b)return;if(b.dataset.go==='conv'){S.usarConv=!S.usarConv;buildConf();paintCards(true);return}show(b.dataset.go)});
+
+  /* ---------- Pagamento (atendimento particular) ----------
+     TROCAR AQUI: valores reais da tabela da clínica. */
+  var PRECO_CONSULTA={'Clínico Geral':150,'Pediatria':180,'Nutrição':160,'Psiquiatria':280,'Odontologia':140};
+  var PRECO_EXAME={'Hemograma completo':25,'Glicemia em jejum':15,'Hemoglobina glicada':35,'Colesterol total e frações':40,'Triglicerídeos':20,'TSH e T4 livre':55,'Creatinina e ureia':30,'Vitamina D':80,'Vitamina B12':60,'PSA':50,'Beta HCG':45,'Exame de urina (EAS)':20,'Urocultura':35,'Exame de fezes (EPF)':20,
+    'Raio-X':90,'Ultrassonografia':180,'Tomografia computadorizada':450,'Ressonância magnética':850,'Mamografia':160,'Densitometria óssea':150,'Ecocardiograma':280,'Doppler vascular':300,'Eletrocardiograma':80,'Teste ergométrico':250,'Holter 24 horas':280,'MAPA 24 horas':250};
+  function valorAtendimento(){
+    if(S.tipo==='Exame')return PRECO_EXAME[S.exame]||150;
+    return PRECO_CONSULTA[S.esp]||220;
+  }
+  function brl(v){return 'R$ '+v.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
+  /* TROCAR AQUI pela integração real:
+     - Pix: gerar a cobrança no banco/PSP e consultar se foi paga;
+     - Débito/Crédito: enviar a venda para a maquininha (TEF/POS integrado).
+     Deve devolver uma Promise com {ok:true, autorizacao:'...'} ou {ok:false, motivo:'...'}. */
+  function processarPagamento(metodo,valor,parcelas){
+    return new Promise(function(ok){setTimeout(function(){ok({ok:true,autorizacao:String(100000+Math.floor(Math.random()*899999))})},metodo==='pix'?2200:2600)});
+  }
+  var pagT=null,pagBusy=false;
+  function pagIc(k){return k==='pix'?'<svg viewBox="0 0 24 24"><path d="M12 2.5l4.2 4.2-4.2 4.2-4.2-4.2zM2.5 12l4.2-4.2 4.2 4.2-4.2 4.2zM21.5 12l-4.2 4.2-4.2-4.2 4.2-4.2zM12 21.5l-4.2-4.2 4.2-4.2 4.2 4.2z"/></svg>':'<svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/></svg>'}
+  [].forEach.call(document.querySelectorAll('.pgi'),function(e){e.innerHTML=pagIc(e.dataset.i)});
+  function qrSvg(seed){
+    var n=29,h=seed>>>0,r='',inF=function(x,y){return (x<8&&y<8)||(x>n-9&&y<8)||(x<8&&y>n-9)};
+    function rnd(){h^=h<<13;h>>>=0;h^=h>>>17;h^=h<<5;h>>>=0;return h%100}
+    for(var y=0;y<n;y++)for(var x=0;x<n;x++){if(!inF(x,y)&&rnd()<48)r+='<rect x="'+x+'" y="'+y+'" width="1.02" height="1.02"/>'}
+    [[0,0],[n-7,0],[0,n-7]].forEach(function(p){r+='<rect x="'+(p[0]+.5)+'" y="'+(p[1]+.5)+'" width="6" height="6" fill="none" stroke="#073b24" stroke-width="1"/><rect x="'+(p[0]+2)+'" y="'+(p[1]+2)+'" width="3" height="3"/>'});
+    return '<svg viewBox="0 0 '+n+' '+n+'" shape-rendering="crispEdges" fill="#073b24">'+r+'</svg>';
+  }
+  function pagBtn(){
+    var m=S.pag&&S.pag.m,g=$('goPag');g.disabled=!m||pagBusy;
+    $('goPagTxt').textContent=!m?'Escolha a forma de pagamento':m==='pix'?'Já paguei com Pix':'Pagar '+brl(S.pag.val)+(m==='credito'&&S.pag.parc>1?' em '+S.pag.parc+'x':'');
+  }
+  function pagPanel(){
+    clearInterval(pagT);var m=S.pag.m,p=$('pgPanel');
+    if(m==='pix'){
+      p.innerHTML='<div class="qr">'+qrSvg(hsh(S.cpf+S.pag.val))+'</div><div class="pgtx"><h4>Pague com Pix</h4><p>Escaneie o QR Code com o app do seu banco.</p><ol><li>Abra o app do banco e escolha <b>Pix</b></li><li>Toque em <b>Ler QR Code</b></li><li>Confira o valor de <b>'+brl(S.pag.val)+'</b> e confirme</li></ol><span class="pxt" id="pxT">Expira em 5:00</span></div>';
+      var t=300;pagT=setInterval(function(){t--;var e=$('pxT');if(!e)return clearInterval(pagT);e.textContent='Expira em '+Math.floor(t/60)+':'+p2(t%60);if(t<=0){clearInterval(pagT);e.textContent='QR Code expirado · toque em Pix para gerar outro'}},1000);
+    }else{
+      var cr=m==='credito',ps=S.pag.val>=100?[1,2,3]:[1];
+      p.innerHTML='<div class="pos"><span class="cardani"></span></div><div class="pgtx"><h4>'+(cr?'Cartão de crédito':'Cartão de débito')+'</h4><p>Ao tocar em pagar, <b>insira ou aproxime o cartão</b> na maquininha ao lado do totem e digite a senha se for pedida.</p>'+
+        (cr?'<div class="parc" id="parc">'+ps.map(function(n){return '<button type="button" data-p="'+n+'" aria-pressed="'+(S.pag.parc===n)+'">'+n+'x<small>'+brl(S.pag.val/n)+'</small></button>'}).join('')+'</div>':'')+'</div>';
+    }
+  }
+  $('pgOpts').addEventListener('click',function(e){
+    var b=e.target.closest('[data-m]');if(!b||pagBusy)return;
+    S.pag={m:b.dataset.m,val:valorAtendimento(),parc:1};
+    [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});
+    pagPanel();pagBtn();
+  });
+  $('pgPanel').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b||pagBusy)return;S.pag.parc=+b.dataset.p;[].forEach.call(b.parentNode.children,function(x){x.setAttribute('aria-pressed',String(x===b))});pagBtn()});
+  function buildPag(){
+    S.pag=null;pagBusy=false;clearInterval(pagT);
+    var v=valorAtendimento(),d=S.date;
+    $('pgVal').textContent=brl(v);
+    $('pgDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>'+(S.tipo==='Exame'?'Exame':'Consulta')+'</dt><dd>'+esc(S.tipo==='Exame'?S.exame:S.esp)+'</dd><dt>Profissional</dt><dd>'+esc(S.doc)+'</dd><dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+' · '+S.hora+'</dd>';
+    [].forEach.call($('pgOpts').children,function(x){x.setAttribute('aria-pressed','false')});
+    $('pgPanel').innerHTML='';pagBtn();
+  }
+  $('goPag').addEventListener('click',function(){
+    if(this.disabled||!S.pag)return;
+    var g=this,m=S.pag.m;pagBusy=true;g.classList.add('load');g.disabled=true;
+    $('goPagTxt').textContent=m==='pix'?'Verificando pagamento…':'Aguardando o cartão…';
+    var w=document.createElement('div');w.className='pgwait';w.innerHTML='<i></i>'+(m==='pix'?'Consultando o banco…':'Siga as instruções da maquininha');
+    var tx=$('pgPanel').querySelector('.pgtx');if(tx)tx.appendChild(w);
+    processarPagamento(m,S.pag.val,S.pag.parc).then(function(r){
+      g.classList.remove('load');
+      if(!r.ok){pagBusy=false;w.innerHTML='Pagamento não aprovado'+(r.motivo?': '+esc(r.motivo):'')+'. Tente novamente ou escolha outra forma.';pagBtn();return}
+      clearInterval(pagT);S.pag.aut=r.autorizacao;
+      $('pgPanel').insertAdjacentHTML('beforeend','<div class="pgok"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>Pagamento aprovado!</b><small>'+(m==='pix'?'Pix':m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' em '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+'</small></div>');
+      $('goPagTxt').textContent='Pagamento aprovado';
+      setTimeout(function(){pagBusy=false;finishFlow()},1600);
+    });
+  });
+  $('pagBack').addEventListener('click',function(){if(pagBusy)return;clearInterval(pagT);show('sConf')});
+  function particular(){return !(S.conv&&S.usarConv)}
+  function confTxt(){return particular()?'Continuar para pagamento →':'Confirmar atendimento'}
   $('confBack').addEventListener('click',function(){show(horScr())});
   $('goConf').addEventListener('click',function(){
     var go=this;if(go.classList.contains('load'))return;
-    go.classList.add('load');$('goConfTxt').textContent='Confirmando…';
+    go.classList.add('load');$('goConfTxt').textContent=particular()?'Preparando pagamento…':'Confirmando…';
     setTimeout(function(){
-      go.classList.remove('load');$('goConfTxt').textContent='Confirmar atendimento';
-      finishFlow();
+      go.classList.remove('load');$('goConfTxt').textContent=confTxt();
+      if(particular()){buildPag();show('sPag')}else finishFlow();
     },1300);
   });
 
   /* Concluído */
   var doneT=null;
+  /* ---------- Preparo pré-exame ----------
+     TROCAR AQUI pelas orientações oficiais da clínica/laboratório.
+     curto = linha impressa na senha; itens = orientações mostradas na tela.
+     Exame que não está aqui aparece como "não precisa de preparo". */
+  var PREPARO={
+    'Hemograma completo':{curto:'Jejum de 4 horas',itens:['Jejum de 4 horas (pode beber água).','Evite exercícios intensos nas 24 horas antes.']},
+    'Glicemia em jejum':{curto:'Jejum de 8 horas',itens:['Jejum de 8 a 12 horas (pode beber água).','Não fume e evite exercícios antes da coleta.','Tome seus remédios normalmente, salvo orientação médica.']},
+    'Colesterol total e frações':{curto:'Jejum de 12 horas',itens:['Jejum de 12 horas (pode beber água).','Não beba álcool nas 72 horas antes.','Mantenha sua alimentação de costume nos dias anteriores.']},
+    'Triglicerídeos':{curto:'Jejum de 12 horas',itens:['Jejum de 12 horas (pode beber água).','Não beba álcool nas 72 horas antes.']},
+    'TSH e T4 livre':{curto:'Jejum de 4 horas',itens:['Jejum de 4 horas.','Se usa levotiroxina, faça a coleta antes de tomar a dose do dia.']},
+    'Creatinina e ureia':{curto:'Jejum de 4 horas',itens:['Jejum de 4 horas.','Evite exercícios intensos no dia anterior.']},
+    'Vitamina D':{curto:'Jejum de 4 horas',itens:['Jejum de 4 horas.']},
+    'Vitamina B12':{curto:'Jejum de 4 horas',itens:['Jejum de 4 horas.']},
+    'PSA':{curto:'Abstinência de 48 h',itens:['Sem relação sexual (ejaculação) nas 48 horas antes.','Não ande de bicicleta ou moto nas 48 horas antes.','Avise se fez toque retal ou exame de próstata recentemente.']},
+    'Exame de urina (EAS)':{curto:'1ª urina da manhã',itens:['Colete de preferência a primeira urina da manhã.','Faça a higiene íntima antes da coleta.','Despreze o primeiro jato e colete o jato do meio no frasco.']},
+    'Urocultura':{curto:'1ª urina da manhã',itens:['Colete a primeira urina da manhã, após higiene íntima.','Despreze o primeiro jato e colete o jato do meio.','Avise se estiver tomando antibiótico.']},
+    'Exame de fezes (EPF)':{curto:'Frasco na recepção',itens:['Retire o frasco coletor na recepção.','Colete sem contato com urina ou com a água do vaso.','Entregue em até 24 horas, guardando na geladeira.']},
+    'Ultrassonografia':{curto:'Varia conforme a região',itens:['Abdome: jejum de 8 horas.','Pélvico: beba 4 a 6 copos de água 1 hora antes e não urine.','Confirme o preparo do seu pedido na recepção.']},
+    'Ultrassom transvaginal':{curto:'Bexiga vazia',itens:['Esvazie a bexiga antes do exame.']},
+    'Ultrassom de rins e vias urinárias':{curto:'Bexiga cheia',itens:['Beba 4 a 6 copos de água 1 hora antes e não urine.']},
+    'Ultrassom de próstata':{curto:'Bexiga cheia',itens:['Beba 4 a 6 copos de água 1 hora antes e não urine.']},
+    'Tomografia computadorizada':{curto:'Jejum de 4 h (contraste)',itens:['Jejum de 4 horas se o exame for com contraste.','Traga um exame de creatinina recente.','Avise se tem alergia ou se usa metformina.']},
+    'Ressonância magnética':{curto:'Sem objetos de metal',itens:['Avise se tem marca-passo, implante ou prótese de metal.','Retire brincos, piercings e objetos de metal.','Jejum de 4 horas se o exame for com contraste.']},
+    'Mamografia':{curto:'Sem desodorante',itens:['Não use desodorante, talco ou creme nas axilas e mamas no dia.','Traga suas mamografias anteriores.']},
+    'Densitometria óssea':{curto:'Sem cálcio 24 h antes',itens:['Não tome suplemento de cálcio nas 24 horas antes.','Venha com roupa sem metal (zíper, botões).']},
+    'Teste ergométrico':{curto:'Roupa e tênis confortáveis',itens:['Venha com roupa e tênis confortáveis.','Faça uma refeição leve 2 horas antes.','Pergunte ao médico se deve suspender remédios do coração.']},
+    'Holter 24 horas':{curto:'Banho antes do exame',itens:['Tome banho antes: o aparelho não pode ser molhado por 24 horas.','Homens: se possível, venha com o peito depilado.']},
+    'MAPA 24 horas':{curto:'Camisa de manga larga',itens:['Venha com camisa de manga larga.','Tome banho antes: o aparelho não pode ser molhado por 24 horas.']},
+    'Eletroencefalograma':{curto:'Cabelos limpos e secos',itens:['Lave os cabelos no dia, sem creme, gel ou óleo.','Siga a orientação de sono do seu médico, se houver.']},
+    'Audiometria':{curto:'Evite barulho 14 h antes',itens:['Evite lugares com barulho alto nas 14 horas antes.']},
+    'Preventivo (Papanicolau)':{curto:'Abstinência de 48 h',itens:['Sem relação sexual nas 48 horas antes.','Não use cremes ou duchas vaginais nas 48 horas antes.','Não pode estar menstruada.']},
+    'Colposcopia':{curto:'Abstinência de 48 h',itens:['Sem relação sexual nas 48 horas antes.','Não use cremes ou duchas vaginais nas 48 horas antes.','Não pode estar menstruada.']},
+    'Bioimpedância':{curto:'Jejum de 4 horas',itens:['Jejum de 4 horas.','Não faça exercícios nas 12 horas antes.','Evite café e álcool nas 24 horas antes.','Urine 30 minutos antes do exame.']}
+  };
+  function showPrep(){
+    var ex=S.tipo==='Exame',p=ex?PREPARO[S.exame]:null;
+    $('prep').hidden=!ex;$('prep').classList.toggle('none',ex&&!p);
+    $('sDone').classList.toggle('hasprep',ex);
+    if(!ex)return 0;
+    $('prepT').textContent=S.exame;
+    $('prepL').innerHTML=(p?p.itens:['Este exame não precisa de preparo.']).map(function(t){return '<li>'+esc(t)+'</li>'}).join('');
+    return p?1:0;
+  }
+
+  /* ---------- Enviar confirmação por WhatsApp ou e-mail ----------
+     TROCAR AQUI: o envio deve ser feito pelo servidor da clínica
+     (API do WhatsApp Business e serviço de e-mail), nunca direto do totem.
+     Devem devolver uma Promise com {ok:true} ou {ok:false, motivo:'...'}. */
+  function enviarWhatsApp(telefone,mensagem){return new Promise(function(ok){setTimeout(function(){ok({ok:true})},1500)})}
+  function enviarEmail(email,assunto,mensagem){return new Promise(function(ok){setTimeout(function(){ok({ok:true})},1500)})}
+  function msgConfirmacao(){
+    var d=S.date,ex=S.tipo==='Exame',p=ex?PREPARO[S.exame]:null,L=[];
+    L.push('Policlínica São Francisco de Paula');
+    L.push(ex?'Exame confirmado ✅':'Consulta confirmada ✅');
+    L.push('');
+    L.push('Senha: '+$('tSenha').textContent);
+    L.push('Paciente: '+S.nome.trim());
+    if(ex){L.push('Exame: '+S.exame);if(!SO_EXAME[S.esp])L.push('Especialidade: '+S.esp)}else L.push('Especialidade: '+S.esp);
+    L.push('Profissional: '+S.doc);
+    L.push('Local: '+S.clin);
+    L.push('Data: '+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+' às '+S.hora);
+    L.push('Atendimento: '+(S.conv&&S.usarConv?'Convênio '+S.conv.nome:'Particular'));
+    if(S.pag&&S.pag.aut)L.push('Pagamento: '+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val));
+    if(ex){
+      L.push('');L.push('Preparo para o exame:');
+      (p?p.itens:['Este exame não precisa de preparo.']).forEach(function(t){L.push('• '+t)});
+    }
+    L.push('');L.push('Chegue com 15 minutos de antecedência e traga um documento com foto.');
+    return L.join('\n');
+  }
+  var enModo='',enMail='',enBusy=false,enIcons={wa:"<svg viewBox=\"0 0 24 24\"><path d=\"M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3.5 20.5l1.4-4.2A8.5 8.5 0 1 1 20.5 11.6z\"/><path d=\"M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8c-1-.4-2.3-1.7-2.7-2.7l.8-1-1-2z\"/></svg>",mail:"<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2.5\"/><path d=\"M3.5 6.5l8.5 6.5 8.5-6.5\"/></svg>"};
+  function emValido(e){return /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(e)}
+  function enPaint(){
+    var q=$('emQ');if(!q)return;q.textContent=enMail;$('emPh').hidden=!!enMail;
+    $('emInp').classList.remove('bad');$('emHint').classList.remove('bad');
+    $('emHint').textContent='Você receberá a confirmação'+(S.tipo==='Exame'?' e o preparo do exame':'')+' neste e-mail.';
+  }
+  function abrirEnvio(modo){
+    enModo=modo;enBusy=false;
+    $('enIco').innerHTML=enIcons[modo];
+    $('enT').textContent=modo==='wa'?'Enviar por WhatsApp':'Enviar por e-mail';
+    $('enSm').textContent=S.tipo==='Exame'?'Confirmação e preparo do exame':'Confirmação do atendimento';
+    $('enBtns').hidden=false;$('enGo').disabled=false;$('enGoTxt').textContent='Enviar';$('enCancel').textContent='Cancelar';
+    if(modo==='wa'){
+      $('enBody').innerHTML='<div class="ento"><small>Enviaremos para o número</small><b>'+esc(fmtTel(S.tel))+'</b></div><div class="enprev">'+esc(msgConfirmacao())+'</div>';
+    }else{
+      var R=['1234567890','QWERTYUIOP','ASDFGHJKL','ZXCVBNM'],h='';
+      R.forEach(function(r,i){h+='<div class="krow">'+r.split('').map(function(c){return '<button type="button" class="k" data-k="'+c+'">'+c+'</button>'}).join('')+(i===3?'<button type="button" class="k fn w2" data-k="bk" aria-label="Apagar">'+ic('bk')+'</button>':'')+'</div>'});
+      h+='<div class="krow">'+['@','.','_','-','.com','.com.br','@gmail.com','@hotmail.com'].map(function(c){return '<button type="button" class="k fn'+(c.length>4?' w2':'')+'" data-k="'+c+'">'+c+'</button>'}).join('')+'</div>';
+      $('enBody').innerHTML='<div class="eminp" id="emInp">'+"<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2.5\"/><path d=\"M3.5 6.5l8.5 6.5 8.5-6.5\"/></svg>"+'<span class="q" id="emQ"></span><span class="ph" id="emPh">seuemail@exemplo.com</span></div><p class="emhint" id="emHint"></p><div class="tkb emkb" id="emKb">'+h+'</div>';
+      enPaint();
+    }
+    openOv('ovEnvio');
+  }
+  function emKey(k){
+    if(k==='bk')enMail=enMail.slice(0,-1);
+    else if(enMail.length<60){if(k.charAt(0)==='@'&&enMail.indexOf('@')>=0)return;enMail+=k.toLowerCase()}
+    enPaint();
+  }
+  $('enBody').addEventListener('click',function(e){var b=e.target.closest('[data-k]');if(b&&!enBusy)emKey(b.dataset.k)});
+  $('sendWa').addEventListener('click',function(){abrirEnvio('wa')});
+  $('sendMail').addEventListener('click',function(){abrirEnvio('mail')});
+  $('enCancel').addEventListener('click',function(){if(!enBusy)closeOv('ovEnvio')});
+  $('enGo').addEventListener('click',function(){
+    if(enBusy)return;
+    if($('enGoTxt').textContent==='Concluir')return closeOv('ovEnvio');
+    if(enModo==='mail'&&!emValido(enMail)){$('emInp').classList.add('bad');$('emHint').classList.add('bad');$('emHint').textContent='Confira o e-mail digitado. Exemplo: nome@gmail.com';return}
+    var g=this;enBusy=true;g.classList.add('load');$('enGoTxt').textContent='Enviando…';
+    var msg=msgConfirmacao(),pr=enModo==='wa'?enviarWhatsApp(S.tel,msg):enviarEmail(enMail,'Confirmação do seu atendimento · Policlínica São Francisco de Paula',msg);
+    pr.then(function(r){
+      g.classList.remove('load');enBusy=false;
+      if(!r.ok){$('enGoTxt').textContent='Tentar novamente';return}
+      var dest=enModo==='wa'?fmtTel(S.tel):enMail;
+      $('enBody').innerHTML='<div class="endone"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>Enviado!</b><p>'+(S.tipo==='Exame'?'A confirmação e o preparo do exame foram enviados':'A confirmação foi enviada')+' para<br><strong>'+esc(dest)+'</strong></p></div>';
+      $('enGoTxt').textContent='Concluir';$('enCancel').textContent='Fechar';
+      var sb=$(enModo==='wa'?'sendWa':'sendMail');sb.classList.add('sent');sb.querySelector('span').textContent=enModo==='wa'?'Enviado no WhatsApp':'Enviado por e-mail';
+    });
+  });
+  document.addEventListener('keydown',function(e){
+    if(!$('ovEnvio').classList.contains('on')||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='Escape'){if(!enBusy)closeOv('ovEnvio');return}
+    if(enModo!=='mail'||enBusy||!$('emQ'))return;
+    if(e.key==='Backspace'){e.preventDefault();emKey('bk')}
+    else if(e.key==='Enter'){e.preventDefault();$('enGo').click()}
+    else if(e.key.length===1&&/[a-z0-9@._+-]/i.test(e.key)){e.preventDefault();emKey(e.key)}
+  });
+  function resetEnvio(){
+    enMail='';
+    [['sendWa','Enviar por WhatsApp'],['sendMail','Enviar por e-mail']].forEach(function(x){var b=$(x[0]);b.classList.remove('sent');b.querySelector('span').textContent=x[1]});
+  }
   function finishFlow(){
     var senha=(S.pri==='Atendimento mais rápido'?'R':'M')+p2(Math.floor(Math.random()*90)+10)+Math.floor(Math.random()*10);
     $('tSenha').textContent=senha;
     $('doneH').textContent='Tudo certo, '+firstName()+'!';
     var d=S.date;
-    $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd><dt>Local</dt><dd>'+esc(S.clin)+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>Profissional</dt><dd>'+esc(S.doc)+'</dd><dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
+    $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd><dt>Local</dt><dd>'+esc(S.clin)+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>'+(S.tipo==='Exame'?'Exame':'Tipo')+'</dt><dd>'+(S.tipo==='Exame'?esc(S.exame):'Consulta')+'</dd>'+(S.tipo==='Exame'&&PREPARO[S.exame]?'<dt>Preparo</dt><dd>'+esc(PREPARO[S.exame].curto)+'</dd>':'')+'<dt>Profissional</dt><dd>'+esc(S.doc)+'</dd>'+(S.pag&&S.pag.aut?'<dt>Pagamento</dt><dd>'+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+'</dd>':'')+'<dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
     var t=$('ticket');t.style.animation='none';void t.offsetWidth;t.style.animation='';
+    var temPrep=showPrep();resetEnvio();
     show('sDone');confetti();
-    var n=30;$('count').textContent='Voltando ao início em '+n+'s';
+    var n=temPrep?60:45;$('count').textContent='Voltando ao início em '+n+'s';
     clearInterval(doneT);
-    doneT=setInterval(function(){n--;$('count').textContent='Voltando ao início em '+n+'s';if(n<=0)tearAndReset()},1000);
+    doneT=setInterval(function(){if($('ovEnvio').classList.contains('on'))return;n--;$('count').textContent='Voltando ao início em '+n+'s';if(n<=0)tearAndReset()},1000);
   }
   /* Finalizar: a senha balança, rasga no alto e cai; depois volta ao início */
   var tearing=false;
@@ -1590,8 +2132,10 @@ svg.av{stroke:none!important}
 
   /* ---------- Reiniciar ---------- */
   function resetAll(){
+    clearInterval(pagT);pagBusy=false;
     clearInterval(doneT);clearInterval(idleT);idleOpen=false;
-    ['ovCard','ovIdle','ovCancel','ovSlide'].forEach(closeOv);
+    ['ovCard','ovIdle','ovCancel','ovSlide','ovTipo','ovEnvio'].forEach(closeOv);
+    [].forEach.call(document.querySelectorAll('#gEsp .sel'),function(x){x.textContent=''});
     fresh();act=null;$('kb').classList.remove('on');K.classList.remove('kb-open');
     [].forEach.call(document.querySelectorAll('.opt[aria-pressed]'),function(x){x.setAttribute('aria-pressed','false')});
     checkPref();
