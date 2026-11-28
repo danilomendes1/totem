@@ -1031,6 +1031,237 @@ svg.av{stroke:none!important}
 @keyframes pbIn{from{transform:translate(-50%,-100%) scale(.4);opacity:0}to{transform:translate(-50%,-100%);opacity:1}}
 @keyframes pbSwap{0%{transform:translate(-50%,-100%) scale(.85)}100%{transform:translate(-50%,-100%)}}
 @keyframes pbOut{to{transform:translate(-50%,-100%) scale(.7) translateY(-30px);opacity:0}}
+
+/* Tela inicial com CPF e teclado */
+#sHome{cursor:default}
+.idcard{position:relative;border-radius:40px;background:linear-gradient(135deg,#fff 0%,#e3f7ea 60%,#bbf0cf 100%);color:#0c2a1b;padding:38px 44px 46px;box-shadow:0 34px 70px -24px rgba(0,30,15,.65),0 0 0 1px rgba(255,255,255,.4) inset;text-align:left;animation:float 5s ease-in-out infinite;overflow:hidden}
+.idcard::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 0%,rgba(255,255,255,.7),transparent 45%);pointer-events:none}
+.idcard>*{position:relative;z-index:1}
+.idcard .row{display:flex;justify-content:space-between;align-items:center}
+.idcard .logo{display:flex;align-items:center;gap:14px;font-weight:800;font-size:24px;color:#0b5a35;line-height:1.12}
+.idcard .logo img{width:60px;height:52px;object-fit:contain;flex:none}
+.idcard .chip{width:66px;height:50px;border-radius:11px}
+.idcard .ecg{height:56px;margin:16px 0 20px}
+.idcard h2{font-size:44px;font-weight:800;color:#0b5a35;letter-spacing:-.01em;line-height:1.1}
+.idcard p{font-size:27px;color:#3d5a4a;margin-top:8px;font-weight:500}
+.cpfbox{margin-top:26px;display:flex;align-items:center;gap:26px;height:118px;padding:0 32px;border-radius:28px;background:#fff;border:4px solid var(--g600);box-shadow:0 0 0 7px rgba(22,163,74,.13)}
+.cpfbox svg{width:64px;height:52px;stroke:var(--g600);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.cpfv{font-size:56px;font-weight:700;font-variant-numeric:tabular-nums;color:#0c2a1b;white-space:nowrap}
+.cpfv .rest{color:#b7c5bd}
+.cpfv .caret{height:56px;width:4px;vertical-align:-8px}
+.cpfhint{font-size:21px;font-weight:700;color:#53705f;margin:12px 8px 0;min-height:28px}
+.cpfhint.ok{color:var(--g700)}
+#sHome .hgo{width:580px;height:118px;margin:22px auto 0;background:linear-gradient(180deg,#22b45a,#0f7a45);color:#fff;font-size:50px;border:5px solid #fff;box-shadow:0 20px 38px -14px rgba(7,59,36,.75);transition:filter .2s,opacity .2s}
+#sHome .hgo svg{stroke:#fff;width:58px;height:58px;stroke-width:2.6}
+#sHome .hgo::before{border-color:rgba(22,163,74,.5)}
+#sHome .hgo:disabled{filter:saturate(.35);opacity:.6;cursor:default}
+#sHome .hgo:disabled::before{display:none}
+#sHome .hlist span{background:#f3fbf6;color:#0b5a35;border:2px solid #bbf0cf;font-size:24px;padding:14px 26px;box-shadow:0 10px 22px -14px rgba(0,30,15,.6)}
+#sHome .hlist svg{stroke:var(--g700);width:32px;height:32px}
+.hpad{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.hk{height:96px;border:0;border-radius:24px;background:linear-gradient(180deg,#fff,#e6f5ec);color:#0c2a1b;font-family:inherit;font-size:60px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;box-shadow:0 6px 0 #9bd6b2,0 18px 26px -14px rgba(0,30,15,.7);transition:transform .08s,box-shadow .08s}
+.hk:active{transform:translateY(5px);box-shadow:0 1px 0 #9bd6b2,0 8px 14px -10px rgba(0,30,15,.7)}
+.hk.fn{font-size:28px;color:#0b5a35}
+.hk svg{width:38px;height:38px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+#sHome{grid-template-columns:830px 1fr;gap:100px;padding:30px 120px}
+#sHome .hcol{gap:26px}
+#sHome h1{font-size:104px}
+#sHome .lead{font-size:31px;color:#fff;font-weight:600;margin:-8px 0 0;max-width:none}
+#sHome .hlist{gap:20px}
+#sHome .hpad{width:700px;margin-top:6px}
+
+#sHome .hgo .spin{display:none;border-color:rgba(255,255,255,.4);border-top-color:#fff;width:40px;height:40px}
+#sHome .hgo.load .spin{display:block}
+#sHome .hgo.load{filter:none;opacity:1;font-size:38px}
+#sHome .hgo.load svg{display:none}
+
+/* Confirmação dos dados do cadastro localizado */
+.cfdados{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;margin:4px 0 20px;text-align:left}
+.cfdados[hidden]{display:none}
+.cfd{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid var(--g100);border-radius:20px;padding:12px 18px;min-width:0}
+.cfd.full{grid-column:1/-1}
+.cfd i{width:46px;height:46px;border-radius:14px;background:var(--g100);display:grid;place-items:center;flex:none}
+.cfd i svg{width:26px;height:26px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cfd span{min-width:0}
+.cfd small{display:block;font-size:15px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.cfd b{display:block;font-size:23px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.cfq{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;color:var(--g700);margin-bottom:2px}
+.cfq svg{width:26px;height:26px;stroke:var(--g600);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#ovCard.found .cardhint{display:none}
+.ov.on#ovCard .cfdados{animation:upIn .45s .05s both}
+
+#ovCard.found .dlg{width:1500px;display:grid;grid-template-columns:620px 1fr;column-gap:48px;align-items:center;padding:40px 52px 36px}
+#ovCard.found .dlg>h2,#ovCard.found .dlg>p{grid-column:1/-1}
+#ovCard.found .dlg>p{margin-bottom:22px}
+#ovCard.found .tilt{grid-column:1;grid-row:3/span 5;align-self:center}
+#ovCard.found .dlg .card{margin:0}
+#ovCard.found .cfdados{grid-column:2;grid-row:3;margin:0 0 16px}
+#ovCard.found .convrow{grid-column:2;grid-row:4;margin:0 0 22px}
+#ovCard.found .cvtag{grid-column:2;grid-row:5}
+#ovCard.found .go{grid-column:2;grid-row:6}
+#ovCard.found .back{grid-column:2;grid-row:7}
+#ovCard.found .convrow .cvinfo small{display:none}
+
+/* Aviso rápido: cadastro não localizado */
+.nfmsg{position:absolute;inset:0;z-index:70;display:grid;place-items:center;background:rgba(4,30,18,.55);backdrop-filter:blur(4px);animation:nfIn .3s ease both;cursor:pointer}
+.nfmsg.out{animation:nfOut .3s ease forwards}
+.nfwin{width:760px;max-width:calc(100% - 80px);background:#fff;border-radius:40px;padding:50px 56px 44px;text-align:center;box-shadow:0 40px 80px -30px rgba(0,30,15,.8);animation:upIn .45s cubic-bezier(.3,1.4,.5,1) both}
+.nfico{width:120px;height:120px;margin:0 auto 22px;border-radius:50%;background:#fff4e0;display:grid;place-items:center;animation:nfPop .5s .1s cubic-bezier(.3,1.6,.5,1) both}
+.nfico svg{width:64px;height:64px;stroke:#d97706;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nfwin h2{font-size:48px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.nfwin p{font-size:26px;color:var(--muted);margin-top:12px;line-height:1.35}
+.nfbar{height:10px;border-radius:99px;background:var(--g100);margin-top:32px;overflow:hidden}
+.nfbar i{display:block;height:100%;width:100%;background:var(--g600);border-radius:inherit;transform-origin:left;animation:nfBar 2.6s linear both}
+.nfwin small{display:block;font-size:19px;font-weight:700;color:var(--g700);margin-top:14px}
+@keyframes nfIn{from{opacity:0}}
+@keyframes nfOut{to{opacity:0}}
+@keyframes nfPop{from{transform:scale(.3);opacity:0}}
+@keyframes nfBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Abas Consultas / Exames na escolha do atendimento */
+.ptabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--g100);border-radius:26px;padding:8px}
+.ptab{border:0;border-radius:20px;background:#fff;color:var(--g800);font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:82px;cursor:pointer;box-shadow:0 4px 12px -8px rgba(0,30,15,.4);transition:background .2s,color .2s}
+.ptab b{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:800}
+.ptab b svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ptab small{font-size:17px;font-weight:600;color:var(--muted)}
+.ptab[aria-pressed=true]{background:linear-gradient(135deg,var(--g600),var(--g700));color:#fff;box-shadow:0 12px 24px -12px rgba(7,59,36,.8)}
+.ptab[aria-pressed=true] small{color:#d7f5e3}
+#sPref .psearch{margin:14px 0}
+.pgrid{overflow-y:auto;overscroll-behavior:contain;padding:2px 4px 14px 2px;margin:0 -4px 0 -2px;-webkit-mask-image:linear-gradient(#000 calc(100% - 28px),transparent);mask-image:linear-gradient(#000 calc(100% - 28px),transparent)}
+#gEsp[hidden],#gEx[hidden]{display:none}
+#gEx{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
+.exh{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;color:var(--g700);text-transform:uppercase;letter-spacing:.06em;margin:10px 2px 0}
+.exh:first-child{margin-top:0}
+.exh svg{width:22px;height:22px;stroke:var(--g600);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#gEx .opt{flex-direction:row;justify-content:flex-start;text-align:left;gap:14px;padding:12px 44px 12px 14px;min-height:78px}
+#gEx .opt svg{width:30px;height:30px;flex:none}
+#gEx .opt span{display:flex;flex-direction:column;min-width:0}
+#gEx .opt b{font-size:19px;font-weight:800;line-height:1.15}
+#gEx .opt small{font-size:15px;font-weight:600;color:var(--muted);margin-top:2px}
+#gEx .opt[aria-pressed=true]::after{width:24px;height:24px;top:50%;margin-top:-12px;right:12px;background-size:14px}
+
+#sPref .cols{flex:1;min-height:0;align-items:stretch}
+#sPref .cols>.sec{display:flex;flex-direction:column;min-height:0;margin-top:20px}
+#sPref .cols>div:last-child .sec:first-child{margin-top:20px}
+#sPref .psearch{position:static;width:100%;height:72px;margin:12px 0}
+#sPref .psearch b{height:54px}
+#sPref .pgrid{flex:1;min-height:0}
+#sPref #gEsp .opt{min-height:100px}
+#sPref .actions{margin-top:14px}
+
+/* Atendimento mais rápido: uma clínica só, com médico e local em destaque */
+#fList.one{display:block}
+.cl.one{padding:24px 28px 20px;margin:0}
+.oneg{display:grid;gap:22px}
+.ohl{display:flex;gap:18px;align-items:center;background:var(--g50);border:2px solid var(--g100);border-radius:24px;padding:16px 20px;min-width:0}
+.ohl+.ohl{margin-top:14px}
+.ohl>span:last-child{min-width:0}
+.ofoto{width:86px;height:86px;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 0 0 4px #fff,0 0 0 6px var(--g200)}
+.ofoto img,.ofoto svg{width:100%;height:100%;display:block;object-fit:cover}
+.ohl .bi{width:86px!important;height:86px!important;border-radius:24px!important}
+.ohl .bi svg{width:44px!important;height:44px!important}
+.ohl small{display:block;font-size:15px;font-weight:800;color:var(--g700);text-transform:uppercase;letter-spacing:.07em}
+.ohl b{display:block;font-size:31px;font-weight:800;letter-spacing:-.01em;line-height:1.12;margin-top:2px}
+.ohl em{display:block;font-style:normal;font-size:19px;font-weight:600;color:var(--muted);margin-top:3px}
+.otimes .when{margin-top:0}
+.otimes .when b{color:var(--g700)}
+.otimes .xs{margin-top:12px}
+.otimes .xd{margin-top:20px}
+.onone{text-align:center;padding:40px 20px;font-size:22px;color:var(--muted);font-weight:600}
+.onone b{display:block;font-size:28px;color:var(--ink);margin-bottom:6px}
+
+.oneg{grid-template-columns:620px 1fr;align-items:start;gap:34px}
+.cl.one{height:100%;overflow-y:auto}
+.otimes .xs{grid-template-columns:repeat(4,1fr)}
+
+/* Médico específico: só os profissionais de uma clínica */
+.hloc{margin-bottom:16px}
+.hloc .bi{background:var(--g100);display:grid;place-items:center;flex:none}
+.hloc .bi svg{stroke:var(--g700);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.hloc b{font-size:27px}
+.doc .free{display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:800;color:var(--g700);margin-top:6px}
+.doc .free svg{width:16px;height:16px;stroke:var(--g600);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.doc .free.no{color:var(--muted)}
+
+/* Local do atendimento em destaque */
+.ohl.oloc{background:linear-gradient(135deg,var(--g600),var(--g800));border:0;box-shadow:0 18px 36px -18px rgba(7,59,36,.85);position:relative;overflow:hidden}
+.ohl.oloc::after{content:"";position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);pointer-events:none}
+.ohl.oloc small{color:#bbf0cf}
+.ohl.oloc b{color:#fff;font-size:32px!important}
+.ohl.oloc em{color:#fff;font-size:26px;font-weight:700;margin-top:4px;display:flex;align-items:center;gap:8px}
+.ohl.oloc .bi{background:#fff!important;position:relative;box-shadow:0 8px 18px -8px rgba(0,30,15,.6)}
+.ohl.oloc .bi svg{stroke:var(--g700)!important;animation:pinHop 1.8s ease-in-out infinite}
+.ohl.oloc .bi::after{content:"";position:absolute;inset:-6px;border-radius:28px;border:3px solid rgba(255,255,255,.55);animation:ring 2.2s ease-out infinite}
+@keyframes pinHop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* Parcelas com juros a partir de 4x */
+.parc{display:grid!important;grid-template-columns:repeat(5,1fr);gap:8px}
+.parc button{height:auto!important;min-height:76px;padding:8px 6px;position:relative}
+.parc button small{margin-top:2px}
+.parc button .pj{display:block;font-size:13px;font-weight:800;margin-top:3px;color:var(--g700)}
+.parc button .pj.cj{color:#b45309}
+.jurinfo{display:flex;align-items:center;gap:8px;font-size:17px!important;font-weight:700;color:var(--muted)!important;margin-top:12px!important;line-height:1.3}
+.jurinfo svg{width:20px;height:20px;flex:none;stroke:var(--g600);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.jurinfo.cj{color:#92400e!important}
+.jurinfo.cj svg{stroke:#d97706}
+.jurinfo b{color:inherit}
+
+/* Pagamento em dinheiro no guichê */
+.pgopts{grid-template-columns:repeat(4,1fr)!important}
+.nota{width:150px;flex:none;display:grid;place-items:center}
+.nota .np{width:128px;background:#fff;border-radius:10px 10px 0 0;padding:16px 14px 22px;box-shadow:0 18px 30px -16px rgba(0,30,15,.6);position:relative;animation:notaSai 2.4s ease-in-out infinite}
+.nota .np::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:12px;background:linear-gradient(-45deg,transparent 6px,#fff 0) 0 0/12px 12px repeat-x,linear-gradient(45deg,transparent 6px,#fff 0) 0 0/12px 12px repeat-x}
+.nota .np i{display:block;height:7px;border-radius:4px;background:#d8e6dd;margin-top:8px}
+.nota .np i:nth-child(2){width:70%}.nota .np i:nth-child(4){width:55%}
+.nota .np b{display:block;font-size:15px;font-weight:800;color:var(--g700);text-align:center;letter-spacing:.06em}
+.nota .np em{display:block;font-style:normal;font-size:20px;font-weight:800;text-align:center;margin-top:8px;color:var(--ink)}
+@keyframes notaSai{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.pgsteps{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.pgsteps li{display:flex;align-items:center;gap:12px;font-size:19px;font-weight:600;color:var(--ink)}
+.pgsteps li i{width:32px;height:32px;border-radius:50%;background:var(--g100);color:var(--g700);font-style:normal;font-weight:800;font-size:17px;display:grid;place-items:center;flex:none}
+/* Aviso na tela final */
+.guiche{display:flex;align-items:center;gap:18px;background:#fff7e6;color:#7c2d12;border:3px solid #f59e0b;border-radius:26px;padding:16px 22px;margin-top:18px;text-align:left;box-shadow:0 16px 30px -18px rgba(0,0,0,.5)}
+.guiche[hidden]{display:none}
+.guiche .gi{width:64px;height:64px;border-radius:18px;background:#f59e0b;display:grid;place-items:center;flex:none;animation:pinHop 1.8s ease-in-out infinite}
+.guiche .gi svg{width:38px;height:38px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.guiche small{display:block;font-size:15px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#b45309}
+.guiche b{display:block;font-size:28px;font-weight:800;line-height:1.15;color:#7c2d12}
+.guiche span>em{display:block;font-style:normal;font-size:19px;font-weight:600;color:#92400e;margin-top:2px}
+.tkpag{margin:10px 0 4px;border:2.5px dashed #f59e0b;border-radius:14px;padding:8px 12px;text-align:center;background:#fff7e6}
+.tkpag small{display:block;font-size:13px;font-weight:800;letter-spacing:.08em;color:#b45309}
+.tkpag b{display:block;font-size:24px;font-weight:800;color:#7c2d12}
+
+#sDone.hasguiche .big{display:none}
+.tkpag{margin:8px 0 10px}
+.guiche{margin-bottom:14px}
+
+/* Faixas com o nome da clínica na tela inicial */
+.hfaixa{position:absolute!important;left:0;right:0;height:46px;overflow:hidden;background:rgba(255,255,255,.1);border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);backdrop-filter:blur(2px);z-index:2;pointer-events:none;display:flex;align-items:center}
+.hfaixa.top{top:0}.hfaixa.bot{bottom:0}
+.hft{display:flex;align-items:center;gap:26px;white-space:nowrap;width:max-content;animation:hfRun 60s linear infinite;padding-left:26px}
+.hfaixa.bot .hft{animation-direction:reverse}
+.hft span{font-size:19px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.hft i{font-style:normal;font-size:16px;color:#4ade80}
+@keyframes hfRun{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.hft{animation:none}}
+#sHome{padding-top:66px;padding-bottom:66px}
+#sHome h1{font-size:94px}
+#sHome .hcol{gap:20px}
+#sHome .hk{height:82px}
+#sHome .hpad{gap:13px}
+#sHome .idcard{padding:32px 40px 38px}
+#sHome .idcard .ecg{margin:12px 0 14px}
+
+/* Título da tela de acesso quando é cadastro novo */
+.lpanel h1.novo{animation:upIn .45s both}
+.lsub.novo{color:var(--g700);font-weight:700}
+/* Brilho que acompanha o dedo/mouse no painel */
+.lpanel{--mx:50%;--my:-200px;--gl:0;isolation:isolate}
+.lpanel::before,.lpanel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:var(--gl);transition:opacity .35s}
+.lpanel::before{z-index:5;background:radial-gradient(circle 300px at var(--mx) var(--my),rgba(74,222,128,.32),rgba(74,222,128,.12) 45%,transparent 72%)}
+.lpanel::after{z-index:6;padding:5px;background:radial-gradient(circle 320px at var(--mx) var(--my),rgba(74,222,128,1),rgba(74,222,128,.55) 40%,transparent 78%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+@media (prefers-reduced-motion:reduce){.lpanel::before,.lpanel::after{display:none}}
 </style>
 </head>
 <body>
@@ -1058,29 +1289,39 @@ svg.av{stroke:none!important}
     <!-- 0. Início -->
     <section class="screen green on" id="sHome" aria-label="Início">
       <div class="crosses" aria-hidden="true"></div>
+      <div class="hfaixa top" aria-hidden="true"><div class="hft"><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i></div></div>
+      <div class="hfaixa bot" aria-hidden="true"><div class="hft"><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i><span>Policlínica São Francisco de Paula</span><i>✚</i><span>Desde 1974</span><i>✚</i></div></div>
+      <div class="hcard"><div class="idcard">
+          <div class="row"><div class="logo"><img src="fotos/logo-icone.png" alt=""><span>Policlínica<br>São Francisco de Paula</span></div><div class="chip" aria-hidden="true"></div></div>
+          <svg class="ecg" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 16h110c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h148"/><path class="pulse" pathLength="1" d="M0 16h110c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h148"/></svg>
+          <h2>Identificação do paciente</h2>
+          <p>Digite seu CPF para ser identificado.</p>
+          <div class="cpfbox" aria-live="polite"><svg viewBox="0 0 24 24"><rect x="2" y="4.5" width="20" height="15" rx="3"/><circle cx="8" cy="11" r="2.4"/><path d="M4.6 16.5c.8-2.2 6-2.2 6.8 0M14 9.5h5M14 13h5"/></svg><span class="cpfv" id="hCpfV"></span></div>
+          <div class="cpfhint" id="hCpfH"></div>
+          <button class="cta hgo" id="hGo" type="button" disabled><span class="spin" aria-hidden="true"></span><span id="hGoTxt">Confirmar</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div></div>
       <div class="hcol">
         <h1>Olá! Seja<br>bem-vindo(a)</h1>
-        <p class="lead">Faça seu atendimento aqui no totem, de forma rápida e sem fila.</p>
+        <p class="lead">Para iniciar o seu atendimento, digite seu CPF.</p>
         <div class="hlist">
-          <span><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 11h18"/></svg>Tenha seu CPF</span>
+          <span><svg viewBox="0 0 24 24"><rect x="2" y="4.5" width="20" height="15" rx="3"/><circle cx="8" cy="11" r="2.4"/><path d="M4.6 16.5c.8-2.2 6-2.2 6.8 0M14 9.5h5M14 13h5"/></svg>Tenha seu CPF em mãos</span>
           <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Leva 2 minutos</span>
         </div>
-        <button class="cta" id="start" type="button">
-          <svg viewBox="0 0 24 24"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 10V3.5a1.5 1.5 0 0 1 3 0V10M14 10V5a1.5 1.5 0 0 1 3 0v8c0 5-3 8-6 8-3 0-4-2-6-5l-1.5-3a1.5 1.5 0 0 1 2.5-1.5L8 14"/></svg>
-          Toque para começar
-        </button>
-        <p class="hsmall">Precisa de ajuda? Procure nossa recepção.</p>
+        <div class="hpad" id="hPad"><button type="button" class="hk" data-h="1">1</button><button type="button" class="hk" data-h="2">2</button><button type="button" class="hk" data-h="3">3</button><button type="button" class="hk" data-h="4">4</button><button type="button" class="hk" data-h="5">5</button><button type="button" class="hk" data-h="6">6</button><button type="button" class="hk" data-h="7">7</button><button type="button" class="hk" data-h="8">8</button><button type="button" class="hk" data-h="9">9</button><button type="button" class="hk fn" data-h="clr"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>Limpar</button><button type="button" class="hk" data-h="0">0</button><button type="button" class="hk fn" data-h="bk"><svg viewBox="0 0 24 24"><path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1zM16 9.5l-5 5M11 9.5l5 5"/></svg>Apagar</button></div>
       </div>
-      <div class="hcard"><div class="card" data-card></div></div>
     </section>
 
     <!-- 1. Identificação (tela de acesso com carrossel) -->
     <section class="screen" id="sId" aria-label="Identificação">
       <div class="lpanel">
         <svg class="lecg" id="lecg" viewBox="0 0 560 30" preserveAspectRatio="none" aria-hidden="true"><path class="lb" d="M0 16h230l12-12 14 24 12-18 10 6h282"/><path class="lf" id="lecgFill" pathLength="1" d="M0 16h230l12-12 14 24 12-18 10 6h282"/><path class="lp" pathLength="1" d="M0 16h230l12-12 14 24 12-18 10 6h282"/></svg>
-        <h1>Acesse sua conta</h1>
-        <p class="lsub">Gerencie seus agendamentos e atendimentos de forma rápida e prática.</p>
+        <h1 id="idT">Acesse sua conta</h1>
+        <p class="lsub" id="idSub">Gerencie seus agendamentos e atendimentos de forma rápida e prática.</p>
 
+        <button class="fld" id="fCpf" data-f="cpf" type="button">
+          <span class="t"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 11h18"/></svg>CPF<span class="hint" id="hCpf"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
+          <span class="v" id="vCpf"></span>
+        </button>
         <button class="fld" id="fNome" data-f="nome" type="button">
           <span class="t"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg>Nome e sobrenome<span class="hint" id="hNome"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
           <span class="v" id="vNome"></span>
@@ -1088,10 +1329,6 @@ svg.av{stroke:none!important}
         <button class="fld" id="fNasc" data-f="nasc" type="button">
           <span class="t"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Data de nascimento<span class="hint" id="hNasc"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
           <span class="v" id="vNasc"></span>
-        </button>
-        <button class="fld" id="fCpf" data-f="cpf" type="button">
-          <span class="t"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 11h18"/></svg>CPF<span class="hint" id="hCpf"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
-          <span class="v" id="vCpf"></span>
         </button>
         <button class="fld" id="fTel" data-f="tel" type="button">
           <span class="t"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Número de celular<span class="hint" id="hTel"></span><span class="status"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></span>
@@ -1181,11 +1418,16 @@ svg.av{stroke:none!important}
       <div class="pnl">
         <h1>Como podemos atender você?</h1>
         <p class="sub">Selecione suas preferências de atendimento.</p>
-        <button type="button" class="psearch" id="prefBusca"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>Pesquisar exame ou especialidade…</span><b>Buscar</b></button>
         <div class="cols">
           <div class="sec">
-            <h3>1. Escolha a especialidade</h3>
-            <div class="g3" id="gEsp"></div>
+            <h3>1. Escolha seu atendimento</h3>
+            <div class="ptabs" id="pTabs">
+              <button type="button" class="ptab" data-tab="c" aria-pressed="true"><b><svg viewBox="0 0 24 24"><path d="M6 3v6a4 4 0 0 0 8 0V3M4 3h4M12 3h4M10 13v2a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12" r="2"/></svg>Consultas</b><small id="ptC">0 selecionadas</small></button>
+              <button type="button" class="ptab" data-tab="e" aria-pressed="false"><b><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7 15h10"/></svg>Exames</b><small id="ptE">0 selecionados</small></button>
+            </div>
+            <button type="button" class="psearch" id="prefBusca"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span id="prefBuscaTx">Pesquisar especialidade…</span><b>Buscar</b></button>
+            <div class="g3 pgrid" id="gEsp"></div>
+            <div class="pgrid" id="gEx" hidden></div>
           </div>
           <div>
             <div class="sec"><h3>2. Qual é sua prioridade?</h3><div class="g2" id="gPri"></div></div>
@@ -1215,7 +1457,7 @@ svg.av{stroke:none!important}
             <div class="sec"><h3>Dia</h3><div class="days" id="gDays"></div></div>
             <div class="sec" id="secDoc"><h3>Profissional</h3><div class="docs" id="gDocs"></div></div>
           </div>
-          <div class="sec"><div class="locrow" id="locRow" hidden><b><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Local</b><div class="seg" id="gLocs"></div></div><p class="locaddr" id="locAddr"></p><h3 id="slotTitle">Horários disponíveis</h3><div class="slots" id="gSlots"></div>
+          <div class="sec"><div class="ohl oloc hloc" id="hLoc"></div><div class="locrow" id="locRow" hidden><b><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Local</b><div class="seg" id="gLocs"></div></div><p class="locaddr" id="locAddr"></p><h3 id="slotTitle">Horários disponíveis</h3><div class="slots" id="gSlots"></div>
             <div class="legend"><span><i></i>Disponível</span><span><i class="s"></i>Selecionado</span><span><i class="x"></i>Ocupado</span></div>
           </div>
         </div>
@@ -1232,7 +1474,7 @@ svg.av{stroke:none!important}
         <div class="frow">
           <div>
             <h1 class="ttl"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Atendimento mais rápido</h1>
-            <p class="sub">Compare os horários disponíveis nas três clínicas.</p>
+            <p class="sub">Mostramos o primeiro horário livre, com o médico e o local.</p>
           </div>
           <div class="fbox">
             <b id="fEsp">Clínico Geral</b>
@@ -1288,6 +1530,7 @@ svg.av{stroke:none!important}
               <button type="button" class="opt" data-m="pix" aria-pressed="false"><span class="pgi" data-i="pix"></span><b>Pix</b><small>Aprovação na hora</small></button>
               <button type="button" class="opt" data-m="debito" aria-pressed="false"><span class="pgi" data-i="card"></span><b>Débito</b><small>Na maquininha</small></button>
               <button type="button" class="opt" data-m="credito" aria-pressed="false"><span class="pgi" data-i="card"></span><b>Crédito</b><small>Até 3x sem juros</small></button>
+              <button type="button" class="opt" data-m="dinheiro" aria-pressed="false"><span class="pgi" data-i="cash"></span><b>Dinheiro</b><small>Pague no guichê</small></button>
             </div>
             <div class="pgpanel" id="pgPanel"></div>
           </div>
@@ -1305,7 +1548,8 @@ svg.av{stroke:none!important}
       <div class="dleft">
         <div class="big"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
         <h1 id="doneH">Tudo certo!</h1>
-        <p class="lead">Retire sua senha ao lado e aguarde ser chamado(a).</p>
+        <p class="lead" id="doneLead">Retire sua senha ao lado e aguarde ser chamado(a).</p>
+        <div class="guiche" id="guiche" hidden><span class="gi"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></span><span><small>Pagamento pendente</small><b>Vá ao guichê de pagamento</b><em id="guicheV"></em></span></div>
         <div class="prep" id="prep" hidden>
           <div class="prh"><span class="pri2"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></svg></span><div><small>Preparo para o exame</small><b id="prepT"></b></div></div>
           <ul id="prepL"></ul>
@@ -1327,8 +1571,9 @@ svg.av{stroke:none!important}
             <div class="tl">Sua senha</div>
             <div class="senha" id="tSenha">A000</div>
             <svg class="ecg" viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path class="base" d="M0 16h96c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h162"/><path class="pulse" pathLength="1" d="M0 16h96c3 0 4-2 6-4s4-2 6 0l4 4 7-14 8 26 7-17 4 5h162"/></svg>
+            <div class="tkpag" id="tkPag" hidden></div>
             <dl id="tDl"></dl>
-            <p class="tf">Apresente esta senha na recepção.<br>Policlínica São Francisco de Paula</p>
+            <p class="tf" id="tkTf">Apresente esta senha na recepção.<br>Policlínica São Francisco de Paula</p>
           </div>
         </div>
       </div>
@@ -1353,6 +1598,7 @@ svg.av{stroke:none!important}
       <span class="fchip"><svg viewBox="0 0 24 24"><path d="M12 2.5l4 4-4 4-4-4zM12 13.5l4 4-4 4-4-4zM2.5 12l4-4 4 4-4 4zM13.5 12l4-4 4 4-4 4z"/></svg>Pix</span>
       <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></svg>Débito</span>
       <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></svg>Crédito</span>
+      <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>Dinheiro</span>
       <span class="fchip"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v8M8 12h8"/></svg>Cartão Consulta</span>
     </div>
   </footer>
@@ -1363,6 +1609,12 @@ svg.av{stroke:none!important}
       <h2 id="ovCardT">Cadastro confirmado!</h2>
       <p id="ovCardP">Confira seus dados na carteirinha antes de continuar.</p>
       <div class="tilt" id="tilt"><div class="card ok" data-card></div></div>
+      <div class="cfdados" id="cfDados" hidden>
+        <div class="cfq"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7M12 17h.01"/></svg>Estes dados estão corretos?</div>
+        <div class="cfd full"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></svg></i><span><small>Nome</small><b id="cfNome"></b></span></div>
+        <div class="cfd"><i><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></i><span><small>Nascimento</small><b id="cfNasc"></b></span></div>
+        <div class="cfd"><i><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></svg></i><span><small>Celular</small><b id="cfTel"></b></span></div>
+      </div>
       <div class="convrow" id="convRow" hidden>
         <div class="cvinfo"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12h6M12 9v6"/></svg><span><small>Cartão Consulta identificado pelo CPF</small><b id="cvNome"></b><em id="cvDet"></em></span></div>
         <div class="seg" id="cvSeg"><button type="button" data-u="1">Usar Cartão Consulta</button><button type="button" data-u="0">Particular</button></div>
@@ -1563,13 +1815,13 @@ svg.av{stroke:none!important}
     setF('fNasc','hNasc',ni.ok,touched.nasc,ni.ok?'Data confirmada.':(touched.nasc?ni.msg:'Exemplo: 05/08/1980'));
     // CPF
     $('vCpf').innerHTML=S.cpf||act==='cpf'?masked(S.cpf,'000.000.000-00',act==='cpf'):'<span class="phd">Toque para digitar · 000.000.000-00</span>';
-    var cmsg=S.cpf.length<11?'Informe os 11 números do seu CPF.':'CPF completo.';
+    var cmsg=S.cpf.length<11?'Informe os 11 números do seu CPF.':(cpfBusy?'Buscando seu cadastro…':'CPF completo.');
     setF('fCpf','hCpf',ok.cpf,touched.cpf&&S.cpf.length===11||touched.cpf&&act!=='cpf',cmsg);
     // Celular
     var ti=telInfo();
     $('vTel').innerHTML=S.tel||act==='tel'?masked(S.tel,'(00) 00000-0000',act==='tel'):'<span class="phd">Toque para digitar · (00) 00000-0000</span>';
     setF('fTel','hTel',ti.ok,touched.tel,ti.ok?ti.msg:(touched.tel?ti.msg:'Para avisos do atendimento.'));
-    ['fNome','fNasc','fCpf','fTel'].forEach(function(id){$(id).classList.toggle('act',$(id).dataset.f===act)});
+    ['fCpf','fNome','fNasc','fTel'].forEach(function(id){$(id).classList.toggle('act',$(id).dataset.f===act)});
     // Progresso
     $('barFill').style.width=(n/4*100)+'%';$('lecgFill').style.strokeDashoffset=(1-n/4).toFixed(3);$('lecg').classList.toggle('full',n===4);
     $('barTxt').textContent=n===4?'Tudo pronto!':(n===3?'Falta 1 passo':'Faltam '+(4-n)+' passos');
@@ -1603,7 +1855,7 @@ svg.av{stroke:none!important}
   var ACC=[['Á','À','Â','Ã','É','Ê','Í','Ó','Ô','Õ'],['Ú','Ü',"'",'-','.','','','','',''],['','','','','','','','bk'],['abc','sp','ok']];
   var NUM=[['1','2','3'],['4','5','6'],['7','8','9'],['bk','0','ok']];
   var LBL={nome:'Nome completo',nasc:'Data de nascimento',cpf:'CPF',tel:'Celular'};
-  var ORDER=['nome','nasc','cpf','tel'];
+  var ORDER=['cpf','nome','nasc','tel'];
   function nextField(){var i=ORDER.indexOf(act);for(var j=i+1;j<ORDER.length;j++){if(!isOk()[ORDER[j]])return ORDER[j]}return null}
   function renderKb(){
     var rows=act==='nome'?(kbMode==='acc'?ACC:ALPHA):NUM,nx=nextField(),h='';
@@ -1636,7 +1888,7 @@ svg.av{stroke:none!important}
     if(k==='bk'){S[act]=S[act].slice(0,-1)}
     else if(k==='sp'){if(act==='nome'&&S.nome&&!/ $/.test(S.nome)&&S.nome.length<60)S.nome+=' '}
     else if(act==='nome'){if(S.nome.length<60)S.nome+=k;if(kbMode==='acc'){kbMode='alpha';renderKb()}}
-    else{var max=act==='nasc'?8:11;if(/\d/.test(k)&&S[act].length<max)S[act]+=k;if(S[act].length===max)touched[act]=true}
+    else{var max=act==='nasc'?8:11;if(/\d/.test(k)&&S[act].length<max)S[act]+=k;if(S[act].length===max)touched[act]=true;if(act==='cpf'&&S.cpf.length===11){paint();buscaCpfId();return}}
     paint();
     var o=$('kbKeys').querySelector('[data-k=ok]');if(o){var nx2=nextField();o.textContent=nx2?'Próximo →':'Concluir ✓'}
   }
@@ -1688,36 +1940,123 @@ svg.av{stroke:none!important}
   [].forEach.call(document.querySelectorAll('[data-back]'),function(b){b.addEventListener('click',function(){show(b.dataset.back)})});
 
   /* Início */
-  $('sHome').addEventListener('click',function(){show('sId')});
+  /* Início: CPF digitado direto na tela inicial */
+  var hCpf='';
+  /* Aviso de cadastro não localizado e ida para a tela de cadastro */
+  function avisoNf(cb){
+    var m=document.createElement('div'),done=false;m.className='nfmsg';m.setAttribute('role','alert');
+    m.innerHTML='<div class="nfwin"><div class="nfico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5M8.5 8.5l5 5M13.5 8.5l-5 5"/></svg></div><h2>Cadastro não localizado</h2><p>Não encontramos um cadastro com este CPF.<br>Vamos fazer o seu agora, é rapidinho!</p><div class="nfbar"><i></i></div><small>Indo para o cadastro…</small></div>';
+    K.appendChild(m);
+    function vai(){if(done)return;done=true;clearTimeout(t);m.classList.add('out');setTimeout(function(){m.remove()},300);cb()}
+    var t=setTimeout(vai,2600);m.addEventListener('click',vai);
+  }
+  function paintHome(){
+    $('hCpfV').innerHTML=masked(hCpf,'000.000.000-00',true);
+    var n=11-hCpf.length;
+    $('hCpfH').textContent=!hCpf.length?'Toque nos números do teclado.':(n?'Faltam '+n+' número'+(n>1?'s':''):'CPF completo. Toque em Confirmar.');
+    $('hCpfH').classList.toggle('ok',!n);
+    $('hGo').disabled=n>0;
+  }
+  function homeKey(k){bump();if(k==='bk')hCpf=hCpf.slice(0,-1);else if(k==='clr')hCpf='';else if(/^\d$/.test(k)&&hCpf.length<11)hCpf+=k;paintHome()}
+  $('hPad').addEventListener('click',function(e){var b=e.target.closest('[data-h]');if(b)homeKey(b.dataset.h)});
+  $('hGo').addEventListener('click',function(){
+    var g=this;if(hCpf.length<11||g.classList.contains('load'))return;
+    g.classList.add('load');g.disabled=true;$('hGoTxt').textContent='Localizando cadastro…';
+    var cpf=hCpf;
+    buscarCadastro('','',cpf).then(function(achou){
+      g.classList.remove('load');$('hGoTxt').textContent='Confirmar';
+      S.cpf=cpf;cpfBuscado=cpf;touched.cpf=true;hCpf='';paintHome();
+      if(achou){
+        /* Cadastro localizado: preenche com os dados do sistema e mostra o pop-up */
+        S.nome=achou.nome||S.nome;S.nasc=achou.nasc||S.nasc;S.tel=achou.tel||S.tel;
+        touched={nome:true,nasc:true,cpf:true,tel:true};paint();
+        abrirCard(achou);
+      }else{
+        /* Não localizado: avisa e segue para a tela de cadastro com o CPF já preenchido */
+        paint();
+        tituloId(true);
+        avisoNf(function(){
+          if(cur!=='sHome')return;
+          show('sId');
+          setTimeout(function(){var f=ORDER.filter(function(x){return!isOk()[x]})[0];if(f)openKb(f)},450);
+        });
+      }
+    });
+  });
+  document.addEventListener('keydown',function(e){
+    if(cur!=='sHome'||$('hGo').classList.contains('load')||e.ctrlKey||e.metaKey||e.altKey||document.querySelector('.ov.on'))return;
+    if(/^\d$/.test(e.key)){e.preventDefault();homeKey(e.key)}
+    else if(e.key==='Backspace'){e.preventDefault();homeKey('bk')}
+    else if(e.key==='Enter'){e.preventDefault();$('hGo').click()}
+  });
+  paintHome();
 
   /* Identificação */
-  $('clearId').addEventListener('click',function(){S.nome=S.nasc=S.cpf=S.tel='';touched={nome:false,nasc:false,cpf:false,tel:false};openKb('nome')});
+  $('clearId').addEventListener('click',function(){S.nome=S.nasc=S.cpf=S.tel='';touched={nome:false,nasc:false,cpf:false,tel:false};openKb('cpf')});
   $('goId').addEventListener('click',function(){
     var go=this;if(go.disabled)return;
     go.classList.add('load');go.disabled=true;$('goIdTxt').textContent='Localizando cadastro…';
     buscarCadastro(S.nome.trim(),S.nasc,S.cpf).then(function(achou){
       go.classList.remove('load');$('goIdTxt').textContent='Entrar';paint();
+      abrirCard(achou);
+    });
+  });
+  /* CPF completo na tela de cadastro: busca os dados no sistema pelo CPF */
+  var cpfBuscado='',cpfBusy=false;
+  function buscaCpfId(){
+    var c=S.cpf;if(c.length<11||c===cpfBuscado||cpfBusy)return;
+    cpfBuscado=c;cpfBusy=true;paint();
+    buscarCadastro('','',c).then(function(achou){
+      cpfBusy=false;
+      if(cur!=='sId'||S.cpf!==c){paint();return}
+      if(achou){
+        tituloId(false);S.nome=achou.nome||S.nome;S.nasc=achou.nasc||S.nasc;S.tel=achou.tel||S.tel;
+        touched={nome:true,nasc:true,cpf:true,tel:true};closeKb();abrirCard(achou);
+      }else{tituloId(true);paint();if(act==='cpf')openKb('nome')}
+    });
+  }
+  /* Tela de acesso: título muda quando o cadastro não foi encontrado */
+  function tituloId(novo){
+    var h=$('idT'),p=$('idSub');h.classList.toggle('novo',!!novo);p.classList.toggle('novo',!!novo);
+    h.textContent=novo?'Faça seu cadastro':'Acesse sua conta';
+    p.textContent=novo?'Não encontramos seu CPF. Preencha seus dados para se cadastrar, é rapidinho!':'Gerencie seus agendamentos e atendimentos de forma rápida e prática.';
+  }
+  /* Brilho que segue o dedo/mouse */
+  (function(){
+    var sc=$('sId'),pn=sc.querySelector('.lpanel');if(!pn)return;
+    sc.addEventListener('pointermove',function(e){
+      var r=pn.getBoundingClientRect(),k=r.width/pn.offsetWidth||1;
+      pn.style.setProperty('--mx',((e.clientX-r.left)/k)+'px');pn.style.setProperty('--my',((e.clientY-r.top)/k)+'px');
+      var dx=Math.max(r.left-e.clientX,0,e.clientX-r.right),dy=Math.max(r.top-e.clientY,0,e.clientY-r.bottom);
+      pn.style.setProperty('--gl',Math.max(0,1-Math.hypot(dx,dy)/(260*k)).toFixed(2));
+    });
+    sc.addEventListener('pointerleave',function(){pn.style.setProperty('--gl',0)});
+  })();
+  function abrirCard(achou){
       if(achou){
         S.novo=false;S.conv=achou.convenio||null;S.usarConv=!!S.conv;
-        $('ovCardT').textContent='Tudo certo, '+firstName()+'!';
-        $('ovCardP').textContent=S.conv?'Identificamos seu Cartão Consulta pelo CPF. Como deseja ser atendido(a)?':'Confira seus dados na carteirinha antes de continuar.';
+        $('ovCardT').textContent='Olá, '+firstName()+'! Encontramos seu cadastro';
+        $('ovCardP').textContent=S.conv?'Confirme seus dados e escolha como deseja ser atendido(a).':'Antes de continuar, confirme se seus dados estão corretos.';
+        $('cfNome').textContent=S.nome.trim();$('cfNasc').textContent=fmtNasc(S.nasc)||'—';$('cfTel').textContent=S.tel?fmtTel(S.tel):'—';
+        $('cfDados').hidden=false;$('ovCard').classList.add('found');
         showConv();
-        $('ovCardGo').textContent='Continuar →';
+        $('ovCardGo').textContent='Sim, estão corretos →';$('ovCardFix').textContent='Não, corrigir meus dados';
         openOv('ovCard');
       }else{
         S.novo=true;S.conv=null;S.usarConv=false;showConv();
+        $('cfDados').hidden=true;$('ovCard').classList.remove('found');$('ovCardFix').textContent='Corrigir meus dados';
         $('ovCardT').textContent='Cadastro não localizado';
         $('ovCardP').textContent='Não encontramos seu cadastro. Deseja se cadastrar agora com estes dados?';
         $('ovCardGo').textContent='Sim, cadastrar agora →';
         openOv('ovCard');
       }
-    });
-  });
+  }
 
   /* Busca do cadastro pelo CPF.
      TROCAR AQUI pela consulta ao sistema da clínica. Deve devolver:
        null                                  -> cadastro não encontrado
-       {convenio:null}                       -> paciente particular
+       {convenio:null, nome:'MARIA DA SILVA', nasc:'15031985', tel:'21987654321'} -> paciente particular
+       (nome, nasc = DDMMAAAA e tel = DDD+número vêm do cadastro e preenchem a carteirinha)
        {convenio:{nome:'Cartão Consulta', plano:'Titular', carteirinha:'0123 4567 8901', desconto:30}} -> paciente com Cartão Consulta
        desconto = porcentagem de desconto do Cartão Consulta, vinda do sistema (0 ou ausente = sem desconto)
      Demonstração: CPF terminado em ímpar = não localizado; em 2 ou 6 = particular; em 0, 4 ou 8 = com convênio. */
@@ -1726,9 +2065,10 @@ svg.av{stroke:none!important}
     return new Promise(function(ok){setTimeout(function(){
       var u=+cpf.slice(-1);
       if(u%2)return ok(null);
-      if(u%4===2)return ok({convenio:null});
       var h=hsh(cpf),n=String(h).padStart(12,'0').slice(-12);
-      ok({convenio:{nome:CONVENIOS_DEMO[h%CONVENIOS_DEMO.length],plano:['Titular','Dependente'][h%2],desconto:30,carteirinha:n.slice(0,4)+' '+n.slice(4,8)+' '+n.slice(8)}});
+      var p={nome:['MARIA DA SILVA SANTOS','JOSÉ CARLOS OLIVEIRA','ANA PAULA FERREIRA','DANILO MENDES'][h%4],nasc:['15031985','02111972','28071990','09041968'][h%4],tel:'2198'+n.slice(0,7)};
+      if(u%4===2)return ok(Object.assign(p,{convenio:null}));
+      ok(Object.assign(p,{convenio:{nome:CONVENIOS_DEMO[h%CONVENIOS_DEMO.length],plano:['Titular','Dependente'][h%2],desconto:30,carteirinha:n.slice(0,4)+' '+n.slice(4,8)+' '+n.slice(8)}}));
     },1300)});
   }
   function showConv(){
@@ -1780,12 +2120,6 @@ svg.av{stroke:none!important}
       g.appendChild(b);
     });
   }
-  (function(){var g=$('gEsp');g.innerHTML='';esp.forEach(function(it){
-    var b=document.createElement('button');b.type='button';b.className='opt';b.dataset.esp=it[0];b.setAttribute('aria-pressed','false');
-    b.innerHTML=ic(it[1])+'<span>'+(it[2]||it[0])+'</span><span class="sel"></span>';
-    b.addEventListener('click',function(){if(!(EXAMES[it[0]]||[]).length)toggleItem(it[0],'Consulta');else abrirTipo(it[0])});
-    g.appendChild(b);
-  })})();
   tiles('gPri',pri,'pri','pri',function(i){return ic(i[1])+'<span>'+i[0]+'</span><small>'+i[2]+'</small>'});
   tiles('gPer',per,'per','per',function(i){return ic(i[1])+i[0]});
   function checkPref(){$('goPref').disabled=!(S.itens.length&&S.pri&&S.per)}
@@ -1812,6 +2146,40 @@ svg.av{stroke:none!important}
   };
   /* Caixas que só têm exames (não abrem a escolha consulta/exame) */
   var SO_EXAME={'Exames de Imagem':1,'Exames de Laboratório':1};
+  /* Grade de consultas (sem as caixas que só têm exames) */
+  (function(){var g=$('gEsp');g.innerHTML='';esp.forEach(function(it){
+    if(SO_EXAME[it[0]])return;
+    var b=document.createElement('button');b.type='button';b.className='opt';b.dataset.esp=it[0];b.setAttribute('aria-pressed','false');
+    b.innerHTML=ic(it[1])+'<span>'+(it[2]||it[0])+'</span><span class="sel"></span>';
+    b.addEventListener('click',function(){toggleItem(it[0],'Consulta')});
+    g.appendChild(b);
+  })})();
+  /* Grade de exames: todos os exames direto, sem escolher especialidade antes */
+  function gruposExames(){
+    var seen={},G=[['Exames de Laboratório','tube','Exames de Laboratório'],['Exames de Imagem','scan','Exames de Imagem']].map(function(c){
+      var l=(EXAMES[c[0]]||[]).filter(function(x){if(seen[x])return false;seen[x]=1;return true}).map(function(x){return [x,c[0],c[1]]});
+      return {t:c[2],i:c[1],l:l};
+    });
+    var out=[];esp.forEach(function(it){if(SO_EXAME[it[0]])return;(EXAMES[it[0]]||[]).forEach(function(x){if(!seen[x]){seen[x]=1;out.push([x,it[0],it[1]])}})});
+    G.push({t:'Outros exames',i:'flask',l:out});
+    return G;
+  }
+  (function(){var g=$('gEx'),h='';gruposExames().forEach(function(gr){
+    if(!gr.l.length)return;
+    h+='<div class="exh">'+ic(gr.i)+esc(gr.t)+'</div>';
+    gr.l.forEach(function(x){h+='<button type="button" class="opt" aria-pressed="false" data-ex="'+esc(x[0])+'" data-esp="'+esc(x[1])+'">'+ic(x[2])+'<span><b>'+esc(x[0])+'</b><small>'+esc(SO_EXAME[x[1]]?x[1].replace('Exames de ',''):x[1])+'</small></span></button>'});
+  });g.innerHTML=h;
+  g.addEventListener('click',function(e){var b=e.target.closest('[data-ex]');if(b)toggleItem(b.dataset.esp,'Exame',b.dataset.ex)});
+  })();
+  var prefTab='c';
+  function setTab(t){
+    prefTab=t;
+    [].forEach.call($('pTabs').children,function(b){b.setAttribute('aria-pressed',String(b.dataset.tab===t))});
+    $('gEsp').hidden=t!=='c';$('gEx').hidden=t!=='e';
+    $('prefBuscaTx').textContent=t==='c'?'Pesquisar especialidade…':'Pesquisar exame…';
+    $(t==='c'?'gEsp':'gEx').scrollTop=0;
+  }
+  $('pTabs').addEventListener('click',function(e){var b=e.target.closest('[data-tab]');if(b)setTab(b.dataset.tab)});
   function espTxt(){return itemPre()+espTxt1()}
   function espTxt1(){if(SO_EXAME[S.esp])return 'Exame: '+S.exame+' · '+S.esp;return S.esp+(S.tipo==='Exame'?' · Exame: '+S.exame:' · Consulta')}
   var tpEsp='',tpQ='';
@@ -1829,14 +2197,13 @@ svg.av{stroke:none!important}
   function temExame(){return S.itens.some(function(it){return it.tipo==='Exame'})}
   function achaItem(e,t,x){var k=itKey(e,t,x);for(var i=0;i<S.itens.length;i++)if(itKey(S.itens[i].esp,S.itens[i].tipo,S.itens[i].exame)===k)return i;return -1}
   function paintItens(){
-    [].forEach.call($('gEsp').children,function(b){
-      var l=S.itens.filter(function(it){return it.esp===b.dataset.esp});
-      b.setAttribute('aria-pressed',String(!!l.length));
-      b.querySelector('.sel').textContent=l.length>1?l.length+' itens':l.length?(l[0].tipo==='Exame'?l[0].exame:'Consulta'):'';
-    });
+    [].forEach.call($('gEsp').children,function(b){b.setAttribute('aria-pressed',String(achaItem(b.dataset.esp,'Consulta')>=0))});
+    [].forEach.call($('gEx').querySelectorAll('[data-ex]'),function(b){b.setAttribute('aria-pressed',String(achaItem(b.dataset.esp,'Exame',b.dataset.ex)>=0))});
+    var nc=S.itens.filter(function(it){return it.tipo!=='Exame'}).length,ne=S.itens.length-nc;
+    $('ptC').textContent=nc+(nc===1?' selecionada':' selecionadas');$('ptE').textContent=ne+(ne===1?' selecionado':' selecionados');
     var n=S.itens.length,txt=n+(n>1?' procedimentos selecionados':' procedimento selecionado');
     $('cart').classList.toggle('has',!!n);
-    $('cartHint').textContent=n?txt:'Você pode escolher mais de uma especialidade ou exame.';
+    $('cartHint').textContent=n?txt:'Você pode escolher consultas e exames juntos.';
     $('cartGo').disabled=!n;
     $('goPref').textContent=n?'Continuar ('+n+') →':'Continuar →';
     $('itN').textContent=n||'';
@@ -1844,7 +2211,7 @@ svg.av{stroke:none!important}
     $('itClr').hidden=!n;
     $('itList').innerHTML=n?S.itens.map(function(it,i){
       return '<div class="itrow"><span class="iti">'+ic(espIcon(it.esp))+'</span><span class="itx"><b>'+esc(itNome(it))+'</b><small>'+esc(itSub(it))+'</small></span><button type="button" class="itrm" data-i="'+i+'"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>Remover</button></div>';
-    }).join(''):'<div class="itempty">Nenhum atendimento selecionado.<br>Toque em uma especialidade para escolher.</div>';
+    }).join(''):'<div class="itempty">Nenhum atendimento selecionado.<br>Escolha uma consulta ou um exame.</div>';
     var d=$('tpDone');if(d)d.textContent=n?'Concluir · '+n+(n>1?' selecionados':' selecionado'):'Concluir';
     checkPref();
   }
@@ -1881,7 +2248,7 @@ svg.av{stroke:none!important}
     $('tpExN').textContent=n?n+(n>1?' exames disponíveis':' exame disponível'):'Pesquise entre todos os exames';
     var so=!!SO_EXAME[e];
     $('ovTipo').querySelector('.thead small').textContent=so?'Agendar exame':'Especialidade';
-    $('tpBack').hidden=so;$('tpBack').textContent='← Voltar';paintItens();
+    $('tpBack').hidden=so;$('tpBack').textContent='← Voltar';$('tpPh').textContent='Pesquisar exame…';paintItens();
     $('tpS1').hidden=so;$('tpS2').hidden=!so;if(so)tpList();
     openOv('ovTipo');
   }
@@ -1889,11 +2256,11 @@ svg.av{stroke:none!important}
     var q=semAc(tpQ.trim()),h='',lst=[];
     if(!q){(EXAMES[tpEsp]||[]).forEach(function(x){lst.push([x,tpEsp,'Exame'])})}
     else{
-      if(!tpEsp)esp.forEach(function(it){var e=it[0];if(!SO_EXAME[e]&&semAc(e).indexOf(q)===0)lst.push(['Consulta',e,'Consulta'])});
-      Object.keys(EXAMES).forEach(function(e){EXAMES[e].forEach(function(x){if(semAc(x).indexOf(q)>=0||semAc(e).indexOf(q)===0)lst.push([x,e,'Exame'])})});
+      if(!tpEsp&&prefTab!=='e')esp.forEach(function(it){var e=it[0];if(!SO_EXAME[e]&&semAc(e).indexOf(q)>=0)lst.push(['Consulta',e,'Consulta'])});
+      if(tpEsp||prefTab!=='c')Object.keys(EXAMES).forEach(function(e){EXAMES[e].forEach(function(x){if(semAc(x).indexOf(q)>=0||semAc(e).indexOf(q)===0)lst.push([x,e,'Exame'])})});
       if(tpEsp)lst.sort(function(a,b){return (b[1]===tpEsp)-(a[1]===tpEsp)});
     }
-    $('tpLab').textContent=q?(lst.length?lst.length+' resultado'+(lst.length>1?'s':'')+' para "'+tpQ.trim()+'"':'Nenhum resultado'):(!tpEsp?'Digite o nome do exame ou da especialidade':SO_EXAME[tpEsp]?'Escolha o exame':'Exames de '+tpEsp);
+    $('tpLab').textContent=q?(lst.length?lst.length+' resultado'+(lst.length>1?'s':'')+' para "'+tpQ.trim()+'"':'Nenhum resultado'):(!tpEsp?(prefTab==='c'?'Digite o nome da especialidade':'Digite o nome do exame'):SO_EXAME[tpEsp]?'Escolha o exame':'Exames de '+tpEsp);
     h=lst.map(function(x){
       var nm=esc(x[0]);
       if(q&&x[2]==='Exame'){var i=semAc(x[0]).indexOf(q);if(i>=0)nm=esc(x[0].slice(0,i))+'<mark>'+esc(x[0].slice(i,i+q.length))+'</mark>'+esc(x[0].slice(i+q.length))}
@@ -1905,8 +2272,8 @@ svg.av{stroke:none!important}
   }
   function abrirBusca(){
     tpEsp='';tpQ='';
-    $('tpT').textContent='Pesquisar';$('tpIco').innerHTML='<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>';
-    $('ovTipo').querySelector('.thead small').textContent='Exame ou consulta';
+    $('tpT').textContent=prefTab==='c'?'Pesquisar especialidade':'Pesquisar exame';$('tpIco').innerHTML='<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>';
+    $('ovTipo').querySelector('.thead small').textContent=prefTab==='c'?'Consultas':'Exames';$('tpPh').textContent=prefTab==='c'?'Pesquisar especialidade…':'Pesquisar exame…';
     $('tpBack').hidden=true;paintItens();
     $('tpS1').hidden=true;$('tpS2').hidden=false;tpList();
     openOv('ovTipo');
@@ -2054,24 +2421,21 @@ svg.av{stroke:none!important}
       best.ci=ci;best.c=c;best.none=!meds.length;
       return best;
     }).sort(function(a,b){return a.when-b.when});
-    $('fList').innerHTML=list.map(function(x,i){
-      var best=i===0&&x.first,body;
-      if(x.none)body='<p class="nofast">Nenhum profissional de '+esc(S.esp)+' nesta clínica.</p>';
-      else if(!x.first)body='<p class="nofast">Sem horários neste período nos próximos dias.</p>';
-      else{
-        var extra='';
-        var rest=x.first.s.slice(3);
-        if(rest.length)extra+='<div class="xd">'+CAL+dmy(x.first.d)+'</div><div class="xs">'+rest.map(function(t){return slotBtn(x.ci,x.first.d,t)}).join('')+'</div>';
-        x.days.slice(1,4).forEach(function(dd){extra+='<div class="xd">'+CAL+WDS[dd.d.getDay()]+' · '+dmy(dd.d)+'</div><div class="xs">'+dd.s.map(function(t){return slotBtn(x.ci,dd.d,t)}).join('')+'</div>'});
-        body='<div class="when">'+CAL+dmy(x.first.d)+'</div><div class="dr"><span class="mini">'+foto(x.doc)+'</span>'+x.doc+'</div>'+
-          '<div class="ts">'+x.first.s.slice(0,3).map(function(t){return slotBtn(x.ci,x.first.d,t)}).join('')+'</div>'+
-          '<div class="extra">'+extra+'</div>'+
-          '<button type="button" class="more" data-more="'+x.ci+'">'+(fastOpen[x.ci]?'Ver menos':'Ver mais datas e horários')+'<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>';
-      }
-      return '<div class="cl'+(best?' best':'')+(fastOpen[x.ci]?' open':'')+'" data-doc="'+x.doc+'">'+
-        (best?'<div class="tag"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>HORÁRIO MAIS PRÓXIMO</div>':'')+
-        '<div class="ch"><span class="bi">'+BLD+'</span><span><b>'+x.c.nome+'</b><small>'+x.c.endereco+'</small></span></div>'+body+'</div>';
-    }).join('');
+    var x=list[0],PIN='<svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+    $('fList').classList.add('one');
+    if(!x||!x.first){
+      $('fList').innerHTML='<div class="cl one"><div class="onone"><b>Sem horários neste período</b>Não há horários livres nos próximos dias. Escolha outro período acima.</div></div>';
+    }else{
+      var m=medico(x.doc)||{},oq=S.tipo==='Exame'?S.exame:S.esp;
+      var dias='<div class="when">'+CAL+'<b>'+WDS[x.first.d.getDay()]+' · '+dmy(x.first.d)+'</b></div><div class="xs">'+x.first.s.map(function(t){return slotBtn(x.ci,x.first.d,t)}).join('')+'</div>';
+      x.days.slice(1,4).forEach(function(dd){dias+='<div class="xd">'+CAL+WDS[dd.d.getDay()]+' · '+dmy(dd.d)+'</div><div class="xs">'+dd.s.map(function(t){return slotBtn(x.ci,dd.d,t)}).join('')+'</div>'});
+      $('fList').innerHTML='<div class="cl one best" data-doc="'+esc(x.doc)+'">'+
+        '<div class="tag"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>HORÁRIO MAIS PRÓXIMO</div>'+
+        '<div class="oneg"><div class="oinfo">'+
+          '<div class="ohl odoc"><span class="ofoto">'+foto(x.doc)+'</span><span><small>Médico(a)</small><b>'+esc(x.doc)+'</b><em>'+esc(oq)+(m.crm?' · '+esc(m.crm):'')+'</em></span></div>'+
+          '<div class="ohl oloc"><span class="bi">'+PIN+'</span><span><small>Local do atendimento</small><b>'+esc(x.c.nome)+'</b><em>'+esc(x.c.endereco)+'</em></span></div>'+
+        '</div><div class="otimes">'+dias+'</div></div></div>';
+    }
     $('goFast').disabled=!S.fsel;$('goFast').textContent=goLbl();
   }
   $('fSeg').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b)return;fastPer=b.dataset.p;S.fsel=null;fastOpen={};buildFast();$('fList').scrollTop=0});
@@ -2111,12 +2475,20 @@ svg.av{stroke:none!important}
   function foto(n){var m=medico(n);return m&&m.foto?'<img src="'+m.foto+'" alt="">':avatar(n)}
   function crm(n){var m=medico(n);return m?m.crm:''}
   function ondeAtende(m){return m.clinicas.map(function(id){var c=clinica(id);return c?c.curto:id}).join(' · ')}
+  /* Uma clínica só: a que tem mais profissionais da especialidade (empate: a primeira da lista) */
+  function horCid(){
+    var best='',n=-1;
+    CLINICAS.forEach(function(c){var k=medicosDe(S.esp,c.id).length;if(k>n){n=k;best=c.id}});
+    return best;
+  }
   function buildHor(){
-    var DS=days(),docs=medicosDe(S.esp),today=new Date();today.setHours(0,0,0,0);
+    S.cid=horCid();
+    var DS=days(),docs=medicosDe(S.esp,S.cid),today=new Date();today.setHours(0,0,0,0);
     var m=medico(S.doc);
-    if(m&&m.clinicas.indexOf(S.cid)<0)S.cid=m.clinicas[0];
-    if(!m)S.cid='';
-    $('horSub').textContent=S.per+' · escolha o profissional, o local e o horário';itemBanner('hItem');
+    if(m&&m.clinicas.indexOf(S.cid)<0){S.doc='';S.hora='';m=null}
+    var r0=PER[S.per],day0=DS[S.day]||DS[0],c0=clinica(S.cid);
+    $('horSub').textContent=S.per+' · escolha o profissional e o horário';itemBanner('hItem');
+    $('hLoc').innerHTML=c0?'<span class="bi">'+PIN+'</span><span><small>Local do atendimento</small><b>'+esc(c0.nome)+'</b><em>'+esc(c0.endereco)+'</em></span>':'';
     $('gDays').innerHTML=DS.map(function(d,i){
       var diff=Math.round((d-today)/864e5);
       var lbl=diff===0?'Hoje':(diff===1?'Amanhã':WDS[d.getDay()]);
@@ -2125,12 +2497,13 @@ svg.av{stroke:none!important}
     $('gDocs').innerHTML=docs.length?docs.map(function(x){
       var n=x.nome,k=x.clinicas.length;
       return '<button type="button" class="doc" data-doc="'+n+'" aria-pressed="'+(S.doc===n)+'"><span class="ph">'+foto(n)+'</span><b>'+n+'</b><small>'+esc(S.esp)+'</small><span class="crm">'+x.crm+'</span>'+
-        '<span class="where">'+PIN+(k>1?'<b>'+k+' clínicas:</b>&nbsp;':'')+ondeAtende(x)+'</span></button>';
-    }).join(''):'<div class="empty-slots" style="grid-column:1/-1">Nenhum profissional de '+esc(S.esp)+' cadastrado.</div>';
+        (function(){var q=horariosLivres(x,S.cid,day0,r0[0]*60,r0[1]*60,30).filter(function(t){return !ocupado(day0,hm(t,':'))}).length;
+          return '<span class="free'+(q?'':' no')+'"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'+(q?q+(q>1?' horários livres':' horário livre'):'Sem horários neste dia')+'</span>'})()+'</button>';
+    }).join(''):'<div class="empty-slots" style="grid-column:1/-1">Nenhum profissional de '+esc(S.esp)+' nesta clínica.</div>';
     // local
-    $('locRow').hidden=!m;
+    $('locRow').hidden=true;
     $('gLocs').innerHTML=m?m.clinicas.map(function(id){var c=clinica(id);return '<button type="button" data-cid="'+id+'" aria-pressed="'+(S.cid===id)+'">'+(c?c.curto:id)+'</button>'}).join(''):'';
-    $('locAddr').textContent=m&&clinica(S.cid)?clinica(S.cid).endereco:'';
+    $('locAddr').textContent='';
     // horários
     var r=PER[S.per],day=DS[S.day],h='',any=false;
     if(!m){h='<div class="empty-slots">Escolha um profissional para ver os horários.</div>'}
@@ -2141,7 +2514,7 @@ svg.av{stroke:none!important}
         if(!busy)any=true;
         h+='<button type="button" class="slot" data-h="'+hh+'"'+(busy?' disabled':'')+' aria-pressed="'+(S.hora===hh)+'">'+hh+'</button>';
       }
-      if(!any)h='<div class="empty-slots">Sem horários livres neste dia e local. Tente outro dia'+(m.clinicas.length>1?' ou outra clínica':'')+'.</div>';
+      if(!any)h='<div class="empty-slots">Sem horários livres neste dia. Tente outro dia ou outro profissional.</div>';
     }
     $('gSlots').innerHTML=h;
     $('slotTitle').textContent='Horários disponíveis · '+S.per;
@@ -2276,8 +2649,28 @@ svg.av{stroke:none!important}
   function processarPagamento(metodo,valor,parcelas){
     return new Promise(function(ok){setTimeout(function(){ok({ok:true,autorizacao:String(100000+Math.floor(Math.random()*899999))})},metodo==='pix'?2200:2600)});
   }
+  /* Parcelamento no crédito.
+     TROCAR AQUI pelas regras da clínica/maquininha:
+       PARC_MAX       = número máximo de parcelas
+       PARC_SEM_JUROS = até quantas parcelas não tem juros
+       JUROS_MES      = juros ao mês (%) a partir da parcela seguinte
+       PARC_MINIMA    = valor mínimo de cada parcela (R$) */
+  var PARC_MAX=10,PARC_SEM_JUROS=3,JUROS_MES=2.99,PARC_MINIMA=20;
+  function parcInfo(v,n){
+    if(n<=PARC_SEM_JUROS)return{n:n,parc:v/n,total:v,juros:false};
+    var i=JUROS_MES/100,p=v*i/(1-Math.pow(1+i,-n));p=Math.round(p*100)/100;
+    return{n:n,parc:p,total:Math.round(p*n*100)/100,juros:true};
+  }
+  function parcOpcoes(v){var o=[];for(var n=1;n<=PARC_MAX;n++){var x=parcInfo(v,n);if(n===1||x.parc>=PARC_MINIMA)o.push(x)}return o}
+  function pctBr(x){return String(x).replace('.',',')}
+  function jurTxt(){
+    var x=parcInfo(S.pag.val,S.pag.parc),I='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>';
+    if(x.juros)return{c:true,h:I+'<span>Em '+x.n+'x: total de <b>'+brl(x.total)+'</b> · juros de <b>'+pctBr(JUROS_MES)+'% ao mês</b></span>'};
+    return{c:false,h:I+'<span>Até '+PARC_SEM_JUROS+'x <b>sem juros</b>. A partir de '+(PARC_SEM_JUROS+1)+'x, juros de '+pctBr(JUROS_MES)+'% ao mês.</span>'};
+  }
+  function pagTotal(){return S.pag.m==='credito'?parcInfo(S.pag.val,S.pag.parc).total:S.pag.val}
   var pagT=null,pagBusy=false;
-  function pagIc(k){return k==='pix'?'<svg viewBox="0 0 24 24"><path d="M12 2.5l4.2 4.2-4.2 4.2-4.2-4.2zM2.5 12l4.2-4.2 4.2 4.2-4.2 4.2zM21.5 12l-4.2 4.2-4.2-4.2 4.2-4.2zM12 21.5l-4.2-4.2 4.2-4.2 4.2 4.2z"/></svg>':'<svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/></svg>'}
+  function pagIc(k){if(k==='cash')return '<svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>';return k==='pix'?'<svg viewBox="0 0 24 24"><path d="M12 2.5l4.2 4.2-4.2 4.2-4.2-4.2zM2.5 12l4.2-4.2 4.2 4.2-4.2 4.2zM21.5 12l-4.2 4.2-4.2-4.2 4.2-4.2zM12 21.5l-4.2-4.2 4.2-4.2 4.2 4.2z"/></svg>':'<svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/></svg>'}
   [].forEach.call(document.querySelectorAll('.pgi'),function(e){e.innerHTML=pagIc(e.dataset.i)});
   function qrSvg(seed){
     var n=29,h=seed>>>0,r='',inF=function(x,y){return (x<8&&y<8)||(x>n-9&&y<8)||(x<8&&y>n-9)};
@@ -2288,17 +2681,21 @@ svg.av{stroke:none!important}
   }
   function pagBtn(){
     var m=S.pag&&S.pag.m,g=$('goPag');g.disabled=!m||pagBusy;
-    $('goPagTxt').textContent=!m?'Escolha a forma de pagamento':m==='pix'?'Já paguei com Pix':'Pagar '+brl(S.pag.val)+(m==='credito'&&S.pag.parc>1?' em '+S.pag.parc+'x':'');
+    $('goPagTxt').textContent=!m?'Escolha a forma de pagamento':m==='dinheiro'?'Confirmar e pagar no guichê':m==='pix'?'Já paguei com Pix':'Pagar '+brl(pagTotal())+(m==='credito'&&S.pag.parc>1?' em '+S.pag.parc+'x':'');
   }
   function pagPanel(){
     clearInterval(pagT);var m=S.pag.m,p=$('pgPanel');
+    if(m==='dinheiro'){
+      p.innerHTML='<div class="nota"><div class="np"><b>PAGAR NO GUICHÊ</b><i></i><i></i><i></i><i></i><em>'+brl(S.pag.val)+'</em></div></div><div class="pgtx"><h4>Pagamento em dinheiro</h4><p>O pagamento em dinheiro é feito no <b>guichê de pagamento</b>.</p><ol class="pgsteps"><li><i>1</i>Toque em confirmar e retire sua notinha</li><li><i>2</i>Leve a notinha ao <b>guichê de pagamento</b></li><li><i>3</i>Pague <b>'+brl(S.pag.val)+'</b> em dinheiro e aguarde ser chamado(a)</li></ol></div>';
+      return;
+    }
     if(m==='pix'){
       p.innerHTML='<div class="qr">'+qrSvg(hsh(S.cpf+S.pag.val))+'</div><div class="pgtx"><h4>Pague com Pix</h4><p>Escaneie o QR Code com o app do seu banco.</p><ol><li>Abra o app do banco e escolha <b>Pix</b></li><li>Toque em <b>Ler QR Code</b></li><li>Confira o valor de <b>'+brl(S.pag.val)+'</b> e confirme</li></ol><span class="pxt" id="pxT">Expira em 5:00</span></div>';
       var t=300;pagT=setInterval(function(){t--;var e=$('pxT');if(!e)return clearInterval(pagT);e.textContent='Expira em '+Math.floor(t/60)+':'+p2(t%60);if(t<=0){clearInterval(pagT);e.textContent='QR Code expirado · toque em Pix para gerar outro'}},1000);
     }else{
-      var cr=m==='credito',ps=S.pag.val>=100?[1,2,3]:[1];
+      var cr=m==='credito',ps=parcOpcoes(S.pag.val),jt=cr?jurTxt():null;
       p.innerHTML='<div class="pos"><span class="cardani"></span></div><div class="pgtx"><h4>'+(cr?'Cartão de crédito':'Cartão de débito')+'</h4><p>Ao tocar em pagar, <b>insira ou aproxime o cartão</b> na maquininha ao lado do totem e digite a senha se for pedida.</p>'+
-        (cr?'<div class="parc" id="parc">'+ps.map(function(n){return '<button type="button" data-p="'+n+'" aria-pressed="'+(S.pag.parc===n)+'">'+n+'x<small>'+brl(S.pag.val/n)+'</small></button>'}).join('')+'</div>':'')+'</div>';
+        (cr?'<div class="parc" id="parc">'+ps.map(function(x){return '<button type="button" data-p="'+x.n+'" aria-pressed="'+(S.pag.parc===x.n)+'">'+x.n+'x<small>'+brl(x.parc)+'</small><span class="pj'+(x.juros?' cj':'')+'">'+(x.juros?'+'+pctBr(JUROS_MES)+'% a.m.':'sem juros')+'</span></button>'}).join('')+'</div><p class="jurinfo'+(jt.c?' cj':'')+'" id="jurInfo">'+jt.h+'</p>':'')+'</div>';
     }
   }
   $('pgOpts').addEventListener('click',function(e){
@@ -2307,7 +2704,7 @@ svg.av{stroke:none!important}
     [].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});
     pagPanel();pagBtn();
   });
-  $('pgPanel').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b||pagBusy)return;S.pag.parc=+b.dataset.p;[].forEach.call(b.parentNode.children,function(x){x.setAttribute('aria-pressed',String(x===b))});pagBtn()});
+  $('pgPanel').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b||pagBusy)return;S.pag.parc=+b.dataset.p;[].forEach.call(b.parentNode.children,function(x){x.setAttribute('aria-pressed',String(x===b))});var jt=jurTxt(),ji=$('jurInfo');if(ji){ji.innerHTML=jt.h;ji.classList.toggle('cj',jt.c)}pagBtn()});
   function buildPag(){
     S.pag=null;pagBusy=false;clearInterval(pagT);
     var v=valorAtendimento(),d=S.date;
@@ -2322,15 +2719,18 @@ svg.av{stroke:none!important}
   }
   $('goPag').addEventListener('click',function(){
     if(this.disabled||!S.pag)return;
-    var g=this,m=S.pag.m;pagBusy=true;g.classList.add('load');g.disabled=true;
+    var g=this,m=S.pag.m;
+    if(m==='dinheiro'){S.pag.total=S.pag.val;S.pag.guiche=true;finishFlow();return}
+    pagBusy=true;g.classList.add('load');g.disabled=true;
     $('goPagTxt').textContent=m==='pix'?'Verificando pagamento…':'Aguardando o cartão…';
     var w=document.createElement('div');w.className='pgwait';w.innerHTML='<i></i>'+(m==='pix'?'Consultando o banco…':'Siga as instruções da maquininha');
     var tx=$('pgPanel').querySelector('.pgtx');if(tx)tx.appendChild(w);
-    processarPagamento(m,S.pag.val,S.pag.parc).then(function(r){
+    S.pag.total=pagTotal();
+    processarPagamento(m,S.pag.total,S.pag.parc).then(function(r){
       g.classList.remove('load');
       if(!r.ok){pagBusy=false;w.innerHTML='Pagamento não aprovado'+(r.motivo?': '+esc(r.motivo):'')+'. Tente novamente ou escolha outra forma.';pagBtn();return}
       clearInterval(pagT);S.pag.aut=r.autorizacao;
-      $('pgPanel').insertAdjacentHTML('beforeend','<div class="pgok"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>Pagamento aprovado!</b><small>'+(m==='pix'?'Pix':m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' em '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+'</small></div>');
+      $('pgPanel').insertAdjacentHTML('beforeend','<div class="pgok"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>Pagamento aprovado!</b><small>'+(m==='pix'?'Pix':m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' em '+S.pag.parc+'x':''))+' · '+brl(S.pag.total)+'</small></div>');
       $('goPagTxt').textContent='Pagamento aprovado';
       setTimeout(function(){pagBusy=false;finishFlow()},1600);
     });
@@ -2425,7 +2825,8 @@ svg.av{stroke:none!important}
     L.push('Data: '+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+' às '+S.hora);
     }
     L.push('Atendimento: '+(S.conv&&S.usarConv?S.conv.nome+(S.conv.plano?' · '+S.conv.plano:''):'Particular'));
-    if(S.pag&&S.pag.aut)L.push('Pagamento: '+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+(descontoPct()?' (com '+descontoPct()+'% de desconto do Cartão Consulta)':''));
+    if(S.pag&&S.pag.guiche)L.push('Pagamento: Dinheiro · pagar '+brl(S.pag.total)+' no guichê de pagamento com a notinha');
+    if(S.pag&&S.pag.aut)L.push('Pagamento: '+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.total||S.pag.val)+(S.pag.parc>PARC_SEM_JUROS&&S.pag.m==='credito'?' (com juros de '+pctBr(JUROS_MES)+'% ao mês)':'')+(descontoPct()?' (com '+descontoPct()+'% de desconto do Cartão Consulta)':''));
     if(mult){S.itens.filter(function(it){return it.tipo==='Exame'}).forEach(function(it){var pp=PREPARO[it.exame];L.push('');L.push('Preparo · '+it.exame+':');(pp?pp.itens:['Não precisa de preparo.']).forEach(function(t){L.push('• '+t)})})}
     else if(ex){
       L.push('');L.push('Preparo para o exame:');
@@ -2526,15 +2927,21 @@ svg.av{stroke:none!important}
     [].forEach.call(K.querySelectorAll('.pvoo,.pena2,.cartinha,.pbalao'),function(e){e.remove()});
     [['sendWa','Enviar por WhatsApp'],['sendMail','Enviar por e-mail']].forEach(function(x){var b=$(x[0]);b.classList.remove('sent','busy','pegou');b.querySelector('span').textContent=x[1]});
   }
+  var DONE_LEAD='Retire sua senha ao lado e aguarde ser chamado(a).';
   function finishFlow(){
     var senha=(S.pri==='Atendimento mais rápido'?'R':'M')+p2(Math.floor(Math.random()*90)+10)+Math.floor(Math.random()*10);
     $('tSenha').textContent=senha;
     $('doneH').textContent='Tudo certo, '+firstName()+'!';
     var d=S.date;
     if(S.itens.length>1){S.date=S.itens[0].date;S.hora=S.itens[0].hora;S.clin=S.itens[0].clin;S.doc=S.itens[0].doc;d=S.date;
-      $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd>'+S.itens.map(function(it){var dd=it.date;return '<dt>'+p2(dd.getDate())+'/'+p2(dd.getMonth()+1)+' '+it.hora+'</dt><dd>'+esc(itNome(it))+'</dd>'}).join('')+(S.pag&&S.pag.aut?'<dt>Pagamento</dt><dd>'+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+'</dd>':'');
+      $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd>'+S.itens.map(function(it){var dd=it.date;return '<dt>'+p2(dd.getDate())+'/'+p2(dd.getMonth()+1)+' '+it.hora+'</dt><dd>'+esc(itNome(it))+'</dd>'}).join('')+(S.pag&&S.pag.aut?'<dt>Pagamento</dt><dd>'+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.total||S.pag.val)+(S.pag.parc>PARC_SEM_JUROS&&S.pag.m==='credito'?' (com juros de '+pctBr(JUROS_MES)+'% ao mês)':'')+'</dd>':'');
     }else
-    $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd><dt>Local</dt><dd>'+esc(S.clin)+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>'+(S.tipo==='Exame'?'Exame':'Tipo')+'</dt><dd>'+(S.tipo==='Exame'?esc(S.exame):'Consulta')+'</dd>'+(S.tipo==='Exame'&&PREPARO[S.exame]?'<dt>Preparo</dt><dd>'+esc(PREPARO[S.exame].curto)+'</dd>':'')+'<dt>Profissional</dt><dd>'+esc(S.doc)+'</dd>'+(S.pag&&S.pag.aut?'<dt>Pagamento</dt><dd>'+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.val)+'</dd>':'')+'<dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
+    $('tDl').innerHTML='<dt>Paciente</dt><dd>'+esc(firstName())+'</dd><dt>Atendimento</dt><dd>'+(S.conv&&S.usarConv?esc(S.conv.nome):'Particular')+'</dd><dt>Local</dt><dd>'+esc(S.clin)+'</dd><dt>Especialidade</dt><dd>'+esc(S.esp)+'</dd><dt>'+(S.tipo==='Exame'?'Exame':'Tipo')+'</dt><dd>'+(S.tipo==='Exame'?esc(S.exame):'Consulta')+'</dd>'+(S.tipo==='Exame'&&PREPARO[S.exame]?'<dt>Preparo</dt><dd>'+esc(PREPARO[S.exame].curto)+'</dd>':'')+'<dt>Profissional</dt><dd>'+esc(S.doc)+'</dd>'+(S.pag&&S.pag.aut?'<dt>Pagamento</dt><dd>'+(S.pag.m==='pix'?'Pix':S.pag.m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' '+S.pag.parc+'x':''))+' · '+brl(S.pag.total||S.pag.val)+(S.pag.parc>PARC_SEM_JUROS&&S.pag.m==='credito'?' (com juros de '+pctBr(JUROS_MES)+'% ao mês)':'')+'</dd>':'')+'<dt>Data</dt><dd>'+p2(d.getDate())+'/'+p2(d.getMonth()+1)+'/'+d.getFullYear()+'</dd><dt>Horário</dt><dd>'+S.hora+'</dd>';
+    var gx=!!(S.pag&&S.pag.guiche);
+    $('guiche').hidden=!gx;$('sDone').classList.toggle('hasguiche',gx);if(gx)$('guicheV').textContent='Pague '+brl(S.pag.total)+' em dinheiro com a sua notinha';
+    $('doneLead').textContent=gx?'Retire sua notinha e vá ao guichê de pagamento.':DONE_LEAD;
+    $('tkTf').innerHTML=gx?'Apresente esta notinha no guichê de pagamento.<br>Policlínica São Francisco de Paula':'Apresente esta senha na recepção.<br>Policlínica São Francisco de Paula';
+    var tp=$('tkPag');tp.hidden=!gx;if(gx)tp.innerHTML='<small>PAGAR NO GUICHÊ · DINHEIRO</small><b>'+brl(S.pag.total)+'</b>';
     var t=$('ticket');t.style.animation='none';void t.offsetWidth;t.style.animation='';
     var temPrep=showPrep();resetEnvio();
     show('sDone');confetti();
@@ -2630,12 +3037,12 @@ svg.av{stroke:none!important}
     clearInterval(pagT);pagBusy=false;
     clearInterval(doneT);clearInterval(idleT);idleOpen=false;
     ['ovCard','ovIdle','ovCancel','ovSlide','ovTipo','ovEnvio','ovItens'].forEach(closeOv);
-    [].forEach.call(document.querySelectorAll('#gEsp .sel'),function(x){x.textContent=''});
+    [].forEach.call(document.querySelectorAll('#gEsp .sel'),function(x){x.textContent=''});setTab('c');
     fresh();paintItens();act=null;$('kb').classList.remove('on');K.classList.remove('kb-open');
     [].forEach.call(document.querySelectorAll('.opt[aria-pressed]'),function(x){x.setAttribute('aria-pressed','false')});
     checkPref();
     ['fNome','fNasc','fCpf','fTel'].forEach(function(id){$(id).classList.remove('ok','bad','act')});
-    paint();show('sHome');
+    hCpf='';cpfBuscado='';cpfBusy=false;tituloId(false);paintHome();[].forEach.call(K.querySelectorAll('.nfmsg'),function(e){e.remove()});paint();show('sHome');
   }
 
   /* ---------- Inatividade: 60s sem toque -> aviso de 15s ---------- */
@@ -2643,6 +3050,7 @@ svg.av{stroke:none!important}
   function bump(){last=Date.now()}
   document.addEventListener('pointerdown',function(){if(!idleOpen)bump()},true);
   setInterval(function(){
+    if(cur==='sHome'&&hCpf&&Date.now()-last>45000){hCpf='';paintHome()}
     if(cur==='sHome'||cur==='sDone'||idleOpen)return;
     if(Date.now()-last>60000){
       idleOpen=true;var n=15;$('idleN').textContent=n;openOv('ovIdle');
