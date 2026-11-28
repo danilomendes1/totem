@@ -947,6 +947,7 @@ svg.av{stroke:none!important}
 @keyframes nfOut{to{opacity:0}}
 @keyframes nfPop{from{transform:scale(.3);opacity:0}}
 @keyframes nfBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.pgopts{grid-template-columns:repeat(2,1fr)}
 </style>
 </head>
 <body>
@@ -1185,7 +1186,6 @@ svg.av{stroke:none!important}
             <h3>Forma de pagamento</h3>
             <div class="pgopts" id="pgOpts">
               <button type="button" class="opt" data-m="pix" aria-pressed="false"><span class="pgi" data-i="pix"></span><b>Pix</b><small>Aprovação na hora</small></button>
-              <button type="button" class="opt" data-m="debito" aria-pressed="false"><span class="pgi" data-i="card"></span><b>Débito</b><small>Na maquininha</small></button>
               <button type="button" class="opt" data-m="credito" aria-pressed="false"><span class="pgi" data-i="card"></span><b>Crédito</b><small>Até 3x sem juros</small></button>
             </div>
             <div class="pgpanel" id="pgPanel"></div>
@@ -1246,7 +1246,6 @@ svg.av{stroke:none!important}
     <div class="fpay" aria-label="Formas de pagamento aceitas">
       <small>Aceitamos</small>
       <span class="fchip"><svg viewBox="0 0 24 24"><path d="M12 2.5l4 4-4 4-4-4zM12 13.5l4 4-4 4-4-4zM2.5 12l4-4 4 4-4 4zM13.5 12l4-4 4 4-4 4z"/></svg>Pix</span>
-      <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></svg>Débito</span>
       <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></svg>Crédito</span>
       <span class="fchip"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v8M8 12h8"/></svg>Cartão Consulta</span>
     </div>

@@ -1032,7 +1032,7 @@ svg.av{stroke:none!important}
 .jurinfo b{color:inherit}
 
 /* Pagamento em dinheiro no guichê */
-.pgopts{grid-template-columns:repeat(4,1fr)!important}
+.pgopts{grid-template-columns:repeat(3,1fr)!important}
 .nota{width:150px;flex:none;display:grid;place-items:center}
 .nota .np{width:128px;background:#fff;border-radius:10px 10px 0 0;padding:16px 14px 22px;box-shadow:0 18px 30px -16px rgba(5,20,45,.6);position:relative;animation:notaSai 2.4s ease-in-out infinite}
 .nota .np::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:12px;background:linear-gradient(-45deg,transparent 6px,#fff 0) 0 0/12px 12px repeat-x,linear-gradient(45deg,transparent 6px,#fff 0) 0 0/12px 12px repeat-x}
@@ -1322,7 +1322,6 @@ header.top::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height
             <h3>Forma de pagamento</h3>
             <div class="pgopts" id="pgOpts">
               <button type="button" class="opt" data-m="pix" aria-pressed="false"><span class="pgi" data-i="pix"></span><b>Pix</b><small>Aprovação na hora</small></button>
-              <button type="button" class="opt" data-m="debito" aria-pressed="false"><span class="pgi" data-i="card"></span><b>Débito</b><small>Na maquininha</small></button>
               <button type="button" class="opt" data-m="credito" aria-pressed="false"><span class="pgi" data-i="card"></span><b>Crédito</b><small>Até 3x sem juros</small></button>
               <button type="button" class="opt" data-m="dinheiro" aria-pressed="false"><span class="pgi" data-i="cash"></span><b>Dinheiro</b><small>Pague no guichê</small></button>
             </div>
@@ -1386,7 +1385,6 @@ header.top::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height
     <div class="fpay" aria-label="Formas de pagamento aceitas">
       <small>Aceitamos</small>
       <span class="fchip"><svg viewBox="0 0 24 24"><path d="M12 2.5l4 4-4 4-4-4zM12 13.5l4 4-4 4-4-4zM2.5 12l4-4 4 4-4 4zM13.5 12l4-4 4 4-4 4z"/></svg>Pix</span>
-      <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></svg>Débito</span>
       <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></svg>Crédito</span>
       <span class="fchip"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v.01M18 14.5v.01"/></svg>Dinheiro</span>
       <span class="fchip"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 8v8M8 12h8"/></svg>Cartão Consulta</span>
