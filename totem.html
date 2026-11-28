@@ -1091,6 +1091,34 @@ svg.av{stroke:none!important}
 .tring{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:4px solid rgba(74,222,128,.8);pointer-events:none;z-index:91;animation:tRing .6s ease-out forwards}
 @keyframes tRing{from{transform:scale(.4);opacity:1}to{transform:scale(3.2);opacity:0}}
 @media (prefers-reduced-motion:reduce){.tglow,.tring{display:none}}
+
+/* Aba de pagamento com cartão */
+#ovPagWeb{padding:40px}
+.pwwin{width:min(1500px,100%);height:min(100%,1500px);background:#fff;border-radius:30px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 90px -30px rgba(0,0,0,.6);animation:upIn .4s both}
+.pwbar{display:flex;align-items:center;gap:18px;height:58px;padding:0 22px;background:#eef2f0;border-bottom:1px solid var(--line);flex:none}
+.pwdots{display:flex;gap:8px}.pwdots i{width:14px;height:14px;border-radius:50%;background:#f87171}.pwdots i:nth-child(2){background:#fbbf24}.pwdots i:nth-child(3){background:#4ade80}
+.pwurl{flex:1;display:flex;align-items:center;gap:10px;height:38px;border-radius:99px;background:#fff;padding:0 18px;font-size:17px;font-weight:600;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.pwurl svg{width:18px;height:18px;stroke:var(--g600);fill:none;stroke-width:2.2;flex:none}
+.pwhead{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 34px;border-bottom:2px solid var(--line);flex:none}
+.pwhead small{display:block;font-size:17px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--g700)}
+.pwhead h2{font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.pwhead em{display:block;font-style:normal;font-size:19px;font-weight:600;color:var(--muted)}
+.pwsafe{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:800;color:var(--g700);background:var(--g100);border-radius:99px;padding:10px 18px}
+.pwsafe svg{width:24px;height:24px;stroke:var(--g600);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pwbody{flex:1;min-height:0;position:relative;background:var(--g50)}
+.pwbody iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.pwdemo{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px}
+.pwdemo .pwi{width:120px;height:120px;border-radius:32px;background:var(--g100);display:grid;place-items:center;margin:0 auto 22px}
+.pwdemo .pwi svg{width:64px;height:64px;stroke:var(--g700);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pwdemo b{display:block;font-size:32px;font-weight:800}
+.pwdemo p{font-size:22px;color:var(--muted);margin-top:10px;line-height:1.4;max-width:30ch}
+.pwfoot{display:flex;gap:18px;padding:20px 34px;border-top:2px solid var(--line);flex:none}
+.pwfoot .back{flex:0 0 320px}.pwfoot .go{flex:1}
+.pwfoot .go.load .spin{display:block}
+.pwmsg{font-size:19px;font-weight:700;color:var(--err);padding:0 34px 14px;flex:none}
+.pgweb{width:170px;height:150px;flex:none;margin-top:20px;border-radius:20px;background:#fff;border:3px solid var(--g200);box-shadow:0 16px 30px -18px rgba(0,30,15,.6);overflow:hidden;position:relative}
+.pgweb::before{content:"";position:absolute;left:0;right:0;top:0;height:28px;background:var(--g100)}
+.pgweb::after{content:"";position:absolute;left:24px;right:24px;top:52px;height:66px;border-radius:12px;background:linear-gradient(135deg,var(--g600),var(--g800));animation:cardIn 2.2s ease-in-out infinite}
 </style>
 </head>
 <body>
@@ -1425,6 +1453,17 @@ svg.av{stroke:none!important}
       <span class="cvtag" id="cvTag" hidden><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="8" cy="8" r="1.6"/></svg><span id="cvTagT"></span></span>
       <button class="go" id="ovCardGo" type="button">Continuar →</button>
       <button class="back" id="ovCardFix" type="button">Corrigir meus dados</button>
+    </div>
+  </div>
+
+
+  <!-- Aba de pagamento com cartão de crédito (página externa) -->
+  <div class="ov" id="ovPagWeb" role="dialog" aria-modal="true" aria-labelledby="pwT">
+    <div class="pwwin">
+      <div class="pwbar"><span class="pwdots"><i></i><i></i><i></i></span><span class="pwurl"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span id="pwUrl">pagamento seguro</span></span></div>
+      <div class="pwhead"><div><small>Pagamento com cartão de crédito</small><h2 id="pwT">R$ 0,00</h2><em id="pwParc"></em></div><span class="pwsafe"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Ambiente seguro</span></div>
+      <div class="pwbody" id="pwBody"></div>
+      <div class="pwfoot"><button class="back" id="pwCancel" type="button">Cancelar</button><button class="go" id="pwOk" type="button"><span class="spin" aria-hidden="true"></span><span id="pwOkTxt">Já concluí o pagamento</span></button></div>
     </div>
   </div>
 
@@ -2446,7 +2485,7 @@ svg.av{stroke:none!important}
   function brl(v){return 'R$ '+v.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
   /* TROCAR AQUI pela integração real:
      - Pix: gerar a cobrança no banco/PSP e consultar se foi paga;
-     - Débito/Crédito: enviar a venda para a maquininha (TEF/POS integrado).
+     - Crédito: vai para a página de pagamento (veja LINK_PAGAMENTO_CREDITO).
      Deve devolver uma Promise com {ok:true, autorizacao:'...'} ou {ok:false, motivo:'...'}. */
   function processarPagamento(metodo,valor,parcelas){
     return new Promise(function(ok){setTimeout(function(){ok({ok:true,autorizacao:String(100000+Math.floor(Math.random()*899999))})},metodo==='pix'?2200:2600)});
@@ -2483,7 +2522,7 @@ svg.av{stroke:none!important}
   }
   function pagBtn(){
     var m=S.pag&&S.pag.m,g=$('goPag');g.disabled=!m||pagBusy;
-    $('goPagTxt').textContent=!m?'Escolha a forma de pagamento':m==='dinheiro'?'Confirmar e pagar no guichê':m==='pix'?'Já paguei com Pix':'Pagar '+brl(pagTotal())+(m==='credito'&&S.pag.parc>1?' em '+S.pag.parc+'x':'');
+    $('goPagTxt').textContent=!m?'Escolha a forma de pagamento':m==='dinheiro'?'Confirmar e pagar no guichê':m==='pix'?'Já paguei com Pix':(m==='credito'?'Ir para o pagamento →':'Pagar '+brl(pagTotal()));
   }
   function pagPanel(){
     clearInterval(pagT);var m=S.pag.m,p=$('pgPanel');
@@ -2496,7 +2535,7 @@ svg.av{stroke:none!important}
       var t=300;pagT=setInterval(function(){t--;var e=$('pxT');if(!e)return clearInterval(pagT);e.textContent='Expira em '+Math.floor(t/60)+':'+p2(t%60);if(t<=0){clearInterval(pagT);e.textContent='QR Code expirado · toque em Pix para gerar outro'}},1000);
     }else{
       var cr=m==='credito',ps=parcOpcoes(S.pag.val),jt=cr?jurTxt():null;
-      p.innerHTML='<div class="pos"><span class="cardani"></span></div><div class="pgtx"><h4>'+(cr?'Cartão de crédito':'Cartão de débito')+'</h4><p>Ao tocar em pagar, <b>insira ou aproxime o cartão</b> na maquininha ao lado do totem e digite a senha se for pedida.</p>'+
+      p.innerHTML='<div class="pgweb"></div><div class="pgtx"><h4>Cartão de crédito</h4><p>Escolha as parcelas e toque em pagar: vamos abrir a <b>página de pagamento</b> para você digitar os dados do cartão.</p>'+
         (cr?'<div class="parc" id="parc">'+ps.map(function(x){return '<button type="button" data-p="'+x.n+'" aria-pressed="'+(S.pag.parc===x.n)+'">'+x.n+'x<small>'+brl(x.parc)+'</small><span class="pj'+(x.juros?' cj':'')+'">'+(x.juros?'+'+pctBr(JUROS_MES)+'% a.m.':'sem juros')+'</span></button>'}).join('')+'</div><p class="jurinfo'+(jt.c?' cj':'')+'" id="jurInfo">'+jt.h+'</p>':'')+'</div>';
     }
   }
@@ -2523,6 +2562,17 @@ svg.av{stroke:none!important}
     if(this.disabled||!S.pag)return;
     var g=this,m=S.pag.m;
     if(m==='dinheiro'){S.pag.total=S.pag.val;S.pag.guiche=true;finishFlow();return}
+    if(m==='credito'){
+      S.pag.total=pagTotal();
+      abrirPagWeb(function(r){
+        if(!r.ok)return;
+        S.pag.aut=r.autorizacao;pagBusy=true;g.disabled=true;
+        $('pgPanel').insertAdjacentHTML('beforeend','<div class="pgok"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>Pagamento aprovado!</b><small>Crédito'+(S.pag.parc>1?' em '+S.pag.parc+'x':'')+' · '+brl(S.pag.total)+'</small></div>');
+        $('goPagTxt').textContent='Pagamento aprovado';
+        setTimeout(function(){pagBusy=false;finishFlow()},1600);
+      });
+      return;
+    }
     pagBusy=true;g.classList.add('load');g.disabled=true;
     $('goPagTxt').textContent=m==='pix'?'Verificando pagamento…':'Aguardando o cartão…';
     var w=document.createElement('div');w.className='pgwait';w.innerHTML='<i></i>'+(m==='pix'?'Consultando o banco…':'Siga as instruções da maquininha');
@@ -2535,6 +2585,38 @@ svg.av{stroke:none!important}
       $('pgPanel').insertAdjacentHTML('beforeend','<div class="pgok"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>Pagamento aprovado!</b><small>'+(m==='pix'?'Pix':m==='debito'?'Débito':'Crédito'+(S.pag.parc>1?' em '+S.pag.parc+'x':''))+' · '+brl(S.pag.total)+'</small></div>');
       $('goPagTxt').textContent='Pagamento aprovado';
       setTimeout(function(){pagBusy=false;finishFlow()},1600);
+    });
+  });
+  /* Crédito: abre a aba de pagamento.
+     TROCAR AQUI: LINK_PAGAMENTO_CREDITO = endereço da página de pagamento (link do gateway/checkout).
+       {valor} e {parcelas} são trocados pelos valores do atendimento, ex.: 'https://pagamento.exemplo.com.br/checkout?valor={valor}&parcelas={parcelas}'
+       Enquanto estiver vazio, aparece uma página de demonstração.
+     conferirPagamentoLink deve consultar no sistema se o pagamento foi aprovado e devolver {ok:true, autorizacao:'...'} ou {ok:false, motivo:'...'}. */
+  var LINK_PAGAMENTO_CREDITO='';
+  function conferirPagamentoLink(valor,parcelas){
+    return new Promise(function(ok){setTimeout(function(){ok({ok:true,autorizacao:String(100000+Math.floor(Math.random()*899999))})},1500)});
+  }
+  var pwRes=null;
+  function abrirPagWeb(cb){
+    pwRes=cb;var v=pagTotal(),n=S.pag.parc,x=parcInfo(S.pag.val,n);
+    $('pwT').textContent=brl(v);
+    $('pwParc').textContent=n>1?n+'x de '+brl(x.parc)+(x.juros?' · juros de '+pctBr(JUROS_MES)+'% ao mês':' sem juros'):'À vista';
+    var url=LINK_PAGAMENTO_CREDITO.replace('{valor}',v.toFixed(2)).replace('{parcelas}',n);
+    $('pwUrl').textContent=url||'pagamento seguro · demonstração';
+    $('pwBody').innerHTML=url?'<iframe src="'+esc(url)+'" title="Página de pagamento" allow="payment"></iframe>':
+      '<div class="pwdemo"><div><div class="pwi"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20M6 15h4"/></svg></div><b>Página de pagamento</b><p>Aqui vai abrir a página para digitar os dados do cartão de crédito. Depois de pagar, toque em <strong>Já concluí o pagamento</strong>.</p></div></div>';
+    var m=$('ovPagWeb').querySelector('.pwmsg');if(m)m.remove();
+    $('pwOk').classList.remove('load');$('pwOk').disabled=false;$('pwOkTxt').textContent='Já concluí o pagamento';
+    openOv('ovPagWeb');
+  }
+  $('pwCancel').addEventListener('click',function(){if($('pwOk').classList.contains('load'))return;closeOv('ovPagWeb');$('pwBody').innerHTML='';var c=pwRes;pwRes=null;if(c)c({ok:false,cancel:true})});
+  $('pwOk').addEventListener('click',function(){
+    var b=this;if(b.classList.contains('load'))return;
+    b.classList.add('load');b.disabled=true;$('pwOkTxt').textContent='Conferindo o pagamento…';
+    conferirPagamentoLink(pagTotal(),S.pag.parc).then(function(r){
+      b.classList.remove('load');b.disabled=false;
+      if(!r.ok){$('pwOkTxt').textContent='Já concluí o pagamento';var m=$('ovPagWeb').querySelector('.pwmsg');if(!m){m=document.createElement('p');m.className='pwmsg';$('ovPagWeb').querySelector('.pwfoot').before(m)}m.textContent='Ainda não identificamos o pagamento'+(r.motivo?': '+r.motivo:'')+'. Conclua na página acima e tente de novo.';return}
+      closeOv('ovPagWeb');$('pwBody').innerHTML='';var c=pwRes;pwRes=null;if(c)c(r);
     });
   });
   $('pagBack').addEventListener('click',function(){if(pagBusy)return;clearInterval(pagT);show('sConf')});
@@ -2838,7 +2920,7 @@ svg.av{stroke:none!important}
   function resetAll(){
     clearInterval(pagT);pagBusy=false;
     clearInterval(doneT);clearInterval(idleT);idleOpen=false;
-    ['ovCard','ovIdle','ovCancel','ovSlide','ovTipo','ovEnvio','ovItens'].forEach(closeOv);
+    ['ovCard','ovIdle','ovCancel','ovSlide','ovTipo','ovEnvio','ovItens','ovPagWeb'].forEach(closeOv);if($('pwBody'))$('pwBody').innerHTML='';
     [].forEach.call(document.querySelectorAll('#gEsp .sel'),function(x){x.textContent=''});setTab('c');
     fresh();paintItens();act=null;$('kb').classList.remove('on');K.classList.remove('kb-open');
     [].forEach.call(document.querySelectorAll('.opt[aria-pressed]'),function(x){x.setAttribute('aria-pressed','false')});
