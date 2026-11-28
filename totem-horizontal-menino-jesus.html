@@ -1260,8 +1260,16 @@ svg.av{stroke:none!important}
 .lpanel{--mx:50%;--my:-200px;--gl:0;isolation:isolate}
 .lpanel::before,.lpanel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:var(--gl);transition:opacity .35s}
 .lpanel::before{z-index:5;background:radial-gradient(circle 300px at var(--mx) var(--my),rgba(74,144,217,.32),rgba(74,144,217,.12) 45%,transparent 72%)}
-.lpanel::after{z-index:6;padding:5px;background:radial-gradient(circle 320px at var(--mx) var(--my),rgba(74,144,217,1),rgba(74,144,217,.55) 40%,transparent 78%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.lpanel::after{z-index:6;padding:5px;background:radial-gradient(circle 320px at var(--mx) var(--my),rgba(74,144,217,1),rgba(74,144,217,.55) 40%,transparent 78%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
 @media (prefers-reduced-motion:reduce){.lpanel::before,.lpanel::after{display:none}}
+
+/* Brilho que acompanha o mouse/toque em toda a tela */
+.tglow{position:absolute;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:90;opacity:0;transition:opacity .45s ease;background:radial-gradient(circle,rgba(74,144,217,.42) 0%,rgba(74,144,217,.2) 30%,rgba(74,144,217,.07) 52%,transparent 68%);will-change:transform,opacity}
+.tglow.on{opacity:1}
+.tglow::after{content:"";position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.85),rgba(74,144,217,.4) 55%,transparent 72%)}
+.tring{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:4px solid rgba(74,144,217,.8);pointer-events:none;z-index:91;animation:tRing .6s ease-out forwards}
+@keyframes tRing{from{transform:scale(.4);opacity:1}to{transform:scale(3.2);opacity:0}}
+@media (prefers-reduced-motion:reduce){.tglow,.tring{display:none}}
 
 /* ===== Policlínica Menino Jesus: identidade azul ===== */
 header.top{background:#E8F1FA;border-bottom:3px solid #E8F1FA;box-shadow:0 6px 18px -12px rgba(13,43,85,.35)}
@@ -3161,6 +3169,20 @@ header.top::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height
   $('idleStay').addEventListener('click',function(){clearInterval(idleT);idleOpen=false;closeOv('ovIdle');bump()});
   $('idleEnd').addEventListener('click',resetAll);
 
+  /* Brilho que acompanha o mouse/toque */
+  (function(){
+    var g=document.createElement('div');g.className='tglow';g.setAttribute('aria-hidden','true');K.appendChild(g);
+    var t=null,x=0,y=0,raf=0;
+    function pos(e){var r=K.getBoundingClientRect(),s=r.width/K.offsetWidth||1;x=(e.clientX-r.left)/s;y=(e.clientY-r.top)/s}
+    function draw(){raf=0;g.style.transform='translate('+x+'px,'+y+'px)'}
+    function mexe(e){pos(e);if(!raf)raf=requestAnimationFrame(draw);g.classList.add('on');clearTimeout(t);t=setTimeout(function(){g.classList.remove('on')},e.pointerType==='mouse'?1600:700)}
+    document.addEventListener('pointermove',mexe,{passive:true});
+    document.addEventListener('pointerdown',function(e){
+      mexe(e);
+      var r=document.createElement('span');r.className='tring';r.style.left=x+'px';r.style.top=y+'px';K.appendChild(r);setTimeout(function(){r.remove()},650);
+    },{passive:true});
+    document.addEventListener('pointerleave',function(){g.classList.remove('on')});
+  })();
   paint();
 })();
 </script>
